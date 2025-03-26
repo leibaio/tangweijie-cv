@@ -1,5 +1,6 @@
 import { BriefcaseBusiness } from "lucide-react";
-import Timeline, { TimelineItemProps } from "../timeline/time-line";
+import { SectionHeader } from "./components/section-header";
+import Timeline, { TimelineItemProps } from "./components/time-line";
 
 const workExperienceData: TimelineItemProps[] = [
   {
@@ -37,10 +38,7 @@ const workExperienceData: TimelineItemProps[] = [
 export default function WorkExperience() {
   return (
     <section className="flex flex-col gap-2">
-      <div className="flex gap-4">
-        <BriefcaseBusiness className="hidden sm:block" />
-        <h2 className="text-xl font-bold">Work Experience</h2>
-      </div>
+      <SectionHeader icon={BriefcaseBusiness} title={"Work Experience"} />
       <Timeline
         items={workExperienceData}
         nodeColor="bg-gradient-to-r from-cyan-500 to-blue-500"

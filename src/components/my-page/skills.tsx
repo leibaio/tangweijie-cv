@@ -1,11 +1,10 @@
 import { Wrench } from "lucide-react";
+import { SectionHeader } from "./components/section-header";
+
 export default function Skills() {
   return (
     <section className="flex flex-col gap-2">
-      <div className="flex gap-4">
-        <Wrench className="hidden sm:block" />
-        <h2 className="text-xl font-bold">Skills</h2>
-      </div>
+      <SectionHeader icon={Wrench} title={"Skills"} />
       <ul className="flex flex-col">
         <li>
           <strong>Frontend Development:</strong> Proficient in HTML5, CSS3, ES6,

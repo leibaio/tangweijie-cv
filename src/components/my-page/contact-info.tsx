@@ -1,12 +1,10 @@
 import { Contact } from "lucide-react";
+import { SectionHeader } from "./components/section-header";
 
 export default function ContactInfo() {
   return (
     <section className="flex flex-col gap-2">
-      <div className="flex gap-4">
-        <Contact className="hidden sm:block" />
-        <h2 className="text-xl font-bold">Contact</h2>
-      </div>
+      <SectionHeader icon={Contact} title={"Contact"} />
       <div className="">
         <ul>
           <li>Tel: 12312311231</li>

@@ -1,12 +1,10 @@
 import { GraduationCap } from "lucide-react";
+import { SectionHeader } from "./components/section-header";
 
 export default function Education() {
   return (
     <section className="flex flex-col gap-2">
-      <div className="flex gap-4">
-        <GraduationCap className="hidden sm:block" />
-        <h2 className="text-xl font-bold">Education</h2>
-      </div>
+      <SectionHeader icon={GraduationCap} title={"Education"} />
       <div className="lg:whitespace-nowrap">
         <ul>
           <li>

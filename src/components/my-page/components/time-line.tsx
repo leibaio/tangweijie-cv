@@ -21,15 +21,15 @@ const TimelineItem = ({
   duration,
   responsibilities,
   isLast = false,
-  nodeColor = "bg-blue-500",
+  nodeColor = "bg-blue-700",
 }: TimelineItemProps & { nodeColor?: string; isLast?: boolean }) => (
   <li className={`relative pl-8 ${!isLast ? "pb-4" : ""}`}>
     <div
-      className={`absolute left-[-8px] top-0 w-4 h-4 rounded-full ${nodeColor} border-2 border-white`}
+      className={`absolute left-[-9px] top-0 w-4 h-4 rounded-full ${nodeColor} border-2 border-white`}
     />
     <div className="flex flex-col gap-1">
       <div className="flex flex-col sm:flex-row justify-between">
-        <h3 className="font-semibold">{company}</h3>
+        <h3 className="font-semibold leading-none">{company}</h3>
         <span className="text-sm text-gray-500">{duration}</span>
       </div>
       <p className="text-sm text-gray-600">{position}</p>
