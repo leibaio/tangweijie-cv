@@ -2,7 +2,7 @@ import React from "react";
 
 type ColorType = "blue" | "red" | "green" | "yellow" | "purple" | "gray";
 
-interface TagProps {
+export interface TagProps {
   children: React.ReactNode;
   color?: ColorType;
 }
