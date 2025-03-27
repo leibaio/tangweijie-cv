@@ -29,7 +29,7 @@ const TimelineItem = ({
     />
     <div className="flex flex-col gap-1">
       <div className="flex flex-col sm:flex-row justify-between">
-        <h3 className="font-semibold leading-none">{company}</h3>
+        <h3 className="font-semibold leading-none mb-2 sm:mb-0">{company}</h3>
         <span className="text-sm text-gray-500">{duration}</span>
       </div>
       <p className="text-sm text-gray-600">{position}</p>
