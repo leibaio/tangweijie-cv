@@ -4,6 +4,7 @@ import Education from "@/components/my-page/education";
 import Skills from "@/components/my-page/skills";
 import WorkExperience from "@/components/my-page/work-experience";
 import Projects from "@/components/my-page/projects";
+import Certification from "@/components/my-page/certification";
 
 export default function MyPage() {
   return (
@@ -21,6 +22,9 @@ export default function MyPage() {
       </div>
       <div className="my-4">
         <Projects />
+      </div>
+      <div className="my-4">
+        <Certification />
       </div>
     </div>
   );
