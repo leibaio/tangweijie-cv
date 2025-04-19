@@ -33,7 +33,7 @@ const TimelineItem = ({
         <span className="text-sm text-gray-500">{duration}</span>
       </div>
       <p className="text-sm text-gray-600">{position}</p>
-      <ul className="list-disc list-inside text-sm text-gray-600 space-y-1 mt-1 pl-2">
+      <ul className="list-disc list-inside text-sm  space-y-1 mt-1 pl-2">
         {responsibilities.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
