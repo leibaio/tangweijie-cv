@@ -17,7 +17,7 @@ export default function Header() {
           </div>
           <div>地址：上海</div>
           <div>年龄：26</div>
-          <div>经验：2年+</div>
+          <div>经验：3年</div>
           <div>英语：CET-6</div>
         </div>
       </div>

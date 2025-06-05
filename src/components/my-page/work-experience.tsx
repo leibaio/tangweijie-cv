@@ -22,14 +22,14 @@ const workExperienceData: TimelineItemProps[] = [
       "封装如支付密码弹窗、银行卡封面等可复用组件",
     ],
   },
-  // {
-  //   company: "上海智驾汽车科技有限公司",
-  //   position: "感知算法组 前端开发工程师（实习）",
-  //   duration: "2022.08 - 2023.06",
-  //   responsibilities: [
-  //     "熟悉开发流程, 参与需求分析, 协助团队完成云数据平台的前端开发工作",
-  //   ],
-  // },
+  {
+    company: "上海智驾汽车科技有限公司",
+    position: "感知算法组 前端开发工程师（实习）",
+    duration: "2022.08 - 2023.06",
+    responsibilities: [
+      "熟悉开发流程, 参与需求分析, 协助团队完成数据云平台的前端开发工作",
+    ],
+  },
 ];
 
 export default function WorkExperience() {
