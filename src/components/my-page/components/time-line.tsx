@@ -25,7 +25,7 @@ const TimelineItem = ({
 }: TimelineItemProps & { nodeColor?: string; isLast?: boolean }) => (
   <li className={`relative pl-8 ${!isLast ? "pb-4" : ""}`}>
     <div
-      className={`absolute left-[-7px] top-0 w-3 h-3 rounded-full ${nodeColor} border-2 border-white`}
+      className={`absolute left-[-7px] top-0 w-3 h-3 rounded-full ${nodeColor} border-2 border-white print:block print:border-black`}
     />
     <div className="flex flex-col gap-1">
       <div className="flex flex-col sm:flex-row justify-between">

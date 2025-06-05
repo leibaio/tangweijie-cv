@@ -4,7 +4,7 @@ import Timeline, { TimelineItemProps } from "./components/time-line";
 
 const workExperienceData: TimelineItemProps[] = [
   {
-    company: "上海触宝科技有限公司",
+    company: "上海触宝信息技术有限公司",
     position: "商业与技术中台 前端开发工程师",
     duration: "2024.05 - 至今",
     responsibilities: [
@@ -38,7 +38,8 @@ export default function WorkExperience() {
       <SectionHeader icon={BriefcaseBusiness} title={"工作经历"} />
       <Timeline
         items={workExperienceData}
-        nodeColor="bg-primary"
+        nodeColor="bg-gray-700 dark:bg-gray-50"
+        // nodeColor="bg-primary"
         // nodeColor="bg-gradient-to-r from-cyan-500 to-blue-500"
         lineColor="border-gray-200 dark:border-gray-700"
       />

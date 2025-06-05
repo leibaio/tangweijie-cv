@@ -3,6 +3,7 @@ import Header from "@/components/my-page/header";
 import Projects from "@/components/my-page/projects";
 import Skills from "@/components/my-page/skills";
 import WorkExperience from "@/components/my-page/work-experience";
+import SelfComment from "@/components/my-page/self-comment";
 
 export default function Home() {
   return (
@@ -19,6 +20,9 @@ export default function Home() {
       </div>
       <div className="my-4">
         <Projects />
+      </div>
+      <div className="my-4">
+        <SelfComment />
       </div>
     </div>
   );
