@@ -4,44 +4,42 @@ import Timeline, { TimelineItemProps } from "./components/time-line";
 
 const workExperienceData: TimelineItemProps[] = [
   {
-    company: "ABC科技有限公司",
-    position: "前端开发工程师",
+    company: "上海触宝科技有限公司",
+    position: "商业与技术中台 前端开发工程师",
     duration: "2024.05 - 至今",
     responsibilities: [
-      "负责核心业务系统的前端架构设计和开发",
-      "主导完成项目从Vue2到Vue3的技术迁移",
-      "使用TypeScript重构核心模块提升代码质量",
+      "海外小说作家平台、内部小说管理后台等项目，前端需求对接和业务开发",
+      "独立完成新品牌 CyanbirdMedia 的官网开发",
+      "协助游戏团队开发游戏试玩等",
     ],
   },
   {
-    company: "XYZ互联网公司",
-    position: "前端开发工程师",
+    company: "同程集团",
+    position: "大前端组 前端开发工程师（实习）",
     duration: "2023.12 - 2024.04",
     responsibilities: [
-      "使用React+Node.js开发电商管理系统",
-      "实现前后端分离架构并优化首屏加载速度",
-      "负责项目 X 的开发与维护",
+      "参与同程借钱、酒店之家积分兑换商城等项目的模块开发与维护",
+      "封装如支付密码弹窗、银行卡封面等可复用组件",
     ],
   },
-  {
-    company: "qwe互联网公司",
-    position: "前端开发工程师",
-    duration: "2022.08 - 2024.06",
-    responsibilities: [
-      "使用Vue开发保险管理系统",
-      "实现前后端分离架构并优化首屏加载速度",
-      "负责项目 X 的开发与维护",
-    ],
-  },
+  // {
+  //   company: "上海智驾汽车科技有限公司",
+  //   position: "感知算法组 前端开发工程师（实习）",
+  //   duration: "2022.08 - 2023.06",
+  //   responsibilities: [
+  //     "熟悉开发流程, 参与需求分析, 协助团队完成云数据平台的前端开发工作",
+  //   ],
+  // },
 ];
 
 export default function WorkExperience() {
   return (
     <section className="flex flex-col gap-2">
-      <SectionHeader icon={BriefcaseBusiness} title={"Work Experience"} />
+      <SectionHeader icon={BriefcaseBusiness} title={"工作经历"} />
       <Timeline
         items={workExperienceData}
-        nodeColor="bg-gradient-to-r from-cyan-500 to-blue-500"
+        nodeColor="bg-primary"
+        // nodeColor="bg-gradient-to-r from-cyan-500 to-blue-500"
         lineColor="border-gray-200 dark:border-gray-700"
       />
     </section>

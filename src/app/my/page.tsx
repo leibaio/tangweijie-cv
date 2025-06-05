@@ -8,10 +8,10 @@ import Certification from "@/components/my-page/certification";
 
 export default function MyPage() {
   return (
-    <div className="container mx-auto px-4 py-8 w-full md:max-w-4xl lg:max-w-6xl">
+    <div className="container mx-auto px-4 py-8 w-full md:max-w-4xl lg:max-w-4xl">
       <Header />
       <div className="my-4 flex flex-col lg:flex-row lg:justify-between gap-4">
-        <ContactInfo />
+        {/* <ContactInfo /> */}
         <Education />
       </div>
       <div className="my-4">
@@ -23,9 +23,9 @@ export default function MyPage() {
       <div className="my-4">
         <Projects />
       </div>
-      <div className="my-4">
+      {/* <div className="my-4">
         <Certification />
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -25,15 +25,15 @@ const TimelineItem = ({
 }: TimelineItemProps & { nodeColor?: string; isLast?: boolean }) => (
   <li className={`relative pl-8 ${!isLast ? "pb-4" : ""}`}>
     <div
-      className={`absolute left-[-9px] top-0 w-4 h-4 rounded-full ${nodeColor} border-2 border-white`}
+      className={`absolute left-[-7px] top-0 w-3 h-3 rounded-full ${nodeColor} border-2 border-white`}
     />
     <div className="flex flex-col gap-1">
       <div className="flex flex-col sm:flex-row justify-between">
         <h3 className="font-semibold leading-none mb-2 sm:mb-0">{company}</h3>
-        <span className="text-sm text-gray-500">{duration}</span>
+        <span className="text text-gray-500">{duration}</span>
       </div>
-      <p className="text-sm text-gray-600">{position}</p>
-      <ul className="list-disc list-inside text-sm  space-y-1 mt-1 pl-2">
+      <p className="text text-gray-600">{position}</p>
+      <ul className="list-disc list-inside text  space-y-1 mt-1 pl-2">
         {responsibilities.map((item, index) => (
           <li key={index}>{item}</li>
         ))}

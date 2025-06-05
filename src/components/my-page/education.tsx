@@ -4,17 +4,11 @@ import { SectionHeader } from "./components/section-header";
 export default function Education() {
   return (
     <section className="flex flex-col gap-2">
-      <SectionHeader icon={GraduationCap} title={"Education"} />
+      <SectionHeader icon={GraduationCap} title={"教育背景"} />
       <div className="lg:whitespace-nowrap">
-        <ul>
-          <li>
-            Shanghai Polytechnic University, Computer and Artificial
-            Intelligence, Master, 09/01/2021 - 06/30/2025
-          </li>
-          <li>
-            Shanghai Polytechnic University, Electronic Information Engineering,
-            Bachelor, 09/01/2017 - 06/30/2021
-          </li>
+        <ul className="space-y-2">
+          <li>上海第二工业大学，电子信息，硕士，2021/09/ - 2024/06</li>
+          <li>上海第二工业大学，电子信息工程，本科，2017/09 - 2021/06</li>
         </ul>
       </div>
     </section>
