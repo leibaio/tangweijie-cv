@@ -21,7 +21,17 @@ const ProjectCard: React.FC<ProjectProps> = ({
       <h3 className="font-semibold">{title}</h3>
       {time && <span className="text-sm text-gray-500">{time}</span>}
     </div>
-    <p className="mb-4">{description}</p>
+
+    <div className="flex flex-wrap gap-2 my-2">
+      {tags.map((tag, index) => (
+        <Tag key={index} color={tag.color}>
+          {tag.text}
+        </Tag>
+      ))}
+    </div>
+
+    <p className="my-2 space-y-2">{description}</p>
+
     {bulletPoints.length > 0 && (
       <ul className="list-disc list-inside mb-4 space-y-2">
         {bulletPoints.map((point, index) => (
@@ -29,14 +39,6 @@ const ProjectCard: React.FC<ProjectProps> = ({
         ))}
       </ul>
     )}
-
-    <div className="flex flex-wrap gap-2 mt-auto">
-      {tags.map((tag, index) => (
-        <Tag key={index} color={tag.color}>
-          {tag.text}
-        </Tag>
-      ))}
-    </div>
   </div>
 );
 
