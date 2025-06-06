@@ -8,7 +8,7 @@ const workExperienceData: TimelineItemProps[] = [
     position: "商业与技术中台 前端开发工程师",
     duration: "2024.05 - 至今",
     responsibilities: [
-      "海外小说作家平台、内部小说管理后台等项目，前端需求对接和业务开发",
+      "疯读小说、海外小说作家平台、内部小说管理后台等项目，前端需求对接和业务开发",
       "独立完成新品牌 CyanbirdMedia 的官网开发",
       "协助游戏团队开发游戏试玩等",
     ],
@@ -18,7 +18,7 @@ const workExperienceData: TimelineItemProps[] = [
     position: "大前端组 前端开发工程师（实习）",
     duration: "2023.12 - 2024.04",
     responsibilities: [
-      "参与同程借钱、酒店之家积分兑换商城等项目的模块开发与维护",
+      "参与同程借钱、酒店之家商城等项目的模块开发与维护",
       "封装如支付密码弹窗、银行卡封面等可复用组件",
     ],
   },

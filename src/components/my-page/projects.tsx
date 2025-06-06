@@ -13,7 +13,7 @@ const projectsData: ProjectProps[] = [
       "1. 独立完成产品官网的模块化开发，使用语义化标签，基于 IntersectionObserver 实现懒加载和动画效果，基于 requestAnimationFrame 实现轮播图效果，精准还原 Figma 设计稿样式",
       "2. 基于 ElementUI 封装可复用组件库，统一主题色管理",
       "3. 基于 html2canvas 及原生 mouse 事件和定位计算，实现作者自行制作书籍封面",
-      "4. 研究 pdf-lib 解析海外税表 pdf，结合 signature_pad 和 canvas 实现 pdf 签名效果，有效提升编辑审核效率",
+      "4. 研究解析海外税表 pdf，实现 pdf 字段自动导入和手动签名效果，有效提升编辑审核效率",
       "5. 基于 echarts 对作者书籍的浏览数据等情况可视化展示，使用 lottie-web 实现作者等级提升动画",
     ],
     tags: [
@@ -49,7 +49,7 @@ const projectsData: ProjectProps[] = [
     ],
   },
   {
-    title: "Hey Beauty h5 试玩",
+    title: "Hey Beauty 游戏增长试玩",
     time: "2024.08-2025.10",
     description: "三消换装小游戏的试玩页，用于投放和引流",
     bulletPoints: [
