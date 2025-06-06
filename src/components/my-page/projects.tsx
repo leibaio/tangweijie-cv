@@ -50,7 +50,7 @@ const projectsData: ProjectProps[] = [
   },
   {
     title: "Hey Beauty 游戏增长试玩",
-    time: "2024.08-2025.10",
+    time: "2024.08-2024.10",
     description: "三消换装小游戏的试玩页，用于投放和引流",
     bulletPoints: [
       "1. 依据屏幕大小实现棋盘背景生成，实现自适应布局",
