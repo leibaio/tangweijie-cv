@@ -2,9 +2,20 @@ import { WorkExperience } from "@/types";
 
 export const workExperienceData: WorkExperience[] = [
   {
+    company: "姚记科技",
+    position: "同花工作室 全栈开发工程师",
+    duration: "2025.07 - 至今",
+    responsibilities: [
+      "负责天天爱掼蛋游戏中后台系统的设计与核心功能开发，系统包含运营配置、研发管理、数据报表、系统管理、GM工具等核心模块，支撑日活 10 万+ 的游戏运营和研发链路",
+      "前端采用 Vue 3 + TypeScript + Vite + Pinia + TDesign 技术栈，封装 useTable、usePagination 等通用 Hooks 和 CommonTable 等业务组件，减少 70% 重复代码",
+      "后端采用 Spring Boot + MyBatis-Plus + Shiro + Redis 技术栈，设计多模块分层架构（web/service/dal/model），实现业务解耦",
+      "设计并实现基于 RBAC 的动态路由权限系统和多渠道配置发布系统，采用责任链模式处理配置发布，支持 Redis 发布订阅实现配置热更新",
+    ],
+  },
+  {
     company: "上海触宝信息技术有限公司",
     position: "商业与技术中台 前端开发工程师",
-    duration: "2024.05 - 至今",
+    duration: "2024.05 - 2025.06",
     responsibilities: [
       "负责疯读小说、海外小说作家平台、内部小说管理后台、增长平台等项目的从需求评估到上线的全流程",
       "负责小说品牌 CyanbirdMedia、Joylit Novel 等产品官网开发，研究性能优化、SEO 和减少首屏加载时间等",

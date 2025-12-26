@@ -2,6 +2,31 @@ import { Project } from "@/types";
 
 export const projectsData: Project[] = [
   {
+    title: "天天爱掼蛋后台管理系统",
+    time: "2025.07-至今",
+    description:
+      "游戏运营后台管理系统，支撑渠道配置、活动运营、比赛管理、兑换码、公告推送、客服系统、财务对账、BI 报表等核心业务，服务于多渠道、多版本的游戏运营需求，支撑日活 10 万+ 用户",
+    bulletPoints: [
+      "前端：封装基于 Axios 的 HTTP 请求层，实现请求拦截、响应转换、错误处理、节流防抖等功能；基于 Composition API 封装 useTable、usePagination 等通用 Hooks，设计 CommonTable 等配置化组件，减少 70% 重复代码和 60% 页面开发工作量",
+      "前端：设计并实现基于 RBAC 的动态路由权限系统，支持细粒度的菜单和按钮级权限控制；实施路由懒加载、组件按需引入、代码分割等性能优化，首屏加载时间优化 40%",
+      "后端：设计多渠道配置发布系统，采用责任链模式处理不同类型配置的发布流程，支持 Redis 发布订阅 + OSS 双通道配置下发，实现配置热更新",
+      "后端：基于 Shiro + Redis 实现分布式会话管理和 RBAC 权限控制，支持菜单、数据、API 多维度权限校验；优化批量发布性能，采用分批处理策略避免大数据量 OOM",
+      "业务：开发精细化弹窗配置系统，支持多维度触发条件和优先级控制，提升用户转化率 15%；开发比赛管理系统，支持三种赛事类型统一配置，支撑日均 1000+ 场比赛运营",
+    ],
+    tags: [
+      { text: "Vue3", color: "blue" },
+      { text: "TypeScript", color: "blue" },
+      { text: "Vite", color: "blue" },
+      { text: "Pinia", color: "blue" },
+      { text: "TDesign", color: "blue" },
+      { text: "Spring Boot", color: "green" },
+      { text: "MyBatis-Plus", color: "green" },
+      { text: "Shiro", color: "green" },
+      { text: "Redis", color: "green" },
+      { text: "阿里云 OSS", color: "green" },
+    ],
+  },
+  {
     title: "CyanbirdMedia/ReadictNovel",
     time: "2024.05-至今",
     description:
