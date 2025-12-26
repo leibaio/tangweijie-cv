@@ -128,3 +128,64 @@
     cursor: pointer;
   }
 }
+
+/* 打印样式 */
+@media print {
+  @page {
+    size: A4;
+    margin: 8mm 12mm;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+  }
+
+  .resume-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* 避免内容被分页截断 */
+  section,
+  li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* 隐藏不需要打印的元素 */
+  [class*="print:hidden"] {
+    display: none !important;
+  }
+
+  /* 链接样式 */
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  /* 减少间距 */
+  .my-4 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .space-y-2 > * + * {
+    margin-top: 0.25rem !important;
+  }
+
+  .gap-2 {
+    gap: 0.25rem !important;
+  }
+
+  /* 边框颜色 */
+  .border-b-2 {
+    border-bottom-width: 1px !important;
+  }
+}

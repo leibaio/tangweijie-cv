@@ -3,9 +3,9 @@ import { SectionHeader } from "./section-header";
 
 export default function SelfComment() {
   return (
-    <section className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2 print:gap-1 print:break-inside-avoid">
       <SectionHeader icon={User} title="自我评价" />
-      <ul className="list-disc list-inside space-y-2">
+      <ul className="list-disc list-inside space-y-2 print:space-y-0 print:text-sm">
         <li>
           对 AI 辅助开发保持高度敏感，熟练使用 Kiro、Cursor、Windsurf 等 AI IDE 工具提升开发效率，善于利用 AI 进行代码生成、重构和问题排查
         </li>

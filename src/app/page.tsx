@@ -1,4 +1,5 @@
 import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeColorToggle } from "@/components/theme-color-toggle";
 import { siteConfig } from "@/config";
 import { Component, FileText } from "lucide-react";
 import Link from "next/link";
@@ -24,7 +25,10 @@ export default function Home() {
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-xl font-bold">{siteConfig.name}</h1>
-          <ModeToggle />
+          <div className="flex items-center gap-2">
+            <ThemeColorToggle />
+            <ModeToggle />
+          </div>
         </div>
       </header>
 
