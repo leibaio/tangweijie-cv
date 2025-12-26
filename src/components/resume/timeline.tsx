@@ -1,20 +1,10 @@
-import { ReactNode } from "react";
+import { TimelineProps, WorkExperience } from "@/types";
 
-export interface TimelineItemProps {
-  company: string;
-  position: string;
-  duration: string;
-  responsibilities: ReactNode[];
+interface TimelineItemProps extends WorkExperience {
+  nodeColor?: string;
   isLast?: boolean;
 }
 
-export interface TimelineProps {
-  items: TimelineItemProps[];
-  nodeColor?: string;
-  lineColor?: string;
-}
-
-// 时间轴条目组件
 const TimelineItem = ({
   company,
   position,
@@ -22,7 +12,7 @@ const TimelineItem = ({
   responsibilities,
   isLast = false,
   nodeColor = "bg-blue-700",
-}: TimelineItemProps & { nodeColor?: string; isLast?: boolean }) => (
+}: TimelineItemProps) => (
   <li className={`relative pl-8 ${!isLast ? "pb-4" : ""}`}>
     <div
       className={`absolute left-[-7px] top-0 w-3 h-3 rounded-full ${nodeColor} border-2 border-white print:block print:border-black`}
@@ -33,7 +23,7 @@ const TimelineItem = ({
         <span className="text text-gray-500">{duration}</span>
       </div>
       <p className="text text-gray-600">{position}</p>
-      <ul className="list-disc list-inside text  space-y-1 mt-1 pl-2">
+      <ul className="list-disc list-inside text space-y-1 mt-1 pl-2">
         {responsibilities.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
@@ -42,14 +32,13 @@ const TimelineItem = ({
   </li>
 );
 
-// 主时间轴组件
 export default function Timeline({
   items,
-  nodeColor = "bg-blue-500",
-  lineColor = "border-gray-200",
+  nodeColor = "bg-gray-700 dark:bg-gray-50",
+  lineColor = "border-gray-200 dark:border-gray-700",
 }: TimelineProps) {
   return (
-    <ul className={`flex flex-col relative ml-4  border-l-2 ${lineColor}`}>
+    <ul className={`flex flex-col relative ml-4 border-l-2 ${lineColor}`}>
       {items.map((item, index) => (
         <TimelineItem
           key={index}

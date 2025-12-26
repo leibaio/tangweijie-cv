@@ -1,15 +1,8 @@
+import { Project } from "@/types";
 import React from "react";
-import { Tag, TagProps } from "./tag";
+import { Tag } from "./tag";
 
-export interface ProjectProps {
-  title: string;
-  description: string;
-  time?: string;
-  bulletPoints?: string[];
-  tags: { text: string; color?: TagProps["color"] }[];
-}
-
-const ProjectCard: React.FC<ProjectProps> = ({
+const ProjectCard: React.FC<Project> = ({
   title,
   time,
   description,

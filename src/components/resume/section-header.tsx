@@ -1,10 +1,5 @@
+import { SectionHeaderProps } from "@/types";
 import React from "react";
-import { LucideIcon } from "lucide-react";
-
-interface SectionHeaderProps {
-  icon: LucideIcon;
-  title: string;
-}
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
   icon: Icon,

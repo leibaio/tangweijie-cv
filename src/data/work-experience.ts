@@ -1,15 +1,13 @@
-import { BriefcaseBusiness } from "lucide-react";
-import { SectionHeader } from "./components/section-header";
-import Timeline, { TimelineItemProps } from "./components/time-line";
+import { WorkExperience } from "@/types";
 
-const workExperienceData: TimelineItemProps[] = [
+export const workExperienceData: WorkExperience[] = [
   {
     company: "上海触宝信息技术有限公司",
     position: "商业与技术中台 前端开发工程师",
     duration: "2024.05 - 至今",
     responsibilities: [
       "负责疯读小说、海外小说作家平台、内部小说管理后台、增长平台等项目的从需求评估到上线的全流程",
-      "负责小说品牌	CyanbirdMedia、	Joylit	Novel	等产品官网开发，研究性能优化、SEO	和减少首屏加载时间等",
+      "负责小说品牌 CyanbirdMedia、Joylit Novel 等产品官网开发，研究性能优化、SEO 和减少首屏加载时间等",
       "负责推动与优化已有前端项目的基础架构与组件抽象，封装多个公共业务组件，提升团队开发效率",
       "主动学习新技术，协助游戏团队开发游戏试玩产品设计与开发等",
     ],
@@ -33,18 +31,3 @@ const workExperienceData: TimelineItemProps[] = [
     ],
   },
 ];
-
-export default function WorkExperience() {
-  return (
-    <section className="flex flex-col gap-2">
-      <SectionHeader icon={BriefcaseBusiness} title={"工作经历"} />
-      <Timeline
-        items={workExperienceData}
-        nodeColor="bg-gray-700 dark:bg-gray-50"
-        // nodeColor="bg-primary"
-        // nodeColor="bg-gradient-to-r from-cyan-500 to-blue-500"
-        lineColor="border-gray-200 dark:border-gray-700"
-      />
-    </section>
-  );
-}
