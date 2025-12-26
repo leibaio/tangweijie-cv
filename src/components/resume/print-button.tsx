@@ -1,9 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Locale } from "@/config";
 import { Printer } from "lucide-react";
 
-export default function PrintButton() {
+interface PrintButtonProps {
+  locale?: Locale;
+}
+
+export default function PrintButton({ locale = "zh" }: PrintButtonProps) {
   const handlePrint = () => {
     window.print();
   };
@@ -16,7 +21,7 @@ export default function PrintButton() {
       className="print:hidden"
     >
       <Printer className="w-4 h-4 mr-2" />
-      打印简历
+      {locale === "zh" ? "打印简历" : "Print"}
     </Button>
   );
 }

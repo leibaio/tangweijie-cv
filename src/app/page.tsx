@@ -97,7 +97,7 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2">
             <LocaleToggle onLocaleChange={setLocale} />
-            <ThemeColorToggle />
+            <ThemeColorToggle locale={locale} />
             <ModeToggle />
           </div>
         </div>

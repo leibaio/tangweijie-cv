@@ -27,6 +27,21 @@ export const i18n = {
     footer: {
       rights: "All rights reserved.",
     },
+    resume: {
+      backToHome: "返回首页",
+      print: "打印简历",
+      jobTarget: "求职方向",
+      phone: "电话",
+      email: "邮箱",
+      location: "地址",
+      age: "年龄",
+      english: "英语",
+      education: "教育背景",
+      skills: "专业技能",
+      workExperience: "工作经历",
+      projects: "项目经历",
+      selfComment: "自我评价",
+    },
   },
   en: {
     nav: {
@@ -53,6 +68,21 @@ export const i18n = {
     techStack: "Tech Stack",
     footer: {
       rights: "All rights reserved.",
+    },
+    resume: {
+      backToHome: "Back to Home",
+      print: "Print Resume",
+      jobTarget: "Position",
+      phone: "Phone",
+      email: "Email",
+      location: "Location",
+      age: "Age",
+      english: "English",
+      education: "Education",
+      skills: "Skills",
+      workExperience: "Work Experience",
+      projects: "Projects",
+      selfComment: "About Me",
     },
   },
 };

@@ -11,7 +11,11 @@ import { ThemeColor, defaultThemeColor, themeColors } from "@/config";
 import { Palette } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export function ThemeColorToggle() {
+interface ThemeColorToggleProps {
+  locale?: "zh" | "en";
+}
+
+export function ThemeColorToggle({ locale = "zh" }: ThemeColorToggleProps) {
   const [color, setColor] = useState<ThemeColor>(defaultThemeColor);
   const [mounted, setMounted] = useState(false);
 
@@ -28,10 +32,8 @@ export function ThemeColorToggle() {
     const config = themeColors[colorKey];
     const root = document.documentElement;
 
-    // 设置 CSS 变量
     root.style.setProperty("--primary", config.primary);
     root.style.setProperty("--primary-foreground", config.primaryForeground);
-    // 同时设置 ring 颜色（用于 focus 状态）
     root.style.setProperty("--ring", config.primary);
   };
 
@@ -57,22 +59,22 @@ export function ThemeColorToggle() {
             className="h-[1.2rem] w-[1.2rem]"
             style={{ color: themeColors[color].primary }}
           />
-          <span className="sr-only">切换主题色</span>
+          <span className="sr-only">{locale === "zh" ? "切换主题色" : "Toggle theme color"}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="grid grid-cols-3 gap-1 w-56 p-2">
         {Object.entries(themeColors).map(([key, config]) => (
           <DropdownMenuItem
             key={key}
             onClick={() => handleColorChange(key as ThemeColor)}
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex items-center gap-1.5 cursor-pointer px-2 py-1.5"
           >
             <span
-              className="w-4 h-4 rounded-full border"
+              className="w-3 h-3 rounded-full border shrink-0"
               style={{ backgroundColor: config.primary }}
             />
-            <span>{config.name}</span>
-            {color === key && <span className="ml-auto">✓</span>}
+            <span className="text-xs truncate">{locale === "zh" ? config.name : config.nameEn}</span>
+            {color === key && <span className="ml-auto text-xs">✓</span>}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

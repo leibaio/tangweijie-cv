@@ -1,173 +1,288 @@
 import { Project } from "@/types";
 
-export const projectsData: Project[] = [
-  {
-    title: "天天爱掼蛋后台管理系统",
-    time: "2025.07-至今",
-    description:
-      "游戏运营后台管理系统，支撑渠道配置、活动运营、比赛管理、兑换码、公告推送、客服系统、财务对账、BI 报表等核心业务，服务于多渠道、多版本的游戏运营需求，支撑日活 10 万+ 用户",
-    bulletPoints: [
-      "前端：封装基于 Axios 的 HTTP 请求层，实现请求拦截、响应转换、错误处理、节流防抖等功能；基于 Composition API 封装 useTable、usePagination 等通用 Hooks，设计 CommonTable 等配置化组件，减少 70% 重复代码和 60% 页面开发工作量",
-      "前端：设计并实现基于 RBAC 的动态路由权限系统，支持细粒度的菜单和按钮级权限控制；实施路由懒加载、组件按需引入、代码分割等性能优化，首屏加载时间优化 40%",
-      "后端：设计多渠道配置发布系统，采用责任链模式处理不同类型配置的发布流程，支持 Redis 发布订阅 + OSS 双通道配置下发，实现配置热更新",
-      "后端：基于 Shiro + Redis 实现分布式会话管理和 RBAC 权限控制，支持菜单、数据、API 多维度权限校验；优化批量发布性能，采用分批处理策略避免大数据量 OOM",
-      "业务：开发精细化弹窗配置系统，支持多维度触发条件和优先级控制，提升用户转化率 15%；开发比赛管理系统，支持三种赛事类型统一配置，支撑日均 1000+ 场比赛运营",
-    ],
-    tags: [
-      { text: "Vue3", color: "blue" },
-      { text: "TypeScript", color: "blue" },
-      { text: "Vite", color: "blue" },
-      { text: "Pinia", color: "blue" },
-      { text: "TDesign", color: "blue" },
-      { text: "Spring Boot", color: "green" },
-      { text: "MyBatis-Plus", color: "green" },
-      { text: "Shiro", color: "green" },
-      { text: "Redis", color: "green" },
-      { text: "阿里云 OSS", color: "green" },
-    ],
-  },
-  {
-    title: "CyanbirdMedia/ReadictNovel",
-    time: "2024.05-至今",
-    description:
-      "海外小说作者平台 (https://www.cyanbirdmedia.com)，平台作者10000+，涉及 150+ 国家地区用户。接手负责开发核心模块，包括小说管理、大纲编写、书籍表现分析、收入结算、签约和个人信息管理等功能",
-    bulletPoints: [
-      "独立完成产品官网的模块化开发，媒体查询实现响应式布局，语义化标签利于 SEO，CSS3 手动实现 UI 动画效果，采用懒加载和 RAF 等进行性能优化",
-      "基于 Figma 设计稿，二次封装 ElementUI 常用组件",
-      "基于 html2canvas 及原生 mouse 事件和定位计算，实现作者自定义生成书籍封面功能，解决跨域问题，优化渲染节点，生成封面平均时间从3000ms->500ms",
-      "研究并实现海外税表 PDF 解析，PDF 字段填充和手动签名功能。显著提升编辑审核效率，缩短处理时间40%",
-      "使用 echarts 对作者书籍的浏览数据进行可视化展示，使用 lottie-web 实现作者等级提升动画",
-    ],
-    tags: [
-      { text: "Vue2", color: "blue" },
-      { text: "二次封装 Element ui", color: "blue" },
-      { text: "jsx", color: "blue" },
-      { text: "vuex", color: "blue" },
-      { text: "vue-router", color: "blue" },
-      { text: "html2canvas", color: "blue" },
-      { text: "cropperjs", color: "blue" },
-      { text: "响应式", color: "blue" },
-      { text: "echarts", color: "blue" },
-      { text: "pdf-lib", color: "blue" },
-    ],
-  },
-  {
-    title: "Hugo",
-    time: "2024.05-至今",
-    description:
-      "内部海外小说管理平台，用于管理作者信息、UGC内容、书籍章节、签约付款等。满足产品、编辑、UI、责编、法务和财务等多个部门角色的需求",
-    bulletPoints: [
-      "基于原生Date()手动封装作者更新字数日历组件。解决了特定需求无现成解决方案的问题，提高了数据可视化效果",
-      "实现图库管理的批量上传控制。优化了大量图片上传的性能，有效提高上传成功率30%",
-      "实现富文本编辑功能，用于编辑通知公告和邮件样式等。增强了平台的内容管理能力，提高编辑效率",
-      "持续进行日常迭代开发、维护和优化，封装可复用组件如图片预览弹窗、文件上传工具等",
-    ],
-    tags: [
-      { text: "Vue2", color: "blue" },
-      { text: "vuex", color: "blue" },
-      { text: "v-code-diff", color: "blue" },
-      { text: "p-queue", color: "blue" },
-      { text: "quill", color: "blue" },
-    ],
-  },
-  {
-    title: "Joylit Novel",
-    time: "2025.01-2025.04",
-    tags: [
-      { text: "Nuxt.js", color: "blue" },
-      { text: "Vue3", color: "blue" },
-      { text: "Tailwind CSS", color: "blue" },
-      { text: "SSR", color: "blue" },
-      { text: "响应式设计", color: "blue" },
-    ],
-    description:
-      "海外小说阅读平台官网(https://www.joylitnovel.com)。注重 Google 等搜索引擎的 SEO，实现响应式等",
-    bulletPoints: [
-      "采用 Nuxt.js 框架结合 Tailwind CSS 进行快速开发，实现服务器端渲染(SSR)。优化了首屏加载速度，网站在搜索引擎结果中的排名显著提升，有机流量增长40%",
-      "开发响应式设计，确保在各种设备上的良好体验。提高了用户跨设备使用的便利性",
-      "优化性能和用户界面，提供流畅的阅读体验。网站上线后一个月内吸引了超过50,000名活跃用户，远超预期目标",
-    ],
-  },
-  {
-    title: "Hey Beauty 游戏增长试玩",
-    time: "2024.08-2024.10",
-    description:
-      "公司三消换装小游戏，需要试玩页面用于市场投放和引流。使用 Cocos 开发游戏试玩版本，确保良好的用户体验，留存和引导用户下载 APP",
-    bulletPoints: [
-      "实现根据屏幕大小动态生成棋盘背景，开发自适应布局，确保游戏在各种设备上都有良好的显示效果",
-      "制作不同等级棋子和人物表情预制体，制作引导手势等",
-      "优化资源加载策略，实现资源的异步加载和预加载。游戏加载时间减少40%，显著提升用户首次体验",
-    ],
-    tags: [
-      { text: "Cocos", color: "blue" },
-      { text: "Typescript", color: "blue" },
-    ],
-  },
-  {
-    title: "同程借钱",
-    time: "2024.12-2025.03",
-    description: "集成于同程旅游APP内的借贷页面服务",
-    bulletPoints: [
-      "负责开发授信、借款、还款、基本信息管理、借还记录等核心模块",
-      "进行组件优化，将页面重复组件如支持银行卡弹框、密码、图像框组件、Pdf 阅读组件封装为公共组件",
-      "使用 MockJs 完成接口模拟和自测，加快了开发进度",
-    ],
-    tags: [
-      { text: "React", color: "blue" },
-      { text: "Antd", color: "blue" },
-      { text: "Less", color: "blue" },
-      { text: "Flatjs", color: "blue" },
-    ],
-  },
-  {
-    title: "保险审核多模态文本视觉问答系统",
-    time: "2023.05-2024.01",
-    description:
-      "研究生毕业设计项目，搭建 H5 端前台用户界面、Web 端后台管理界面和文本视觉问答模型 InsureTVQA，前用户上传理赔表单和图像，后台审核人员可搜索、查看、审核和文本视觉问答等",
-    bulletPoints: [
-      "融合 DBNet 文本检测模型、CRNN 文本识别模型和 RoBERTa-wwm 的机器阅读理解模型，研究文本重排算法，完成对图像中的文字抽取识别和理解，实现问答功能",
-    ],
-    tags: [
-      { text: "DBNet", color: "blue" },
-      { text: "CRNN", color: "blue" },
-      { text: "RoBERTa-wwm", color: "blue" },
-      { text: "Vue3", color: "blue" },
-      { text: "Vite", color: "blue" },
-      { text: "Pinia", color: "blue" },
-      { text: "Flask", color: "blue" },
-      { text: "MySQL", color: "blue" },
-    ],
-  },
-  {
-    title: "基于预训练模型的军事垂直领域知识图谱构建及问答",
-    time: "2023.01-2023.05",
-    description:
-      "第十四届全国大学生服创大赛项目，获得全国三等奖。从非结构化数据 PDF 中进行 OCR 识别、图像抽取等，从文本中抽取「实体-关系-实体」三元组，构建军事垂直领域知识图谱，基于图谱搭建问答系统",
-    bulletPoints: [
-      "主要负责算法模型和问答系统的开发。信息抽取使用 Pipeline 方式依次进行 NER 和 RE ，基于 RoBBERTa-wwm 预训练模型，结合 Bi-LSTM、CRF 和 Attention 等深度学习技术进行文本三元组抽取。问答系统前端基于 Vue3 + Naive UI， 后端使用 Python 和 Flask 搭建接口，使用 RESTful API完成前后端传输，数据库使用了 Neo4j 图数据库存放三元组，使用 MySQL 关系型数据库存放图床图像等数据。",
-    ],
-    tags: [
-      { text: "Pipeline", color: "blue" },
-      { text: "知识图谱", color: "blue" },
-      { text: "三元组抽取", color: "blue" },
-      { text: "Neo4j", color: "blue" },
-    ],
-  },
-  {
-    title: "基于树莓派的 AI 无人水果售货系统",
-    time: "2023.04-2022.08",
-    description:
-      "第十七届研究生电子设计竞赛项目，获得上海市一等奖。基于图像处理实现水果商品的快速识别，使用 OpenCV + YOLOv5 算法实现图像识别；硬件平台基于树莓派搭建；软件使用微信小程序和 Vue3 搭建管理平台。",
-    bulletPoints: [
-      "依据不同用户角色进行对应的需求概述和功能设计；负责前端小程序的开发，使用原生微信小程序 + Vant Weapp 开发，涉及购物车、商城、订单管理、地址信息等功能开发；负责前端 Web 管理平台开发，使用 Vue3 + ElementPlus + Echarts 开发，实现商家商品管理可视化、订单管理统计、交易金额查看等；参与进行数据库设计以及相关技术文档编写。",
-    ],
-    tags: [
-      { text: "OpenCV", color: "blue" },
-      { text: "YOLOv5", color: "blue" },
-      { text: "树莓派", color: "blue" },
-      { text: "小程序", color: "blue" },
-      { text: "Vue3", color: "blue" },
-      { text: "Echarts", color: "blue" },
-    ],
-  },
-];
+export const projectsData: Record<"zh" | "en", Project[]> = {
+  zh: [
+    {
+      title: "天天爱掼蛋后台管理系统",
+      time: "2025.07-至今",
+      description:
+        "游戏运营后台管理系统，支撑渠道配置、活动运营、比赛管理、兑换码、公告推送、客服系统、财务对账、BI 报表等核心业务，支撑日活 10 万+ 用户",
+      bulletPoints: [
+        "前端：封装 Axios 请求层，实现拦截、转换、错误处理、节流防抖；封装 useTable、usePagination 等 Hooks 和 CommonTable 配置化组件，减少 70% 重复代码",
+        "前端：实现 RBAC 动态路由权限系统，支持菜单和按钮级权限；路由懒加载、代码分割等优化，首屏加载优化 40%",
+        "后端：责任链模式处理多渠道配置发布，Redis 发布订阅 + OSS 双通道实现配置热更新",
+        "后端：Shiro + Redis 分布式会话和权限控制；分批处理策略优化批量发布避免 OOM",
+        "业务：弹窗配置系统提升转化率 15%；比赛管理系统支撑日均 1000+ 场比赛",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "TypeScript", color: "blue" },
+        { text: "TDesign", color: "blue" },
+        { text: "Spring Boot", color: "green" },
+        { text: "Redis", color: "green" },
+      ],
+    },
+    {
+      title: "CyanbirdMedia 海外小说作者平台",
+      time: "2024.05-2025.06",
+      description:
+        "海外小说作者平台，服务 10000+ 作者，覆盖 150+ 国家。负责小说管理、数据分析、收入结算、签约管理等核心模块",
+      bulletPoints: [
+        "模块化开发官网，媒体查询响应式布局，语义化标签优化 SEO，懒加载和 RAF 性能优化",
+        "html2canvas + 原生事件实现封面生成，优化渲染从 3000ms 降至 500ms",
+        "海外税表 PDF 解析和电子签名，提升审核效率 40%",
+        "ECharts 数据可视化，Lottie-web 等级动画",
+      ],
+      tags: [
+        { text: "Vue2", color: "blue" },
+        { text: "Element UI", color: "blue" },
+        { text: "html2canvas", color: "blue" },
+        { text: "ECharts", color: "blue" },
+      ],
+    },
+    {
+      title: "Hugo 内部小说管理平台",
+      time: "2024.05-2025.06",
+      description:
+        "内部小说管理平台，管理作者信息、UGC 内容、书籍章节、签约付款，服务产品、编辑、法务、财务等多部门",
+      bulletPoints: [
+        "原生 Date API 封装字数日历组件；图库批量上传队列控制，成功率提升 30%",
+        "Quill 富文本编辑器集成；封装图片预览、文件上传、代码差异对比等组件",
+      ],
+      tags: [
+        { text: "Vue2", color: "blue" },
+        { text: "p-queue", color: "blue" },
+        { text: "Quill", color: "blue" },
+      ],
+    },
+    {
+      title: "Joylit Novel 海外小说阅读平台",
+      time: "2025.01-2025.04",
+      description:
+        "海外小说阅读平台官网，注重 Google SEO 优化和跨设备响应式体验",
+      bulletPoints: [
+        "Nuxt.js + Tailwind CSS 实现 SSR，有机流量增长 40%",
+        "响应式设计确保多端一致体验，首月 50000+ 活跃用户",
+      ],
+      tags: [
+        { text: "Nuxt.js", color: "blue" },
+        { text: "Tailwind CSS", color: "blue" },
+        { text: "SSR", color: "green" },
+      ],
+    },
+    {
+      title: "Hey Beauty 游戏试玩",
+      time: "2024.08-2024.10",
+      description:
+        "三消换装小游戏试玩版本，用于市场投放和用户引流",
+      bulletPoints: [
+        "Cocos Creator 开发，动态棋盘生成自适应布局",
+        "预制体和引导动画制作；资源异步加载优化，加载时间减少 40%",
+      ],
+      tags: [
+        { text: "Cocos Creator", color: "purple" },
+        { text: "TypeScript", color: "blue" },
+      ],
+    },
+    {
+      title: "同程借钱",
+      time: "2023.12-2024.03",
+      description: "同程旅游 APP 内借贷服务，提供授信、借款、还款等金融功能",
+      bulletPoints: [
+        "开发授信、借款、还款、借还记录等核心模块",
+        "封装银行卡弹框、密码输入、PDF 阅读等公共组件",
+      ],
+      tags: [
+        { text: "React", color: "blue" },
+        { text: "Ant Design", color: "blue" },
+      ],
+    },
+    {
+      title: "保险审核多模态文本视觉问答系统",
+      time: "2023.05-2024.01",
+      description:
+        "研究生毕业设计，深度学习模型实现保险理赔表单智能审核和问答",
+      bulletPoints: [
+        "DBNet + CRNN + RoBERTa-wwm 融合模型，实现图像文字抽取和智能问答",
+        "Vue3 + Vite + Pinia 前端，Flask + MySQL 后端",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "Flask", color: "green" },
+        { text: "深度学习", color: "purple" },
+      ],
+    },
+    {
+      title: "军事领域知识图谱问答系统",
+      time: "2023.01-2023.05",
+      description:
+        "服创大赛全国三等奖，从 PDF 抽取三元组构建知识图谱实现智能问答",
+      bulletPoints: [
+        "RoBERTa-wwm + Bi-LSTM + CRF + Attention 三元组抽取",
+        "Vue3 + Naive UI 前端，Flask + Neo4j + MySQL 后端",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "Neo4j", color: "green" },
+        { text: "知识图谱", color: "purple" },
+      ],
+    },
+    {
+      title: "AI 无人水果售货系统",
+      time: "2022.08-2023.04",
+      description:
+        "研电赛上海市一等奖，树莓派 + 图像识别实现水果自动识别售卖",
+      bulletPoints: [
+        "OpenCV + YOLOv5 水果识别，树莓派硬件平台",
+        "微信小程序购物端 + Vue3 Web 管理端",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "小程序", color: "blue" },
+        { text: "YOLOv5", color: "purple" },
+      ],
+    },
+  ],
+  en: [
+    {
+      title: "Guandan Game Admin System",
+      time: "2025.07-Present",
+      description:
+        "Game operation management system for channel config, events, tournaments, announcements, finance and BI. Serving 100K+ DAU.",
+      bulletPoints: [
+        "Frontend: Axios layer with interceptors; useTable/usePagination Hooks and CommonTable components, reducing 70% duplicate code",
+        "Frontend: RBAC dynamic routing with menu/button permissions; lazy loading and code splitting, 40% FCP improvement",
+        "Backend: Chain of Responsibility for multi-channel config; Redis pub/sub + OSS for hot updates",
+        "Backend: Shiro + Redis distributed session; batch processing to prevent OOM",
+        "Business: Popup config improved conversion 15%; Tournament system supports 1000+ daily matches",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "TypeScript", color: "blue" },
+        { text: "TDesign", color: "blue" },
+        { text: "Spring Boot", color: "green" },
+        { text: "Redis", color: "green" },
+      ],
+    },
+    {
+      title: "CyanbirdMedia Author Platform",
+      time: "2024.05-2025.06",
+      description:
+        "Overseas novel author platform serving 10,000+ authors from 150+ countries. Core modules: novel management, analytics, revenue, contracts.",
+      bulletPoints: [
+        "Modular website with responsive design, semantic HTML for SEO, lazy loading optimizations",
+        "html2canvas cover generator optimized from 3000ms to 500ms",
+        "Tax form PDF parsing and e-signature, 40% efficiency improvement",
+        "ECharts visualization, Lottie-web animations",
+      ],
+      tags: [
+        { text: "Vue2", color: "blue" },
+        { text: "Element UI", color: "blue" },
+        { text: "html2canvas", color: "blue" },
+        { text: "ECharts", color: "blue" },
+      ],
+    },
+    {
+      title: "Hugo Internal Novel Management",
+      time: "2024.05-2025.06",
+      description:
+        "Internal platform for author info, UGC content, chapters, contracts, serving product, editorial, legal and finance teams.",
+      bulletPoints: [
+        "Custom calendar component; batch upload queue with 30% success rate improvement",
+        "Quill editor integration; reusable image preview, file upload, code diff components",
+      ],
+      tags: [
+        { text: "Vue2", color: "blue" },
+        { text: "p-queue", color: "blue" },
+        { text: "Quill", color: "blue" },
+      ],
+    },
+    {
+      title: "Joylit Novel Reading Platform",
+      time: "2025.01-2025.04",
+      description:
+        "Overseas novel reading platform focused on Google SEO and responsive design.",
+      bulletPoints: [
+        "Nuxt.js + Tailwind CSS SSR, 40% organic traffic growth",
+        "Responsive design, 50,000+ active users in first month",
+      ],
+      tags: [
+        { text: "Nuxt.js", color: "blue" },
+        { text: "Tailwind CSS", color: "blue" },
+        { text: "SSR", color: "green" },
+      ],
+    },
+    {
+      title: "Hey Beauty Game Playable",
+      time: "2024.08-2024.10",
+      description:
+        "Match-3 dress-up game playable for marketing and user acquisition.",
+      bulletPoints: [
+        "Cocos Creator with dynamic board generation",
+        "Prefabs and tutorial animations; async loading reduced load time 40%",
+      ],
+      tags: [
+        { text: "Cocos Creator", color: "purple" },
+        { text: "TypeScript", color: "blue" },
+      ],
+    },
+    {
+      title: "Tongcheng Loan Service",
+      time: "2023.12-2024.03",
+      description: "Loan service in Tongcheng Travel APP with credit, borrowing and repayment.",
+      bulletPoints: [
+        "Core modules: credit, borrowing, repayment, transaction history",
+        "Reusable components: bank card modal, password input, PDF reader",
+      ],
+      tags: [
+        { text: "React", color: "blue" },
+        { text: "Ant Design", color: "blue" },
+      ],
+    },
+    {
+      title: "Insurance Review VQA System",
+      time: "2023.05-2024.01",
+      description:
+        "Master's thesis: Deep learning for intelligent insurance claim review and Q&A.",
+      bulletPoints: [
+        "DBNet + CRNN + RoBERTa-wwm for image text extraction and Q&A",
+        "Vue3 + Vite + Pinia frontend, Flask + MySQL backend",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "Flask", color: "green" },
+        { text: "Deep Learning", color: "purple" },
+      ],
+    },
+    {
+      title: "Military Knowledge Graph QA",
+      time: "2023.01-2023.05",
+      description:
+        "National 3rd Prize: Knowledge graph from PDFs for intelligent Q&A.",
+      bulletPoints: [
+        "RoBERTa-wwm + Bi-LSTM + CRF + Attention for triple extraction",
+        "Vue3 + Naive UI frontend, Flask + Neo4j + MySQL backend",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "Neo4j", color: "green" },
+        { text: "Knowledge Graph", color: "purple" },
+      ],
+    },
+    {
+      title: "AI Fruit Vending System",
+      time: "2022.08-2023.04",
+      description:
+        "Shanghai 1st Prize: Raspberry Pi + image recognition for automatic fruit vending.",
+      bulletPoints: [
+        "OpenCV + YOLOv5 recognition on Raspberry Pi",
+        "WeChat Mini Program + Vue3 Web admin panel",
+      ],
+      tags: [
+        { text: "Vue3", color: "blue" },
+        { text: "Mini Program", color: "blue" },
+        { text: "YOLOv5", color: "purple" },
+      ],
+    },
+  ],
+};

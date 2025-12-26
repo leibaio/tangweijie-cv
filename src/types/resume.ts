@@ -38,10 +38,13 @@ export interface Education {
 // 个人信息
 export interface PersonalInfo {
   name: string;
+  nameEn?: string;
   title: string;
+  titleEn?: string;
   phone: string;
   email: string;
   location: string;
+  locationEn?: string;
   age: number;
   english: string;
 }
