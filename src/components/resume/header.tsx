@@ -1,6 +1,4 @@
 import { i18n, Locale, personalInfo } from "@/config";
-import { ModeToggle } from "../mode-toggle";
-import { ThemeColorToggle } from "../theme-color-toggle";
 
 interface HeaderProps {
   locale?: Locale;
@@ -31,10 +29,6 @@ export default function Header({ locale = "zh" }: HeaderProps) {
           <div>{t.age}：{personalInfo.age}</div>
           <div>{t.english}：{personalInfo.english}</div>
         </div>
-      </div>
-      <div className="mt-6 md:mt-0 print:hidden flex items-center gap-2">
-        <ThemeColorToggle locale={locale} />
-        <ModeToggle />
       </div>
     </header>
   );

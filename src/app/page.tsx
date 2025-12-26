@@ -4,7 +4,17 @@ import { LocaleToggle } from "@/components/locale-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeColorToggle } from "@/components/theme-color-toggle";
 import { defaultLocale, i18n, Locale, siteConfig } from "@/config";
-import { ArrowRight, Braces, Code2, Component, FileText, Github, Mail, Terminal } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Braces,
+  Code2,
+  Component,
+  FileText,
+  Github,
+  Mail,
+  Terminal
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -60,6 +70,12 @@ export default function Home() {
       icon: FileText,
     },
     {
+      title: t.features.blog.title,
+      description: t.features.blog.description,
+      href: "/blog",
+      icon: BookOpen,
+    },
+    {
       title: t.features.showcase.title,
       description: t.features.showcase.description,
       href: "/showcase",
@@ -93,7 +109,9 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Terminal className="w-5 h-5 text-primary" />
-            <h1 className="text-lg font-bold font-mono text-primary">{t.nav.siteName}</h1>
+            <h1 className="text-lg font-bold font-mono text-primary">
+              {t.nav.siteName}
+            </h1>
           </div>
           <div className="flex items-center gap-2">
             <LocaleToggle onLocaleChange={setLocale} />
@@ -180,7 +198,8 @@ export default function Home() {
         {/* 技术栈展示 */}
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm text-muted-foreground mb-6 font-mono">
-            {"// "}{t.techStack}
+            {"// "}
+            {t.techStack}
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {techStack.map((tech) => (

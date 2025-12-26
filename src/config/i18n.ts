@@ -22,6 +22,10 @@ export const i18n = {
         title: "组件展示",
         description: "项目中使用的各种组件展示和演示",
       },
+      blog: {
+        title: "技术博客",
+        description: "记录技术学习、项目经验和日常思考",
+      },
     },
     techStack: "技术栈",
     footer: {
@@ -41,6 +45,16 @@ export const i18n = {
       workExperience: "工作经历",
       projects: "项目经历",
       selfComment: "自我评价",
+    },
+    blog: {
+      title: "技术博客",
+      description: "记录技术学习和日常思考",
+      readMore: "阅读全文",
+      backToList: "返回列表",
+      publishedOn: "发布于",
+      readingTime: "阅读时间",
+      tags: "标签",
+      noPosts: "暂无文章",
     },
   },
   en: {
@@ -64,6 +78,10 @@ export const i18n = {
         title: "Showcase",
         description: "Component demos and examples from my projects",
       },
+      blog: {
+        title: "Blog",
+        description: "Tech learnings, project experiences and daily thoughts",
+      },
     },
     techStack: "Tech Stack",
     footer: {
@@ -83,6 +101,16 @@ export const i18n = {
       workExperience: "Work Experience",
       projects: "Projects",
       selfComment: "About Me",
+    },
+    blog: {
+      title: "Blog",
+      description: "Tech learnings and daily thoughts",
+      readMore: "Read More",
+      backToList: "Back to List",
+      publishedOn: "Published on",
+      readingTime: "Reading time",
+      tags: "Tags",
+      noPosts: "No posts yet",
     },
   },
 };
