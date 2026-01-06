@@ -2,6 +2,9 @@ export type Locale = "zh" | "en";
 
 export const i18n = {
   zh: {
+    common: {
+      backToHome: "返回首页",
+    },
     nav: {
       siteName: "汤伟杰的个人站点",
     },
@@ -19,8 +22,8 @@ export const i18n = {
         description: "在线简历展示，支持响应式布局、主题切换和打印导出",
       },
       showcase: {
-        title: "组件展示",
-        description: "项目中使用的各种组件展示和演示",
+        title: "案例展示",
+        description: "项目中使用的各种组件练习和演示",
       },
       blog: {
         title: "技术博客",
@@ -58,6 +61,9 @@ export const i18n = {
     },
   },
   en: {
+    common: {
+      backToHome: "Back to Home",
+    },
     nav: {
       siteName: "Tang Weijie's Portfolio",
     },
@@ -72,7 +78,8 @@ export const i18n = {
     features: {
       resume: {
         title: "Resume",
-        description: "Online resume with responsive layout, theme switching and print export",
+        description:
+          "Online resume with responsive layout, theme switching and print export",
       },
       showcase: {
         title: "Showcase",
