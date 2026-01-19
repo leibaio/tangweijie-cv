@@ -3,8 +3,8 @@ import { WorkExperience } from "@/types";
 export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
   zh: [
     {
-      company: "姚记科技-同花工作室",
-      position: "全栈开发工程师",
+      company: "姚记科技",
+      position: "同花工作室-全栈开发工程师",
       duration: "2025.07 - 至今",
       responsibilities: [
         "负责天天爱掼蛋游戏运营后台管理系统的前后端架构设计与核心功能开发，系统包含运营配置、比赛管理、渠道管理、玩家管理等 11 个核心模块，支撑日活 10 万+ 的游戏运营",
@@ -45,7 +45,7 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
   ],
   en: [
     {
-      company: "Yaoji Technology - Tonghua Studio",
+      company: "Yaoji Technology",
       position: "Full Stack Developer",
       duration: "2025.07 - Present",
       responsibilities: [
