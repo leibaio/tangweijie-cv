@@ -1,5 +1,6 @@
 export const skillsData = {
   zh: [
+    "熟练使用 ClaudeCode、Codex 等 AI 编程工具，具备 Prompt 工程能力，建立 AI 辅助开发规范体系，开发自定义 Skill 指令和 MCP，使用 SpecKit 规范化开发流程，实现 AI 深度参与开发全流程",
     "熟练掌握 HTML5、CSS3、Less、ES6+、TypeScript，熟悉浏览器渲染原理、异步编程、跨域解决方案等",
     "熟练掌握 Vue 2/3 全家桶（Vue-Router、Pinia、Vuex）、React（Hooks、React-Router），能快速搭建项目",
     "熟练掌握 ElementUI、TDesign、AntDesign、Tailwind CSS、ShadcnUI 等 UI 框架，并能二次封装组件",
@@ -9,7 +10,6 @@ export const skillsData = {
     "熟悉 RBAC 权限模型设计，能实现菜单、按钮、API 多维度权限控制",
     "熟悉 Nuxt.js、Next.js 等 SSR 框架，能优化 SEO 和首屏加载性能",
     "了解 Cocos 游戏开发框架，能独立完成 H5 小游戏试玩开发",
-    "熟练使用 Kiro、Cursor、Windsurf 等 AI IDE 工具，善于利用 AI 提升开发效率",
     "注重代码质量，熟悉 ESLint + Prettier + Husky 等工程化规范，建立完整的 TypeScript 类型体系",
   ],
   en: [
