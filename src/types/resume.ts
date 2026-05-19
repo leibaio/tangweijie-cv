@@ -45,6 +45,9 @@ export interface PersonalInfo {
   email: string;
   location: string;
   locationEn?: string;
+  education?: string;
+  educationEn?: string;
+  github?: string;
   age: number;
   english: string;
 }
