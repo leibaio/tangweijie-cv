@@ -23,10 +23,11 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
       position: "商业与技术中台-前端开发工程师",
       duration: "2024.05 - 2025.06",
       responsibilities: [
-        "负责疯读小说、海外小说作家平台、内部管理后台、增长平台等多个产品的从需求评估到上线的全流程开发",
-        "负责 CyanbirdMedia、Joylit Novel 等品牌官网开发，通过 Nuxt.js SSR、语义化标签、懒加载等优化，有机流量增长 40%，首屏加载优化 50%",
-        "推动前端架构优化，封装 html2canvas 封面生成（3000ms → 500ms）、批量上传队列（成功率提升 30%）等公共业务组件，提升团队开发效率",
-        "主动学习新技术，协助游戏团队使用 Cocos Creator 完成 H5 试玩广告开发，资源异步加载优化加载时间 40%",
+        "全栈负责多个海外业务项目（cyanbird、hugo_admin、joylit_official、readictnovel）从需求评估到上线的全流程，服务 10000+ 作者和 50000+ 月活用户",
+        "Cyanbird 作者平台：html2canvas 封面生成（3000ms→500ms）、PDF 解析、电子签名、RichEdit 编辑器、ECharts 可视化，收入转化提升 40%",
+        "Joylit 官网：Nuxt3 SSR + Tailwind CSS + JSON-LD SEO 优化，有机流量增长 40%，PageSpeed 90+，首月 50000+ 活跃用户",
+        "Hugo Admin 内部平台：Quill 富文本、批量上传队列（p-queue 成功率 30%+）、ECharts 数据看板，多部门协作（产品/编辑/法务/财务）",
+        "主导前端架构优化，封装 html2canvas、批量上传队列等公共业务组件，提升团队开发效率 30%+；协助游戏团队 Cocos Creator 开发",
       ],
     },
     {
@@ -60,10 +61,11 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
       position: "Frontend Developer",
       duration: "2024.05 - 2025.06",
       responsibilities: [
-        "Owned full lifecycle of multiple products: novel platforms, author portals, internal management systems, and growth platforms",
-        "Developed brand websites (CyanbirdMedia, Joylit Novel) with Nuxt.js SSR, semantic HTML, lazy loading, achieving 40% organic traffic growth and 50% FCP improvement",
-        "Led frontend architecture optimization, encapsulating html2canvas cover generator (3000ms → 500ms), batch upload queue (30% success rate boost), improving team efficiency",
-        "Proactively learned Cocos Creator, assisted game team with H5 playable ads, optimizing load time 40% through async resource loading",
+        "Full-stack ownership of multiple overseas business projects (cyanbird, hugo_admin, joylit_official, readictnovel) from requirements to launch, serving 10,000+ authors and 50,000+ MAU",
+        "Cyanbird Author Platform: html2canvas cover generation (3000ms→500ms), PDF parsing, e-signature, RichEdit editor, ECharts visualization, 40% revenue conversion improvement",
+        "Joylit Official Website: Nuxt3 SSR + Tailwind CSS + JSON-LD SEO, 40% organic traffic growth, PageSpeed 90+, 50,000+ MAU in first month",
+        "Hugo Admin Internal Platform: Quill RichEdit, batch upload queue (p-queue 30%+ success rate), ECharts dashboard, multi-department collaboration (Product/Editorial/Legal/Finance)",
+        "Led frontend architecture optimization, encapsulating html2canvas, batch upload queue and other reusable components, boosting team efficiency 30%+; assisted game team with Cocos Creator",
       ],
     },
     {
