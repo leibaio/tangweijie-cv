@@ -15,7 +15,7 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
 
         "技术优化：封装 useTable、usePagination 等通用 Hooks 和 CommonTable 配置化组件，减少 70% 重复代码；路由懒加载和代码分割优化首屏加载 40%；分批处理策略避免大批量发布 OOM；系统支持 5000+ QPS，缓存命中率 95%+",
 
-        "AI 集成：基于 Node.js + Hono 构建 AI BFF 中间层，对接 Kimi API，实现流式对话分析、自动生成运营报告等功能，保护 API Key 安全；使用 Claude Code + Spec 驱动开发，开发效率提升 3 倍+",
+        "AI 集成：基于 Node.js + Hono 构建 AI BFF 中间层，支持多模型切换（Kimi/NVIDIA/OpenAI），通过环境变量零代码切换；实现流式对话分析、自动生成运营报告等功能，保护 API Key 安全；使用 Claude Code + Spec 驱动开发，开发效率提升 3 倍+",
       ],
     },
     {
@@ -52,7 +52,7 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
 
         "Tech Optimization: Reusable Hooks (useTable, usePagination) and CommonTable, reducing 70% code duplication; lazy loading for 40% FCP improvement; batch processing to prevent OOM; 5000+ QPS, 95%+ cache hit rate",
 
-        "AI Integration: Built AI BFF with Node.js + Hono, integrating Kimi API for streaming chat analytics and auto-generated reports, securing API keys; Claude Code + Spec-driven development boosted efficiency 3x+",
+        "AI Integration: Built AI BFF with Node.js + Hono, supporting multi-model switching (Kimi/NVIDIA/OpenAI) via env vars with zero code changes; integrated for streaming chat analytics and auto-generated reports, securing API keys; Claude Code + Spec-driven development boosted efficiency 3x+",
       ],
     },
     {

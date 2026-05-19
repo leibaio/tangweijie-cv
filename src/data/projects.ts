@@ -10,7 +10,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
       bulletPoints: [
         "前端（Vue3 + TS + TDesign）：封装 Axios 请求层和 useTable/usePagination Hooks，CommonTable 配置化组件减少 70% 重复代码；RBAC 动态路由权限系统，路由懒加载优化首屏加载 40%",
         "后端（Spring Boot + MyBatis Plus + Redis）：责任链模式处理多渠道配置发布，Redis 发布订阅 + OSS 双通道实现配置热更新；Shiro + Redis 分布式会话，分批处理策略避免 OOM",
-        "AI BFF（Node.js + Hono + TS）：代理 Kimi API 流式调用，聚合后端数据组装 prompt，SSE 流式响应提供实时 AI 数据分析，支持对话追问、智能报告生成",
+        "AI BFF（Node.js + Hono + TS）：代理多模型 API（Kimi/NVIDIA/OpenAI）流式调用，通过环境变量零代码切换；聚合后端数据组装 prompt，SSE 流式响应实现实时 AI 分析、对话追问、智能报告生成",
         "AI 驱动开发：使用 Claude Code + Spec 驱动开发，建立 AI 辅助开发规范（自定义 Skills、MCP 集成），开发效率提升 3 倍+，代码质量和可维护性显著提高",
         "业务亮点：弹窗配置系统提升转化率 15%；比赛管理系统支撑日均 1000+ 场比赛；AI 对话式数据分析提升运营决策效率 50%；系统支持 5000+ QPS，缓存命中率 > 95%",
       ],
@@ -103,7 +103,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
       bulletPoints: [
         "Frontend (Vue3 + TS + TDesign): Axios layer with interceptors; useTable/usePagination Hooks and CommonTable reducing 70% code; RBAC dynamic routing, lazy loading for 40% FCP improvement",
         "Backend (Spring Boot + MyBatis Plus + Redis): Chain of Responsibility for multi-channel config; Redis pub/sub + OSS hot updates; Shiro + Redis distributed session, batch processing to prevent OOM",
-        "AI BFF (Node.js + Hono + TS): Proxy Kimi API streaming calls for API key security; aggregate backend data for prompt assembly; SSE streaming for real-time AI analytics with chat follow-ups and auto-report generation",
+        "AI BFF (Node.js + Hono + TS): Proxy multi-model APIs (Kimi/NVIDIA/OpenAI) with zero-code switching via env vars; aggregate backend data for prompt assembly; SSE streaming for real-time AI analytics, chat follow-ups, and auto-report generation",
         "AI-Driven Development: Leveraging Claude Code + Spec-driven approach, establishing AI-assisted development standards (custom Skills, MCP integration), 3x+ efficiency boost with improved code quality and maintainability",
         "Business Impact: Popup config improved conversion 15%; Tournament system supports 1000+ daily matches; AI conversational analytics boosts operational decisions 50%; 5000+ QPS, 95%+ cache hit rate",
       ],
