@@ -23,7 +23,7 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
       position: "商业与技术中台-前端开发工程师",
       duration: "2024.05 - 2025.06",
       responsibilities: [
-        "全栈负责多个海外业务项目（cyanbird、hugo_admin、joylit_official、readictnovel）从需求评估到上线的全流程，服务 10000+ 作者和 50000+ 月活用户",
+        "负责多个海外业务项目（cyanbird、hugo_admin、joylit_official、readictnovel）前端从需求评估到上线的全流程，服务 10000+ 作者和 50000+ 月活用户",
         "Cyanbird 作者平台：html2canvas 封面生成（3000ms→500ms）、PDF 解析、电子签名、RichEdit 编辑器、ECharts 可视化，收入转化提升 40%",
         "Joylit 官网：Nuxt3 SSR + Tailwind CSS + JSON-LD SEO 优化，有机流量增长 40%，PageSpeed 90+，首月 50000+ 活跃用户",
         "Hugo Admin 内部平台：Quill 富文本、批量上传队列（p-queue 成功率 30%+）、ECharts 数据看板，多部门协作（产品/编辑/法务/财务）",
