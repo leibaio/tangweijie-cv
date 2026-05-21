@@ -8,16 +8,16 @@ interface SelfCommentProps {
 
 const comments = {
   zh: [
-    "对 AI 辅助开发保持高度敏感，熟练使用 Kiro、Cursor、Windsurf 等 AI IDE 工具提升开发效率，善于利用 AI 进行代码生成、重构和问题排查",
-    "持续关注 Hacker News、Stack Overflow 等技术社区，保持对前沿技术和行业动态的敏锐度，具备快速学习和落地新技术的能力",
-    "具备全栈开发能力，能够独立完成从需求分析、架构设计到前后端开发的全流程工作",
-    "注重代码质量和工程化实践，善于抽象封装通用组件和工具，提升团队开发效率",
+    "AI 驱动开发：熟练使用 Claude Code + Spec 驱动开发流程，擅长 AI 辅助编程（代码生成/重构/评审）、自定义 Skills 和 MCP 集成，开发效率提升 3 倍+；持续关注 LLM 应用、RAG、Agent 等前沿技术，并在项目中落地",
+    "全栈工程化：具备从前端到后端的全链路开发能力，注重代码质量和工程化实践，熟悉性能优化（懒加载/缓存/分批处理）和架构设计（前后端分离/BFF/微服务），追求高可维护性和可扩展性",
+    "快速学习与落地：对新技术保持敏锐度，善于从技术社区（Hacker News/Stack Overflow）和实践中学习，具备独立调研、选型、落地新技术的能力，曾主导 Nuxt3 SSR、AI BFF 等新技术的快速应用",
+    "团队协作与沟通：具备良好的技术文档和沟通能力，能够清晰表达技术方案和决策理由，有跨部门协作（产品/运营/财务）经验，善于在技术与业务之间找到平衡点,",
   ],
   en: [
-    "Highly sensitive to AI-assisted development, proficient in AI IDE tools like Kiro, Cursor, Windsurf to boost productivity through code generation, refactoring, and debugging",
-    "Actively follow Hacker News, Stack Overflow and tech communities, staying sharp on cutting-edge technologies with strong learning and implementation abilities",
-    "Full-stack capable, independently handling complete workflows from requirements analysis, architecture design to frontend/backend development",
-    "Focus on code quality and engineering practices, skilled at abstracting reusable components and utilities to improve team efficiency",
+    "AI-Driven Development: Proficient in Claude Code + Spec-driven workflow, skilled in AI-assisted coding (generation/refactoring/review), custom Skills and MCP integration, 3x+ efficiency boost; staying current on LLM apps, RAG, and Agent technologies with practical project implementation",
+    "Full-Stack Engineering: End-to-end development from frontend to backend, emphasizing code quality and engineering practices; experienced in performance optimization (lazy loading/caching/batch processing) and architecture design (FE-BE separation/BFF/microservices), pursuing high maintainability and scalability",
+    "Fast Learner & Implementer: Strong technology sensitivity from tech communities (HN/Stack Overflow) and hands-on practice; capable of independently researching, selecting, and implementing new tech — e.g., led rapid adoption of Nuxt3 SSR and AI BFF",
+    "Team Collaboration & Communication: Strong technical documentation and communication skills to articulate designs and decisions; experienced in cross-functional collaboration (Product/Ops/Finance), balancing technical solutions with business needs",
   ],
 };
 
