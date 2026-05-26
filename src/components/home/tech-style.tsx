@@ -187,7 +187,7 @@ export function TechStyle({ locale, header }: TechStyleProps) {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com"
+              href={siteConfig.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"

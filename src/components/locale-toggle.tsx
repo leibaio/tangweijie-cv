@@ -1,32 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { defaultLocale, Locale } from "@/config/i18n";
+import { useLocale } from "@/contexts/locale-context";
 import { Languages } from "lucide-react";
-import { useEffect, useState } from "react";
 
-interface LocaleToggleProps {
-  onLocaleChange?: (locale: Locale) => void;
-}
-
-export function LocaleToggle({ onLocaleChange }: LocaleToggleProps) {
-  const [locale, setLocale] = useState<Locale>(defaultLocale);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("locale") as Locale | null;
-    if (saved && (saved === "zh" || saved === "en")) {
-      setLocale(saved);
-      onLocaleChange?.(saved);
-    }
-  }, [onLocaleChange]);
+export function LocaleToggle() {
+  const { locale, setLocale, mounted } = useLocale();
 
   const toggleLocale = () => {
-    const newLocale = locale === "zh" ? "en" : "zh";
-    setLocale(newLocale);
-    localStorage.setItem("locale", newLocale);
-    onLocaleChange?.(newLocale);
+    setLocale(locale === "zh" ? "en" : "zh");
   };
 
   if (!mounted) {

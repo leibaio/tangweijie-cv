@@ -12,26 +12,33 @@ import {
   WorkExperience,
 } from "@/components/resume";
 import { ThemeColorToggle } from "@/components/theme-color-toggle";
-import { defaultLocale, i18n, Locale } from "@/config";
+import { i18n } from "@/config";
+import { useLocale } from "@/contexts/locale-context";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function ResumePage() {
-  const [locale, setLocale] = useState<Locale>(defaultLocale);
-  const [mounted, setMounted] = useState(false);
+  const { locale, mounted } = useLocale();
   const t = i18n[locale];
 
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("locale") as Locale | null;
-    if (saved && (saved === "zh" || saved === "en")) {
-      setLocale(saved);
-    }
-  }, []);
-
   if (!mounted) {
-    return null;
+    return (
+      <div className="print:p-0 print:m-0">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center print:hidden">
+          <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+            <ArrowLeft className="w-4 h-4" />
+            {i18n.zh.resume.backToHome}
+          </div>
+        </div>
+        <div className="resume-content container mx-auto px-4 py-4 w-full md:max-w-4xl lg:max-w-4xl print:max-w-none print:px-8 print:py-0">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-muted rounded w-1/3" />
+            <div className="h-4 bg-muted rounded w-2/3" />
+            <div className="h-4 bg-muted rounded w-1/2" />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -47,7 +54,7 @@ export default function ResumePage() {
         </Link>
         <div className="flex items-center gap-2">
           <PrintButton locale={locale} />
-          <LocaleToggle onLocaleChange={setLocale} />
+          <LocaleToggle />
           <ThemeColorToggle locale={locale} />
           <ModeToggle />
         </div>

@@ -87,7 +87,7 @@ export function MinimalStyle({ locale, header }: MinimalStyleProps) {
         <div className="container mx-auto px-4 max-w-2xl flex justify-between items-center">
           <p className="text-sm text-muted-foreground/50">© {siteConfig.year} {siteConfig.author}</p>
           <div className="flex items-center gap-4">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/50 hover:text-foreground transition-colors">
+            <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground/50 hover:text-foreground transition-colors">
               <Github className="w-4 h-4" />
             </a>
             <a href="mailto:leibaio@foxmail.com" className="text-muted-foreground/50 hover:text-foreground transition-colors">

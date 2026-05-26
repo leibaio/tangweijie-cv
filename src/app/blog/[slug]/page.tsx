@@ -1,58 +1,25 @@
-"use client";
-
-import { LocaleToggle } from "@/components/locale-toggle";
-import { ModeToggle } from "@/components/mode-toggle";
-import { ThemeColorToggle } from "@/components/theme-color-toggle";
-import { defaultLocale, i18n, Locale } from "@/config";
-import "highlight.js/styles/github-dark.css";
-import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
-import Link from "next/link";
-import { use, useEffect, useState } from "react";
+import { BlogHeader } from "@/components/blog-header";
+import { i18n } from "@/config";
+import { getPostBySlug } from "@/lib/blog";
+import { Calendar, Clock, Tag } from "lucide-react";
+import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+import "highlight.js/styles/github-dark.css";
 
-interface Post {
-  slug: string;
-  title: string;
-  titleEn?: string;
-  date: string;
-  description: string;
-  descriptionEn?: string;
-  tags: string[];
-  tagsEn?: string[];
-  content: string;
-  readingTime: string;
-}
-
-export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
-  const [locale, setLocale] = useState<Locale>(defaultLocale);
-  const [post, setPost] = useState<Post | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const t = i18n[locale].blog;
-
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("locale") as Locale | null;
-    if (saved && (saved === "zh" || saved === "en")) {
-      setLocale(saved);
-    }
-    fetch(`/api/posts/${slug}`)
-      .then((res) => res.json())
-      .then((data) => setPost(data))
-      .catch(() => setPost(null));
-  }, [slug]);
-
-  if (!mounted) return null;
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
-      </div>
-    );
+    notFound();
   }
+
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("locale")?.value === "en" ? "en" : "zh") as "zh" | "en";
+  const t = i18n[locale].blog;
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -60,22 +27,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
         <div className="absolute inset-0 bg-background bg-[linear-gradient(to_right,hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
       </div>
 
-      <header className="border-b border-primary/10 bg-background/60 backdrop-blur-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            {t.backToList}
-          </Link>
-          <div className="flex items-center gap-2">
-            <LocaleToggle onLocaleChange={setLocale} />
-            <ThemeColorToggle locale={locale} />
-            <ModeToggle />
-          </div>
-        </div>
-      </header>
+      <BlogHeader backHref="/blog" backText={t.backToList} />
 
       <main className="flex-1 container mx-auto px-4 py-12 max-w-3xl">
         <article>

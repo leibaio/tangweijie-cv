@@ -5,7 +5,7 @@ export const siteConfig = {
   descriptionEn: "Tang Weijie's personal website featuring online resume, tech blog and project showcase. Focused on Full Stack Web Development.",
   author: "汤伟杰",
   authorEn: "Tang Weijie",
-  year: 2025,
+  year: new Date().getFullYear(),
   url: "https://tangweijie-cv.vercel.app", 
   email: "leibaio@foxmail.com",
   github: "https://github.com/leibaio",

@@ -109,7 +109,7 @@ export function TerminalStyle({ locale, header }: TerminalStyleProps) {
         {/* Quick links */}
         <div className="mt-8 flex items-center justify-center gap-6 text-sm font-mono animate-fade-in-up animation-delay-500">
           <a
-            href="https://github.com"
+            href={siteConfig.github}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#8b949e] hover:text-[#c9d1d9] transition-colors"

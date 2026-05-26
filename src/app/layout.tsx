@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { LocaleProvider } from "@/contexts/locale-context";
 import { siteConfig } from "@/config";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -75,7 +76,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <LocaleProvider>
+            {children}
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

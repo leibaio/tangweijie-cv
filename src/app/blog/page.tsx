@@ -1,45 +1,15 @@
-"use client";
-
-import { LocaleToggle } from "@/components/locale-toggle";
-import { ModeToggle } from "@/components/mode-toggle";
-import { ThemeColorToggle } from "@/components/theme-color-toggle";
-import { defaultLocale, i18n, Locale } from "@/config";
-import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
+import { BlogHeader } from "@/components/blog-header";
+import { i18n } from "@/config";
+import { getAllPosts } from "@/lib/blog";
+import { Calendar, Clock, Tag } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { cookies } from "next/headers";
 
-interface PostMeta {
-  slug: string;
-  title: string;
-  titleEn?: string;
-  date: string;
-  description: string;
-  descriptionEn?: string;
-  tags: string[];
-  tagsEn?: string[];
-  readingTime: string;
-}
-
-export default function BlogPage() {
-  const [locale, setLocale] = useState<Locale>(defaultLocale);
-  const [posts, setPosts] = useState<PostMeta[]>([]);
-  const [mounted, setMounted] = useState(false);
+export default async function BlogPage() {
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("locale")?.value === "en" ? "en" : "zh") as "zh" | "en";
   const t = i18n[locale].blog;
-
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("locale") as Locale | null;
-    if (saved && (saved === "zh" || saved === "en")) {
-      setLocale(saved);
-    }
-    // 获取文章列表
-    fetch("/api/posts")
-      .then((res) => res.json())
-      .then((data) => setPosts(data))
-      .catch(() => setPosts([]));
-  }, []);
-
-  if (!mounted) return null;
+  const posts = getAllPosts();
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -49,22 +19,7 @@ export default function BlogPage() {
         <div className="absolute top-0 h-[400px] w-full bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.1),transparent)]" />
       </div>
 
-      <header className="border-b border-primary/10 bg-background/60 backdrop-blur-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            {i18n[locale].resume.backToHome}
-          </Link>
-          <div className="flex items-center gap-2">
-            <LocaleToggle onLocaleChange={setLocale} />
-            <ThemeColorToggle locale={locale} />
-            <ModeToggle />
-          </div>
-        </div>
-      </header>
+      <BlogHeader backHref="/" backText={i18n[locale].resume.backToHome} />
 
       <main className="flex-1 container mx-auto px-4 py-12 max-w-3xl">
         <div className="mb-12">
