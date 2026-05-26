@@ -9,13 +9,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { defaultHomeStyle, HomeStyle, homeStyles } from "@/config/home-style";
 import { Locale } from "@/config/i18n";
-import { Cpu, Minus, Terminal } from "lucide-react";
+import { Cpu, Minus, Scroll, Terminal } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const iconMap = {
   cpu: Cpu,
   minus: Minus,
   terminal: Terminal,
+  scroll: Scroll,
 };
 
 interface HomeStyleToggleProps {

@@ -1,6 +1,6 @@
 "use client";
 
-import { MinimalStyle, TechStyle, TerminalStyle } from "@/components/home";
+import { ChineseStyle, MinimalStyle, TechStyle, TerminalStyle } from "@/components/home";
 import { HomeStyleToggle } from "@/components/home-style-toggle";
 import { LocaleToggle } from "@/components/locale-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -8,8 +8,10 @@ import { ThemeColorToggle } from "@/components/theme-color-toggle";
 import { i18n } from "@/config";
 import { defaultHomeStyle, HomeStyle } from "@/config/home-style";
 import { useLocale } from "@/contexts/locale-context";
-import { Terminal } from "lucide-react";
+import { Scroll, Terminal } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+
+const VALID_STYLES = ["tech", "minimal", "terminal", "chinese"];
 
 export default function Home() {
   const { locale, mounted } = useLocale();
@@ -18,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     const savedStyle = localStorage.getItem("home-style") as HomeStyle | null;
-    if (savedStyle && ["tech", "minimal", "terminal"].includes(savedStyle)) {
+    if (savedStyle && VALID_STYLES.includes(savedStyle)) {
       setHomeStyle(savedStyle);
     }
   }, []);
@@ -27,12 +29,35 @@ export default function Home() {
     setHomeStyle(style);
   }, []);
 
+  const isTerminal = homeStyle === "terminal";
+  const isChinese = homeStyle === "chinese";
+
+  const headerStyle = isTerminal
+    ? "border-[#30363d] bg-[#161b22]"
+    : isChinese
+    ? "bg-[#F5F0E8]/80 backdrop-blur-md"
+    : "border-primary/10 bg-background/60 backdrop-blur-md";
+
+  const iconColor = isTerminal
+    ? "text-[#7ee787]"
+    : isChinese
+    ? "text-[#C5A33A]"
+    : "text-primary";
+
+  const titleColor = isTerminal
+    ? "text-[#c9d1d9]"
+    : isChinese
+    ? "text-[#3D2B1F]"
+    : "text-primary";
+
+  const SiteIcon = isChinese ? Scroll : Terminal;
+
   const header = (
-    <header className={`border-b ${homeStyle === "terminal" ? "border-[#30363d] bg-[#161b22]" : "border-primary/10 bg-background/60 backdrop-blur-md"} sticky top-0 z-50`}>
+    <header className={`border-b ${headerStyle} sticky top-0 z-50`} style={isChinese ? { borderColor: "#D4C5A0" } : undefined}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <Terminal className={`w-5 h-5 ${homeStyle === "terminal" ? "text-[#7ee787]" : "text-primary"}`} />
-          <h1 className={`text-lg font-bold font-mono ${homeStyle === "terminal" ? "text-[#c9d1d9]" : "text-primary"}`}>
+          <SiteIcon className={`w-5 h-5 ${iconColor}`} />
+          <h1 className={`text-lg font-bold font-mono ${titleColor}`}>
             {t.nav.siteName}
           </h1>
         </div>
@@ -52,6 +77,10 @@ export default function Home() {
 
   if (homeStyle === "terminal") {
     return <TerminalStyle locale={locale} header={header} />;
+  }
+
+  if (homeStyle === "chinese") {
+    return <ChineseStyle locale={locale} header={header} />;
   }
 
   return <TechStyle locale={locale} header={header} />;

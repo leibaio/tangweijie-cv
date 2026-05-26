@@ -1,4 +1,4 @@
-export type HomeStyle = "tech" | "minimal" | "terminal";
+export type HomeStyle = "tech" | "minimal" | "terminal" | "chinese";
 
 export interface HomeStyleConfig {
   name: string;
@@ -21,6 +21,11 @@ export const homeStyles: Record<HomeStyle, HomeStyleConfig> = {
     name: "终端风",
     nameEn: "Terminal",
     icon: "terminal",
+  },
+  chinese: {
+    name: "国风",
+    nameEn: "Chinese",
+    icon: "scroll",
   },
 };
 
