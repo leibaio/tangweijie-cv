@@ -1,7 +1,7 @@
 export const skillsData = {
   zh: [
     // AI 能力（重点突出）
-    "⭐ AI 驱动开发：深度使用 Claude Code、Codex、Cursor 等 AI 工具，结合 Prompt Engineering、Spec、MCP 集成等提升开发效率；熟悉大模型接入（OpenAI/Nvidia Api）、SSE 流式对话和基础 Agent 工作流开发，具有 AI 数据分析和智能对话系统开发经验统",
+    "⭐ AI 驱动开发：深度使用 Claude Code、Codex、Cursor 等 AI 工具，结合 Skills、Spec、MCP 集成等提升开发效率；熟悉大模型接入（OpenAI/Nvidia Api）、SSE 流式对话和基础 Agent 工作流开发，具有 AI 数据分析和智能对话系统开发经验统",
     "前端工程化：熟练掌握 Vue 2/3 全家桶、React（Hooks），TypeScript/ES6+；熟悉 Vite/Webpack 构建优化（Tree Shaking、代码分割、懒加载），ESLint + Prettier + Husky 工程化规范",
     "全栈开发：熟悉 Node.js BFF（Express/Hono）和 Spring Boot 后端开发，熟悉 MySQL/MongoDB 数据库设计、Redis 缓存及 RESTful API 开发，能够独立完成中小型项目开发",
     "SSR 与 SEO：熟悉 Nuxt3/Next.js 服务端渲染，SEO 优化（JSON-LD、结构化数据），Core Web Vitals 首屏性能优化，PageSpeed 90+",
@@ -10,7 +10,7 @@ export const skillsData = {
   ],
   en: [
   // AI Capabilities
-  "⭐ AI-Driven Development: Extensive hands-on experience with Claude Code, Codex, Cursor, and other AI tools; able to improve development efficiency through Prompt Engineering, Spec-driven workflows, and MCP integration. Familiar with LLM integration (OpenAI/NVIDIA APIs), SSE streaming chat, and basic Agent workflow development, with experience in AI analytics and intelligent conversation systems",
+  "⭐ AI-Driven Development: Extensive hands-on experience with Claude Code, Codex, Cursor, and other AI tools; able to improve development efficiency through Skills, Spec-driven workflows, and MCP integration. Familiar with LLM integration (OpenAI/NVIDIA APIs), SSE streaming chat, and basic Agent workflow development, with experience in AI analytics and intelligent conversation systems",
 
   // Frontend Engineering
   "Frontend Engineering: Proficient in Vue 2/3 ecosystem and React (Hooks), with solid TypeScript/ES6+ skills. Familiar with Vite/Webpack optimization including Tree Shaking, code splitting, and lazy loading, along with ESLint + Prettier + Husky engineering practices",
