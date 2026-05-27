@@ -2,20 +2,13 @@
 
 import { siteConfig } from "@/config";
 import { Locale, i18n } from "@/config/i18n";
+import { getFeatures, techStack } from "@/data/home-shared";
 import {
   ArrowRight,
-  BookOpen,
-  Component,
-  FileText,
   Github,
   Mail,
 } from "lucide-react";
 import Link from "next/link";
-
-const techStack = [
-  "Vue 2/3", "React", "TypeScript", "Next.js", "Nuxt.js",
-  "Tailwind CSS", "Spring Boot", "Node.js", "Redis", "MySQL",
-];
 
 interface ChineseStyleProps {
   locale: Locale;
@@ -71,27 +64,7 @@ function SmallCloud({ className, style }: { className?: string; style?: React.CS
 
 export function ChineseStyle({ locale, header }: ChineseStyleProps) {
   const t = i18n[locale];
-
-  const features = [
-    {
-      title: t.features.resume.title,
-      description: t.features.resume.description,
-      href: "/resume",
-      icon: FileText,
-    },
-    {
-      title: t.features.blog.title,
-      description: t.features.blog.description,
-      href: "/blog",
-      icon: BookOpen,
-    },
-    {
-      title: t.features.showcase.title,
-      description: t.features.showcase.description,
-      href: "/showcase",
-      icon: Component,
-    },
-  ];
+  const features = getFeatures(locale);
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden" style={{ backgroundColor: "#F5F0E8" }}>

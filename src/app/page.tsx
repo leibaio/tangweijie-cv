@@ -65,7 +65,7 @@ export default function Home() {
           <HomeStyleToggle locale={locale} onStyleChange={handleStyleChange} />
           <LocaleToggle />
           <ThemeColorToggle locale={locale} />
-          <ModeToggle />
+          {!isChinese && <ModeToggle />}
         </div>
       </div>
     </header>

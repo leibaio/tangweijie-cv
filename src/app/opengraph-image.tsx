@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
@@ -157,7 +158,7 @@ export default async function OpengraphImage() {
               letterSpacing: 4,
             }}
           >
-            tangweijie-cv.vercel.app
+            {siteConfig.url.replace("https://", "")}
           </div>
         </div>
       </div>

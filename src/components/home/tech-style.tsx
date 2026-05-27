@@ -2,31 +2,16 @@
 
 import { siteConfig } from "@/config";
 import { Locale, i18n } from "@/config/i18n";
+import { getFeatures, techStack } from "@/data/home-shared";
 import {
   ArrowRight,
-  BookOpen,
   Braces,
   Code2,
-  Component,
-  FileText,
   Github,
   Mail,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
-const techStack = [
-  "Vue 2/3",
-  "React",
-  "TypeScript",
-  "Next.js",
-  "Nuxt.js",
-  "Tailwind CSS",
-  "Spring Boot",
-  "MyBatis-Plus",
-  "Redis",
-  "MySQL",
-];
 
 interface TechStyleProps {
   locale: Locale;
@@ -36,6 +21,7 @@ interface TechStyleProps {
 export function TechStyle({ locale, header }: TechStyleProps) {
   const [typedText, setTypedText] = useState("");
   const t = i18n[locale];
+  const features = getFeatures(locale);
   const fullText = "console.log('Hello, World!');";
 
   useEffect(() => {
@@ -51,27 +37,6 @@ export function TechStyle({ locale, header }: TechStyleProps) {
     }, 80);
     return () => clearInterval(timer);
   }, []);
-
-  const features = [
-    {
-      title: t.features.resume.title,
-      description: t.features.resume.description,
-      href: "/resume",
-      icon: FileText,
-    },
-    {
-      title: t.features.blog.title,
-      description: t.features.blog.description,
-      href: "/blog",
-      icon: BookOpen,
-    },
-    {
-      title: t.features.showcase.title,
-      description: t.features.showcase.description,
-      href: "/showcase",
-      icon: Component,
-    },
-  ];
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">

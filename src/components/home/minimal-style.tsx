@@ -2,12 +2,9 @@
 
 import { siteConfig } from "@/config";
 import { Locale, i18n } from "@/config/i18n";
-import { ArrowRight, BookOpen, Component, FileText, Github, Mail } from "lucide-react";
+import { getFeatures, techStack } from "@/data/home-shared";
+import { ArrowRight, Github, Mail } from "lucide-react";
 import Link from "next/link";
-
-const techStack = [
-  "Vue", "React", "TypeScript", "Next.js", "Tailwind CSS", "Spring Boot", "MySQL",
-];
 
 interface MinimalStyleProps {
   locale: Locale;
@@ -16,12 +13,7 @@ interface MinimalStyleProps {
 
 export function MinimalStyle({ locale, header }: MinimalStyleProps) {
   const t = i18n[locale];
-
-  const features = [
-    { title: t.features.resume.title, description: t.features.resume.description, href: "/resume", icon: FileText },
-    { title: t.features.blog.title, description: t.features.blog.description, href: "/blog", icon: BookOpen },
-    { title: t.features.showcase.title, description: t.features.showcase.description, href: "/showcase", icon: Component },
-  ];
+  const features = getFeatures(locale);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">

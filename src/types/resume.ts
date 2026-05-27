@@ -1,5 +1,4 @@
 import { LucideIcon } from "lucide-react";
-import { ReactNode } from "react";
 
 // 标签颜色类型
 export type TagColor = "blue" | "red" | "green" | "yellow" | "purple" | "gray";
@@ -24,7 +23,7 @@ export interface WorkExperience {
   company: string;
   position: string;
   duration: string;
-  responsibilities: ReactNode[];
+  responsibilities: string[];
 }
 
 // 教育经历
