@@ -9,13 +9,13 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
       responsibilities: [
         "全栈负责天天爱掼蛋运营管理系统（前端 Vue3 + 后端 Spring Boot + AI BFF Node.js），系统包含权限管理、渠道配置、比赛管理、客服系统等 11 个核心模块，支撑日活 40 万+ 用户的游戏运营",
 
-        "架构设计：前后端分离架构，后端采用多模块分层（web/service/dal/model）实现业务解耦；引入 BFF 中间层代理 AI 服务，通过 SSE 流式响应支持智能数据分析，提升运营决策效率 50%+",
+        "架构设计：前后端分离架构，后端采用多模块分层（web/service/dal/model）实现业务解耦；引入 BFF 中间层代理 AI 服务，通过 SSE 流式响应支持智能数据分析，显著提升运营决策效率",
 
-        "核心功能：①基于 RBAC 的动态路由权限系统（菜单+按钮+API 三级控制）②多渠道配置发布系统（责任链模式 + Redis 发布订阅实现配置热更新）③弹窗配置系统（转化率提升 15%）④比赛管理系统（日均 1000+ 场比赛）",
+        "核心功能：①基于 RBAC 的动态路由权限系统（菜单+按钮+API 三级控制）②多渠道配置发布系统（责任链模式 + Redis 发布订阅实现配置热更新）③弹窗配置系统（多场景触发规则和优先级控制）④比赛管理系统（支撑大规模多赛制运营）",
 
-        "技术优化：封装 useTable、usePagination 等通用 Hooks 和 CommonTable 配置化组件，减少 70% 重复代码；路由懒加载和代码分割优化首屏加载 40%；分批处理策略避免大批量发布 OOM；系统支持 5000+ QPS，缓存命中率 95%+",
+        "技术优化：封装 useTable、usePagination 等通用 Hooks 和 CommonTable 配置化组件，大幅减少重复代码；路由懒加载和代码分割优化首屏加载；分批处理策略避免大批量发布 OOM",
 
-        "AI 集成：基于 Node.js + Hono 构建 AI BFF 中间层，支持多模型切换（Kimi/NVIDIA/OpenAI），通过环境变量零代码切换；实现流式对话分析、自动生成运营报告等功能，保护 API Key 安全；使用 Claude Code + Spec 驱动开发，开发效率提升 3 倍+",
+        "AI 集成：基于 Node.js + Hono 构建 AI BFF 中间层，支持多模型切换（Kimi/NVIDIA/OpenAI），通过环境变量零代码切换；实现流式对话分析、自动生成运营报告等功能，保护 API Key 安全；使用 Claude Code + Spec 驱动开发，开发效率显著提升",
       ],
     },
     {
@@ -47,13 +47,13 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
       responsibilities: [
         "Full-stack ownership of game operation system (Vue3 + Spring Boot + Node.js BFF), covering 11 core modules including permissions, channels, tournaments, customer service, supporting 100K+ DAU",
 
-        "Architecture: Frontend-backend separation with multi-module layering (web/service/dal/model); BFF layer proxies AI service with SSE streaming for intelligent analytics, boosting operational decision efficiency 50%+",
+        "Architecture: Frontend-backend separation with multi-module layering (web/service/dal/model); BFF layer proxies AI service with SSE streaming for intelligent analytics, significantly boosting operational decision efficiency",
 
-        "Core Features: ①RBAC dynamic routing (menu+button+API access control) ②Multi-channel config publishing (Chain of Responsibility + Redis pub/sub for hot updates) ③Popup config (15% conversion lift) ④Tournament system (1000+ daily matches)",
+        "Core Features: ①RBAC dynamic routing (menu+button+API access control) ②Multi-channel config publishing (Chain of Responsibility + Redis pub/sub for hot updates) ③Popup config (multi-scenario triggers with priority control) ④Tournament system (large-scale multi-format competition management)",
 
-        "Tech Optimization: Reusable Hooks (useTable, usePagination) and CommonTable, reducing 70% code duplication; lazy loading for 40% FCP improvement; batch processing to prevent OOM; 5000+ QPS, 95%+ cache hit rate",
+        "Tech Optimization: Reusable Hooks (useTable, usePagination) and CommonTable, significantly reducing code duplication; lazy loading and code splitting for first-screen optimization; batch processing to prevent OOM",
 
-        "AI Integration: Built AI BFF with Node.js + Hono, supporting multi-model switching (Kimi/NVIDIA/OpenAI) via env vars with zero code changes; integrated for streaming chat analytics and auto-generated reports, securing API keys; Claude Code + Spec-driven development boosted efficiency 3x+",
+        "AI Integration: Built AI BFF with Node.js + Hono, supporting multi-model switching (Kimi/NVIDIA/OpenAI) via env vars with zero code changes; integrated for streaming chat analytics and auto-generated reports, securing API keys; Claude Code + Spec-driven development significantly boosting efficiency",
       ],
     },
     {
