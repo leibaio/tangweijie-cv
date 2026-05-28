@@ -1,4 +1,4 @@
-export type HomeStyle = "tech" | "minimal" | "terminal" | "chinese";
+export type HomeStyle = "tech" | "minimal" | "terminal" | "chinese" | "magazine" | "bauhaus" | "retro" | "glass";
 
 export interface HomeStyleConfig {
   name: string;
@@ -26,6 +26,26 @@ export const homeStyles: Record<HomeStyle, HomeStyleConfig> = {
     name: "国风",
     nameEn: "Chinese",
     icon: "scroll",
+  },
+  magazine: {
+    name: "杂志风",
+    nameEn: "Magazine",
+    icon: "book-open",
+  },
+  bauhaus: {
+    name: "包豪斯",
+    nameEn: "Bauhaus",
+    icon: "triangle",
+  },
+  retro: {
+    name: "像素复古",
+    nameEn: "Retro",
+    icon: "gamepad-2",
+  },
+  glass: {
+    name: "玻璃拟态",
+    nameEn: "Glass",
+    icon: "sparkles",
   },
 };
 
