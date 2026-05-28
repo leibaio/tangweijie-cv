@@ -213,6 +213,57 @@
   animation: marquee 35s linear infinite reverse;
 }
 
+/* 祥云漂浮动画 */
+@keyframes cloudFloat {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-6px) translateX(3px); }
+  50% { transform: translateY(-2px) translateX(-2px); }
+  75% { transform: translateY(-8px) translateX(1px); }
+}
+
+@keyframes cloudFloatReverse {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(4px) translateX(-3px); }
+  50% { transform: translateY(-3px) translateX(2px); }
+  75% { transform: translateY(2px) translateX(-1px); }
+}
+
+@keyframes cloudFloatSlow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33% { transform: translateY(-4px) translateX(2px); }
+  66% { transform: translateY(2px) translateX(-3px); }
+}
+
+.animate-cloud-float {
+  animation: cloudFloat 8s ease-in-out infinite;
+}
+
+.animate-cloud-float-reverse {
+  animation: cloudFloatReverse 10s ease-in-out infinite;
+}
+
+.animate-cloud-float-slow {
+  animation: cloudFloatSlow 12s ease-in-out infinite;
+}
+
+/* 花瓣飘落动画 */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  90% {
+    opacity: 0.1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(80px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 /* 噪点纹理叠加层 */
 .noise-overlay {
   position: absolute;
