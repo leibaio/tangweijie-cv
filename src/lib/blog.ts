@@ -90,10 +90,3 @@ export function getPostBySlug(slug: string): Post | null {
     readingTime: stats.text,
   };
 }
-
-export function getAllTags(): string[] {
-  const posts = getAllPosts();
-  const tags = new Set<string>();
-  posts.forEach((post) => post.tags.forEach((tag) => tags.add(tag)));
-  return Array.from(tags);
-}

@@ -1,6 +1,7 @@
 "use client";
 
 import { defaultLocale, Locale } from "@/config/i18n";
+import { useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 interface LocaleContextValue {
@@ -18,6 +19,7 @@ const LocaleContext = createContext<LocaleContextValue>({
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(defaultLocale);
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -31,7 +33,8 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     setLocaleState(newLocale);
     localStorage.setItem("locale", newLocale);
     document.cookie = `locale=${newLocale};path=/;max-age=31536000`;
-  }, []);
+    router.refresh();
+  }, [router]);
 
   return (
     <LocaleContext value={{ locale, setLocale, mounted }}>

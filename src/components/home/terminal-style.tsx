@@ -11,12 +11,6 @@ interface TerminalStyleProps {
   header: React.ReactNode;
 }
 
-const commands = [
-  { cmd: "whoami", delay: 0 },
-  { cmd: "cat skills.txt", delay: 1500 },
-  { cmd: "ls ./projects", delay: 3000 },
-];
-
 export function TerminalStyle({ locale, header }: TerminalStyleProps) {
   const t = i18n[locale];
   const [visibleLines, setVisibleLines] = useState<number>(0);
