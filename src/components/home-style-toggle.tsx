@@ -42,6 +42,7 @@ export function HomeStyleToggle({ locale, onStyleChange }: HomeStyleToggleProps)
   const handleStyleChange = (newStyle: HomeStyle) => {
     setStyle(newStyle);
     localStorage.setItem("home-style", newStyle);
+    window.dispatchEvent(new CustomEvent("home-style-change", { detail: newStyle }));
     onStyleChange?.(newStyle);
   };
 
