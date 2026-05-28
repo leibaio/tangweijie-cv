@@ -21,18 +21,46 @@ const comments = {
   ],
 };
 
+const accentColors = [
+  "border-l-primary",
+  "border-l-blue-400",
+  "border-l-emerald-400",
+  "border-l-amber-400",
+];
+
 export default function SelfComment({ locale = "zh" }: SelfCommentProps) {
   const t = i18n[locale].resume;
   const items = comments[locale];
 
   return (
-    <section className="flex flex-col gap-2 print:gap-1 print:break-inside-avoid">
+    <section className="flex flex-col gap-3 print:gap-1 print:break-inside-avoid">
       <SectionHeader icon={User} title={t.selfComment} />
-      <ul className="list-disc list-inside space-y-2 print:space-y-0 print:text-sm">
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+      <div className="grid gap-2.5 print:gap-1">
+        {items.map((item, index) => {
+          const colonIndex = item.indexOf("：");
+          const hasLabel = colonIndex !== -1;
+          const label = hasLabel ? item.slice(0, colonIndex) : null;
+          const content = hasLabel ? item.slice(colonIndex + 1) : item;
+          const accent = accentColors[index % accentColors.length];
+
+          return (
+            <div
+              key={index}
+              className={`flex items-start gap-3 p-3 rounded-lg border-l-[3px] ${accent} border-y border-r border-border/40 print:p-1 print:border-l-2 hover:bg-primary/[0.02] transition-colors`}
+            >
+              <span className="text-xs text-muted-foreground/50 font-mono mt-0.5 shrink-0 print:text-[10px] select-none">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p className="text-sm text-muted-foreground leading-relaxed print:text-xs">
+                {label && (
+                  <span className="font-semibold text-foreground/80">{label}：</span>
+                )}
+                {content}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }

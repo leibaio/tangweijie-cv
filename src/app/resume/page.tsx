@@ -19,21 +19,28 @@ export default async function ResumePage() {
       <ResumeToolbar />
 
       {/* 简历内容 */}
-      <div className="resume-content container mx-auto px-4 py-4 w-full md:max-w-4xl lg:max-w-4xl print:max-w-none print:px-8 print:py-0">
+      <div className="resume-content container mx-auto px-6 py-8 w-full md:max-w-4xl lg:max-w-4xl print:max-w-none print:px-8 print:py-0">
         <Header locale={locale} />
-        <div className="my-4 print:my-2 flex flex-col lg:flex-row lg:justify-between gap-4">
-          <Education locale={locale} />
-        </div>
-        <div className="my-4 print:my-2">
+
+        <div className="mt-8 print:mt-3 flex flex-col gap-6 print:gap-3">
+          <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
+            <Education locale={locale} />
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent print:hidden" />
+
           <Skills locale={locale} />
-        </div>
-        <div className="my-4 print:my-2">
+
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent print:hidden" />
+
           <WorkExperience locale={locale} />
-        </div>
-        <div className="my-4 print:my-2">
+
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent print:hidden" />
+
           <Projects locale={locale} />
-        </div>
-        <div className="my-4 print:my-2">
+
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent print:hidden" />
+
           <SelfComment locale={locale} />
         </div>
       </div>

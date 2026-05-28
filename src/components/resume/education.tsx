@@ -10,30 +10,30 @@ interface EducationProps {
 export default function Education({ locale = "zh" }: EducationProps) {
   const t = i18n[locale].resume;
   const data = educationData[locale];
-  const separator = locale === "zh" ? "、" : " | ";
 
   return (
-    <section className="flex flex-col gap-2 print:gap-1 print:break-inside-avoid">
+    <section className="flex flex-col gap-3 print:gap-1 print:break-inside-avoid flex-1">
       <SectionHeader icon={GraduationCap} title={t.education} />
-      <ul className="space-y-2 print:space-y-0 print:text-sm">
+      <div className="space-y-2.5 print:space-y-1">
         {data.items.map((edu, index) => (
-          <li key={index}>
-            {edu.school}，{edu.major}，{edu.degree}，{edu.duration}
-          </li>
+          <div key={index} className="text-sm text-muted-foreground print:text-xs">
+            <span className="font-medium text-foreground/90">{edu.school}</span>
+            <span className="text-primary/30 mx-1.5">·</span>
+            <span>{edu.major}</span>
+            <span className="text-primary/30 mx-1.5">·</span>
+            <span>{edu.degree}</span>
+            <span className="text-primary/30 mx-1.5">·</span>
+            <span className="font-mono text-xs">{edu.duration}</span>
+          </div>
         ))}
-        <li className="flex flex-wrap gap-x-2 gap-y-1">
+        <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground/80 print:text-[10px]">
           {data.highlights.map((item, index) => (
             <span key={index} className="inline-flex items-center">
               {item}
-              {index < data.highlights.length - 1 && (
-                <span className="ml-2 text-muted-foreground">
-                  {separator.trim()}
-                </span>
-              )}
             </span>
           ))}
-        </li>
-      </ul>
+        </div>
+      </div>
     </section>
   );
 }
