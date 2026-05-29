@@ -13,152 +13,155 @@ export default async function OpengraphImage() {
         width: "100%",
         height: "100%",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#F5F0E8",
-        fontFamily: "serif",
+        background: "#FAF8F5",
+        fontFamily: "sans-serif",
       }}
     >
-      {/* Outer gold border frame */}
+      {/* Red accent bar */}
+      <div style={{ width: 8, height: "100%", background: "#C44536", flexShrink: 0 }} />
+
+      {/* Main content area */}
       <div
         style={{
           display: "flex",
-          width: 1140,
-          height: 570,
-          border: "2px solid #C5A33A",
-          padding: 3,
-          borderRadius: 4,
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "60px 80px",
+          position: "relative",
         }}
       >
-        {/* Inner border */}
+        {/* Small label */}
+        <div
+          style={{
+            display: "flex",
+            fontSize: 14,
+            color: "#999",
+            letterSpacing: 6,
+            textTransform: "uppercase",
+            marginBottom: 20,
+          }}
+        >
+          FULL STACK DEVELOPER
+        </div>
+
+        {/* Name */}
+        <div
+          style={{
+            display: "flex",
+            fontSize: 108,
+            fontWeight: 900,
+            color: "#1A1A1A",
+            letterSpacing: 16,
+            lineHeight: 1,
+            marginBottom: 16,
+          }}
+        >
+          汤伟杰
+        </div>
+
+        {/* Red underline accent */}
+        <div
+          style={{
+            display: "flex",
+            width: 120,
+            height: 5,
+            background: "#C44536",
+            marginBottom: 24,
+          }}
+        />
+
+        {/* Subtitle */}
+        <div
+          style={{
+            display: "flex",
+            fontSize: 28,
+            color: "#555",
+            letterSpacing: 8,
+            marginBottom: 36,
+          }}
+        >
+          全栈开发工程师
+        </div>
+
+        {/* Divider line */}
         <div
           style={{
             display: "flex",
             width: "100%",
-            height: "100%",
-            border: "1px solid #D4C5A0",
-            borderRadius: 2,
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
+            height: 1,
+            background: "#DDD",
+            marginBottom: 28,
+          }}
+        />
+
+        {/* Tech stack tags */}
+        <div style={{ display: "flex", gap: 10 }}>
+          {["Vue", "React", "Next.js", "Spring Boot", "Node.js"].map((tech) => (
+            <div
+              key={tech}
+              style={{
+                fontSize: 15,
+                color: "#666",
+                padding: "8px 20px",
+                border: "1px solid #DDD",
+                letterSpacing: 2,
+              }}
+            >
+              {tech}
+            </div>
+          ))}
+        </div>
+
+        {/* URL - bottom right */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 40,
+            right: 80,
+            display: "flex",
+            fontSize: 14,
+            color: "#999",
+            letterSpacing: 3,
           }}
         >
-          {/* Corner decorations */}
-          {["top-left", "top-right", "bottom-left", "bottom-right"].map((pos) => (
-            <div
-              key={pos}
-              style={{
-                position: "absolute",
-                width: 20,
-                height: 20,
-                border: "2px solid #C5A33A",
-                ...(pos === "top-left" ? { top: 16, left: 16, borderRight: "none", borderBottom: "none" } : {}),
-                ...(pos === "top-right" ? { top: 16, right: 16, borderLeft: "none", borderBottom: "none" } : {}),
-                ...(pos === "bottom-left" ? { bottom: 16, left: 16, borderRight: "none", borderTop: "none" } : {}),
-                ...(pos === "bottom-right" ? { bottom: 16, right: 16, borderLeft: "none", borderTop: "none" } : {}),
-              }}
-            />
-          ))}
+          {siteConfig.url.replace("https://", "")}
+        </div>
 
-          {/* Decorative top line */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              marginBottom: 20,
-            }}
-          >
-            <div style={{ width: 60, height: 1, background: "#C5A33A" }} />
-            <div style={{ fontSize: 14, color: "#B8963E", letterSpacing: 8 }}>个人站点</div>
-            <div style={{ width: 60, height: 1, background: "#C5A33A" }} />
+        {/* Issue/edition number - top right */}
+        <div
+          style={{
+            position: "absolute",
+            top: 40,
+            right: 80,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            gap: 4,
+          }}
+        >
+          <div style={{ fontSize: 11, color: "#BBB", letterSpacing: 4 }}>
+            PORTFOLIO
           </div>
-
-          {/* Name - main focus */}
-          <div
-            style={{
-              display: "flex",
-              fontSize: 96,
-              fontWeight: "bold",
-              color: "#3D2B1F",
-              letterSpacing: 24,
-              marginBottom: 12,
-            }}
-          >
-            汤伟杰
+          <div style={{ fontSize: 42, fontWeight: 900, color: "#1A1A1A", lineHeight: 1 }}>
+            01
           </div>
+        </div>
 
-          {/* Gold divider */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 16,
-              marginBottom: 20,
-            }}
-          >
-            <div style={{ width: 120, height: 1, background: "linear-gradient(90deg, transparent, #C5A33A)" }} />
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                background: "#C5A33A",
-                transform: "rotate(45deg)",
-              }}
-            />
-            <div style={{ width: 120, height: 1, background: "linear-gradient(270deg, transparent, #C5A33A)" }} />
-          </div>
-
-          {/* Title */}
-          <div
-            style={{
-              display: "flex",
-              fontSize: 32,
-              color: "#6B5B4F",
-              letterSpacing: 12,
-              marginBottom: 32,
-            }}
-          >
-            全栈开发工程师
-          </div>
-
-          {/* Tech stack tags */}
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-            }}
-          >
-            {["Vue", "React", "Next.js", "Spring Boot", "Node.js"].map((tech) => (
-              <div
-                key={tech}
-                style={{
-                  fontSize: 16,
-                  color: "#8B7355",
-                  padding: "6px 18px",
-                  border: "1px solid #D4C5A0",
-                  borderRadius: 2,
-                  letterSpacing: 2,
-                }}
-              >
-                {tech}
-              </div>
-            ))}
-          </div>
-
-          {/* Bottom URL */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 24,
-              display: "flex",
-              fontSize: 14,
-              color: "#B8A88A",
-              letterSpacing: 4,
-            }}
-          >
-            {siteConfig.url.replace("https://", "")}
+        {/* Issue label - bottom left */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 40,
+            left: 80,
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <div style={{ width: 30, height: 2, background: "#C44536" }} />
+          <div style={{ fontSize: 11, color: "#BBB", letterSpacing: 4 }}>
+            个人站点
           </div>
         </div>
       </div>

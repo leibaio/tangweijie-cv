@@ -1,7 +1,7 @@
 import { LucideIcon } from "lucide-react";
 
 // 标签颜色类型
-export type TagColor = "blue" | "red" | "green" | "yellow" | "purple" | "gray";
+export type TagColor = "blue" | "green" | "purple";
 
 // 标签
 export interface TagItem {

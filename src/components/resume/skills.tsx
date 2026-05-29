@@ -7,14 +7,7 @@ interface SkillsProps {
   locale?: Locale;
 }
 
-const categoryColors = [
-  "bg-primary",
-  "bg-blue-500",
-  "bg-emerald-500",
-  "bg-amber-500",
-  "bg-purple-500",
-  "bg-rose-500",
-];
+const categoryColors = ["bg-primary"];
 
 function parseSkill(skill: string) {
   const colonIndex = skill.indexOf(":");

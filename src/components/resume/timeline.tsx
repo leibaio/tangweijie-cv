@@ -5,13 +5,7 @@ interface TimelineItemProps extends WorkExperience {
   index: number;
 }
 
-const nodeColors = [
-  "bg-primary",
-  "bg-blue-500",
-  "bg-emerald-500",
-  "bg-amber-500",
-  "bg-purple-500",
-];
+const nodeColors = ["bg-primary"];
 
 const TimelineItem = ({
   company,

@@ -23,9 +23,7 @@ const comments = {
 
 const accentColors = [
   "border-l-primary",
-  "border-l-blue-400",
-  "border-l-emerald-400",
-  "border-l-amber-400",
+  "border-l-primary/60",
 ];
 
 export default function SelfComment({ locale = "zh" }: SelfCommentProps) {
