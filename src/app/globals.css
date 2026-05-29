@@ -296,30 +296,59 @@
 @media print {
   @page {
     size: A4;
-    margin: 8mm 12mm;
+    margin: 15mm 18mm;
   }
 
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 
   html,
   body {
-    font-size: 10px !important;
-    line-height: 1.4 !important;
+    font-size: 9pt !important;
+    line-height: 1.45 !important;
+    -webkit-font-smoothing: auto !important;
   }
 
+  /* 去掉页面背景，纸张本身就是白底 */
+  body {
+    background: white !important;
+    color: #1a1a1a !important;
+  }
+
+  /* 简历容器 */
   .resume-content {
     max-width: 100% !important;
     padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
   }
 
   /* 避免内容被分页截断 */
-  section,
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   li {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  /* 项目卡片不跨页 */
+  .group {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* 分页策略：主要区块前强制分页或避免分页 */
+  section + section {
+    break-before: avoid;
+    page-break-before: avoid;
   }
 
   /* 隐藏不需要打印的元素 */
@@ -327,28 +356,67 @@
     display: none !important;
   }
 
-  /* 链接样式 */
+  /* 去掉所有交互样式 */
   a {
     text-decoration: none !important;
     color: inherit !important;
   }
 
-  /* 减少间距 */
-  .my-4 {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
+  button,
+  [role="button"] {
+    display: none !important;
   }
 
-  .space-y-2 > * + * {
-    margin-top: 0.25rem !important;
+  /* 去掉 hover 效果 */
+  *:hover {
+    background: inherit !important;
+    box-shadow: none !important;
   }
 
-  .gap-2 {
-    gap: 0.25rem !important;
+  /* 减少间距以适应纸张 */
+  .mt-8 { margin-top: 1.25rem !important; }
+  .mb-5 { margin-bottom: 0.75rem !important; }
+  .mt-5 { margin-top: 0.75rem !important; }
+  .mt-4 { margin-top: 0.5rem !important; }
+  .pb-6 { padding-bottom: 0.5rem !important; }
+  .gap-6 { gap: 0.75rem !important; }
+  .gap-3 { gap: 0.375rem !important; }
+  .p-3 { padding: 0.375rem !important; }
+  .p-5 { padding: 0.5rem !important; }
+  .mb-2\.5 { margin-bottom: 0.25rem !important; }
+  .my-2\.5 { margin-top: 0.25rem !important; margin-bottom: 0.25rem !important; }
+  .my-2 { margin-top: 0.25rem !important; margin-bottom: 0.25rem !important; }
+  .mt-1 { margin-top: 0.125rem !important; }
+  .space-y-1 > * + * { margin-top: 0.125rem !important; }
+  .space-y-1\.5 > * + * { margin-top: 0.25rem !important; }
+  .space-y-2\.5 > * + * { margin-top: 0.25rem !important; }
+  .pb-5 { padding-bottom: 0.5rem !important; }
+
+  /* 字号微调 */
+  .text-4xl, .text-5xl { font-size: 1.5rem !important; }
+  .text-lg { font-size: 0.8125rem !important; }
+  .text-base { font-size: 0.75rem !important; }
+  .text-sm { font-size: 0.6875rem !important; }
+  .text-xs { font-size: 0.625rem !important; }
+
+  /* 去掉阴影 */
+  .shadow-sm,
+  .hover\:shadow-sm {
+    box-shadow: none !important;
   }
 
-  /* 边框颜色 */
-  .border-b-2 {
-    border-bottom-width: 1px !important;
+  /* 边框统一变淡 */
+  .border-primary\/15 { border-color: oklch(0 0 0 / 0.08) !important; }
+  .border-primary\/10 { border-color: oklch(0 0 0 / 0.06) !important; }
+  .border-border\/60 { border-color: oklch(0 0 0 / 0.1) !important; }
+  .border-border\/40 { border-color: oklch(0 0 0 / 0.08) !important; }
+
+  /* 分隔线在打印时隐藏 */
+  .print\:hidden { display: none !important; }
+
+  /* 去掉模糊效果 */
+  .backdrop-blur-md,
+  [style*="backdrop-filter"] {
+    backdrop-filter: none !important;
   }
 }

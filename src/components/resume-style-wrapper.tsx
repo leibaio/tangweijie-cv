@@ -320,7 +320,7 @@ export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProp
         ...config.cssVars as React.CSSProperties,
       }}
     >
-      {renderBackground()}
+      <div className="print:hidden">{renderBackground()}</div>
       {toolbar}
       <div
         className="resume-content container mx-auto px-6 py-8 w-full md:max-w-4xl lg:max-w-4xl print:max-w-none print:px-8 print:py-0 relative z-10"

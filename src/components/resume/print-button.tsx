@@ -20,8 +20,7 @@ export default function PrintButton({ locale = "zh" }: PrintButtonProps) {
       onClick={handlePrint}
       className="print:hidden"
     >
-      <Printer className="w-4 h-4 mr-2" />
-      {locale === "zh" ? "打印简历" : "Print"}
+      <Printer className="w-4 h-4" />
     </Button>
   );
 }
