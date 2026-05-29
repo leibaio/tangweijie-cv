@@ -200,6 +200,102 @@ const styleConfigs: Record<HomeStyle, {
     paperStyle: { fontFamily: "'Geist Mono', 'Fira Code', monospace" },
     dividerClass: "bg-[#E10600]/15!",
   },
+  brutalist: {
+    wrapperClass: "min-h-screen",
+    wrapperStyle: { backgroundColor: "#FFF" },
+    cssVars: {
+      "--background": "#FFFFFF",
+      "--foreground": "#000000",
+      "--card": "#FFFFFF",
+      "--card-foreground": "#000000",
+      "--primary": "#000000",
+      "--primary-foreground": "#CCFF00",
+      "--secondary": "#F5F5F5",
+      "--secondary-foreground": "#000000",
+      "--muted": "#F5F5F5",
+      "--muted-foreground": "#555555",
+      "--accent": "#F5F5F5",
+      "--accent-foreground": "#000000",
+      "--border": "#000000",
+      "--input": "#000000",
+      "--ring": "#CCFF00",
+    },
+    paperClass: "",
+    paperStyle: { fontFamily: "system-ui, sans-serif" },
+    dividerClass: "bg-black!",
+  },
+  synthwave: {
+    wrapperClass: "min-h-screen",
+    wrapperStyle: { backgroundColor: "#0D0221" },
+    cssVars: {
+      "--background": "#0D0221",
+      "--foreground": "#FFFFFF",
+      "--card": "rgba(255,255,255,0.03)",
+      "--card-foreground": "#FFFFFF",
+      "--primary": "#FF00FF",
+      "--primary-foreground": "#FFFFFF",
+      "--secondary": "rgba(255,0,255,0.1)",
+      "--secondary-foreground": "#FFFFFF",
+      "--muted": "rgba(255,0,255,0.1)",
+      "--muted-foreground": "rgba(255,255,255,0.5)",
+      "--accent": "rgba(0,255,255,0.1)",
+      "--accent-foreground": "#00FFFF",
+      "--border": "rgba(255,0,255,0.2)",
+      "--input": "rgba(255,0,255,0.2)",
+      "--ring": "#FF00FF",
+    },
+    paperClass: "",
+    paperStyle: { fontFamily: "'Orbitron', sans-serif", fontSize: "0.75rem" },
+    dividerClass: "bg-[#FF00FF]/20!",
+  },
+  japanese: {
+    wrapperClass: "min-h-screen",
+    wrapperStyle: { backgroundColor: "#F8F6F0" },
+    cssVars: {
+      "--background": "#F8F6F0",
+      "--foreground": "#1A1A1A",
+      "--card": "#FFFFFF",
+      "--card-foreground": "#1A1A1A",
+      "--primary": "#B53733",
+      "--primary-foreground": "#F8F6F0",
+      "--secondary": "#F0EDE5",
+      "--secondary-foreground": "#1A1A1A",
+      "--muted": "#F0EDE5",
+      "--muted-foreground": "rgba(26,26,26,0.45)",
+      "--accent": "#F0EDE5",
+      "--accent-foreground": "#1A1A1A",
+      "--border": "rgba(26,26,26,0.08)",
+      "--input": "rgba(26,26,26,0.08)",
+      "--ring": "#B53733",
+    },
+    paperClass: "",
+    paperStyle: { fontFamily: "'Noto Serif SC', serif" },
+    dividerClass: "bg-[#1A1A1A]/06!",
+  },
+  newspaper: {
+    wrapperClass: "min-h-screen",
+    wrapperStyle: { backgroundColor: "#F5F0E1" },
+    cssVars: {
+      "--background": "#F5F0E1",
+      "--foreground": "#111111",
+      "--card": "#F5F0E1",
+      "--card-foreground": "#111111",
+      "--primary": "#8B0000",
+      "--primary-foreground": "#F5F0E1",
+      "--secondary": "#EDE8D8",
+      "--secondary-foreground": "#111111",
+      "--muted": "#EDE8D8",
+      "--muted-foreground": "#555555",
+      "--accent": "#EDE8D8",
+      "--accent-foreground": "#111111",
+      "--border": "rgba(17,17,17,0.12)",
+      "--input": "rgba(17,17,17,0.12)",
+      "--ring": "#8B0000",
+    },
+    paperClass: "",
+    paperStyle: { fontFamily: "'Playfair Display', 'Georgia', serif" },
+    dividerClass: "bg-[#111]/10!",
+  },
 };
 
 export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProps) {
@@ -329,6 +425,66 @@ export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProp
             />
           </>
         );
+      case "brutalist":
+        return (
+          <>
+            <div className="absolute top-0 left-0 w-full h-1.5 -z-10" style={{ backgroundColor: "#000" }} />
+            <div
+              className="absolute -z-10 pointer-events-none hidden md:block"
+              style={{
+                width: 200, height: 200,
+                border: "3px solid #000",
+                top: -40, right: -40,
+                transform: "rotate(8deg)",
+                opacity: 0.04,
+              }}
+            />
+          </>
+        );
+      case "synthwave":
+        return (
+          <>
+            <div
+              className="absolute inset-0 -z-10 pointer-events-none"
+              style={{
+                background: "linear-gradient(180deg, #0D0221 0%, #150734 30%, #261447 50%, transparent 100%)",
+              }}
+            />
+            <div
+              className="absolute bottom-0 left-0 right-0 -z-10 pointer-events-none"
+              style={{
+                height: "30vh",
+                background: [
+                  "linear-gradient(transparent 0%, rgba(13,2,33,0.95) 100%)",
+                  "repeating-linear-gradient(90deg, rgba(255,0,255,0.08) 0px, transparent 1px, transparent 80px)",
+                  "repeating-linear-gradient(0deg, rgba(255,0,255,0.08) 0px, transparent 1px, transparent 80px)",
+                ].join(", "),
+                transform: "perspective(400px) rotateX(55deg)",
+                transformOrigin: "center top",
+              }}
+            />
+          </>
+        );
+      case "japanese":
+        return (
+          <div
+            className="absolute inset-0 -z-10 pointer-events-none"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E")`,
+              opacity: 0.6,
+            }}
+          />
+        );
+      case "newspaper":
+        return (
+          <div
+            className="absolute inset-0 -z-10 pointer-events-none opacity-[0.03]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E")`,
+              backgroundSize: "200px",
+            }}
+          />
+        );
       default:
         return null;
     }
@@ -352,6 +508,14 @@ export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProp
     ? { borderTop: "4px solid #1A1A1A" }
     : style === "f1"
     ? { border: "1px solid rgba(225,6,0,0.15)", borderTop: "3px solid #E10600" }
+    : style === "brutalist"
+    ? { border: "3px solid #000" }
+    : style === "synthwave"
+    ? { border: "1px solid rgba(255,0,255,0.15)", borderTop: "2px solid #FF00FF" }
+    : style === "japanese"
+    ? { border: "1px solid rgba(26,26,26,0.06)" }
+    : style === "newspaper"
+    ? { borderTop: "3px solid #111", borderBottom: "1px solid #111" }
     : {};
 
   if (!mounted) {

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { defaultHomeStyle, HomeStyle, homeStyles } from "@/config/home-style";
 import { Locale } from "@/config/i18n";
-import { BookOpen, Cpu, Flag, Gamepad2, Minus, Scroll, Sparkles, Terminal, Triangle } from "lucide-react";
+import { Blocks, BookOpen, Cpu, Flag, Flower2, Gamepad2, Minus, Newspaper, Scroll, Sparkles, Terminal, Triangle, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const iconMap = {
@@ -22,6 +22,10 @@ const iconMap = {
   "gamepad-2": Gamepad2,
   sparkles: Sparkles,
   flag: Flag,
+  blocks: Blocks,
+  zap: Zap,
+  "flower-2": Flower2,
+  newspaper: Newspaper,
 };
 
 interface HomeStyleToggleProps {

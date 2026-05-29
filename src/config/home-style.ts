@@ -1,4 +1,4 @@
-export type HomeStyle = "tech" | "minimal" | "terminal" | "chinese" | "magazine" | "bauhaus" | "retro" | "glass" | "f1";
+export type HomeStyle = "tech" | "minimal" | "terminal" | "chinese" | "magazine" | "bauhaus" | "retro" | "glass" | "f1" | "brutalist" | "synthwave" | "japanese" | "newspaper";
 
 export interface HomeStyleConfig {
   name: string;
@@ -51,6 +51,26 @@ export const homeStyles: Record<HomeStyle, HomeStyleConfig> = {
     name: "F1 赛车",
     nameEn: "F1 Racing",
     icon: "flag",
+  },
+  brutalist: {
+    name: "粗野主义",
+    nameEn: "Brutalist",
+    icon: "blocks",
+  },
+  synthwave: {
+    name: "合成波",
+    nameEn: "Synthwave",
+    icon: "zap",
+  },
+  japanese: {
+    name: "日式侘寂",
+    nameEn: "Japanese",
+    icon: "flower-2",
+  },
+  newspaper: {
+    name: "报纸风",
+    nameEn: "Newspaper",
+    icon: "newspaper",
   },
 };
 
