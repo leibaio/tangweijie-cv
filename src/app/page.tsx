@@ -1,6 +1,6 @@
 "use client";
 
-import { BauhausStyle, ChineseStyle, GlassStyle, MagazineStyle, MinimalStyle, RetroStyle, TechStyle, TerminalStyle } from "@/components/home";
+import { BauhausStyle, ChineseStyle, F1Style, GlassStyle, MagazineStyle, MinimalStyle, RetroStyle, TechStyle, TerminalStyle } from "@/components/home";
 import { HomeStyleToggle } from "@/components/home-style-toggle";
 import { LocaleToggle } from "@/components/locale-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -8,10 +8,10 @@ import { ThemeColorToggle } from "@/components/theme-color-toggle";
 import { i18n } from "@/config";
 import { defaultHomeStyle, HomeStyle } from "@/config/home-style";
 import { useLocale } from "@/contexts/locale-context";
-import { Scroll, Terminal } from "lucide-react";
+import { Flag, Scroll, Terminal } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
-const VALID_STYLES = ["tech", "minimal", "terminal", "chinese", "magazine", "bauhaus", "retro", "glass"];
+const VALID_STYLES = ["tech", "minimal", "terminal", "chinese", "magazine", "bauhaus", "retro", "glass", "f1"];
 
 export default function Home() {
   const { locale, mounted } = useLocale();
@@ -35,6 +35,7 @@ export default function Home() {
   const isGlass = homeStyle === "glass";
   const isMagazine = homeStyle === "magazine";
   const isBauhaus = homeStyle === "bauhaus";
+  const isF1 = homeStyle === "f1";
 
   const headerStyle = isTerminal
     ? "border-[#30363d] bg-[#161b22]"
@@ -48,6 +49,8 @@ export default function Home() {
     ? "border-[#1A1A1A]/10 bg-[#FAF8F5]/80 backdrop-blur-md"
     : isBauhaus
     ? "border-[#1A1A1A]/20 bg-[#F5F2EB]/80 backdrop-blur-md"
+    : isF1
+    ? "border-[#E10600]/20 bg-[#0A0A0A]/95 backdrop-blur-md"
     : "border-primary/10 bg-background/60 backdrop-blur-md";
 
   const iconColor = isTerminal
@@ -62,6 +65,8 @@ export default function Home() {
     ? "text-[#1A1A1A]"
     : isBauhaus
     ? "text-[#1A1A1A]"
+    : isF1
+    ? "text-[#E10600]"
     : "text-primary";
 
   const titleColor = isTerminal
@@ -76,9 +81,11 @@ export default function Home() {
     ? "text-[#1A1A1A]"
     : isBauhaus
     ? "text-[#1A1A1A]"
+    : isF1
+    ? "text-white"
     : "text-primary";
 
-  const SiteIcon = isChinese ? Scroll : Terminal;
+  const SiteIcon = isChinese ? Scroll : isF1 ? Flag : Terminal;
 
   const headerBorder = isChinese
     ? { borderColor: "#D4C5A0" }
@@ -90,6 +97,8 @@ export default function Home() {
     ? { borderColor: "rgba(26,26,26,0.1)" }
     : isBauhaus
     ? { borderColor: "rgba(26,26,26,0.2)" }
+    : isF1
+    ? { borderColor: "rgba(225,6,0,0.2)" }
     : undefined;
 
   const header = (
@@ -105,7 +114,7 @@ export default function Home() {
           <HomeStyleToggle locale={locale} onStyleChange={handleStyleChange} />
           <LocaleToggle />
           <ThemeColorToggle locale={locale} />
-          {!isChinese && !isRetro && !isGlass && <ModeToggle />}
+          {!isChinese && !isRetro && !isGlass && !isF1 && <ModeToggle />}
         </div>
       </div>
     </header>
@@ -137,6 +146,10 @@ export default function Home() {
 
   if (homeStyle === "glass") {
     return <GlassStyle locale={locale} header={header} />;
+  }
+
+  if (homeStyle === "f1") {
+    return <F1Style locale={locale} header={header} />;
   }
 
   return <TechStyle locale={locale} header={header} />;

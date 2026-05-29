@@ -176,6 +176,30 @@ const styleConfigs: Record<HomeStyle, {
     paperStyle: {},
     dividerClass: "bg-white/[0.06]!",
   },
+  f1: {
+    wrapperClass: "min-h-screen",
+    wrapperStyle: { backgroundColor: "#0A0A0A" },
+    cssVars: {
+      "--background": "#0A0A0A",
+      "--foreground": "#FFFFFF",
+      "--card": "#111111",
+      "--card-foreground": "#FFFFFF",
+      "--primary": "#E10600",
+      "--primary-foreground": "#FFFFFF",
+      "--secondary": "#1A1A1A",
+      "--secondary-foreground": "#FFFFFF",
+      "--muted": "#1A1A1A",
+      "--muted-foreground": "rgba(255,255,255,0.5)",
+      "--accent": "#1A1A1A",
+      "--accent-foreground": "#FFFFFF",
+      "--border": "rgba(225,6,0,0.2)",
+      "--input": "rgba(225,6,0,0.2)",
+      "--ring": "#E10600",
+    },
+    paperClass: "",
+    paperStyle: { fontFamily: "'Geist Mono', 'Fira Code', monospace" },
+    dividerClass: "bg-[#E10600]/15!",
+  },
 };
 
 export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProps) {
@@ -285,6 +309,26 @@ export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProp
             }}
           />
         );
+      case "f1":
+        return (
+          <>
+            {/* Carbon fiber pattern */}
+            <div
+              className="absolute inset-0 -z-10 pointer-events-none"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h30v30H0zM30 30h30v30H30z' fill='%23111'/%3E%3Cpath d='M15 0h30v15H15zM0 15h15v30H0zM30 30h30v15H30zM15 45h15v15H15z' fill='%23161616'/%3E%3C/svg%3E")`,
+                opacity: 0.6,
+              }}
+            />
+            {/* Red speed lines */}
+            <div
+              className="absolute inset-0 -z-10 pointer-events-none"
+              style={{
+                background: "linear-gradient(90deg, transparent 14.5%, rgba(225,6,0,0.04) 15%, rgba(225,6,0,0.04) 15.5%, transparent 16%, transparent 29.5%, rgba(225,6,0,0.04) 30%, rgba(225,6,0,0.04) 30.5%, transparent 31%, transparent 44.5%, rgba(225,6,0,0.04) 45%, rgba(225,6,0,0.04) 45.5%, transparent 46%, transparent 59.5%, rgba(225,6,0,0.04) 60%, rgba(225,6,0,0.04) 60.5%, transparent 61%, transparent 74.5%, rgba(225,6,0,0.04) 75%, rgba(225,6,0,0.04) 75.5%, transparent 76%)",
+              }}
+            />
+          </>
+        );
       default:
         return null;
     }
@@ -306,6 +350,8 @@ export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProp
     ? { borderLeft: "3px solid #C44536" }
     : style === "bauhaus"
     ? { borderTop: "4px solid #1A1A1A" }
+    : style === "f1"
+    ? { border: "1px solid rgba(225,6,0,0.15)", borderTop: "3px solid #E10600" }
     : {};
 
   if (!mounted) {
