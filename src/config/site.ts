@@ -6,7 +6,9 @@ export const siteConfig = {
   author: "汤伟杰",
   authorEn: "Tang Weijie",
   year: new Date().getFullYear(),
-  url: "https://tangweijie-cv.vercel.app", 
+  url: "https://tangweijie-cv.vercel.app",
+  resumePdfUrl:
+    "https://drive.google.com/file/d/1f8CjDYo3zQZjXUeT6GKZvAEmh7Jk4DXw/view?usp=drive_link",
   email: "leibaio@foxmail.com",
   github: "https://github.com/leibaio",
   keywords: [

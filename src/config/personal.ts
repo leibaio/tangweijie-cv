@@ -11,7 +11,7 @@ export const personalInfo: PersonalInfo = {
   locationEn: "Shanghai",
   education: "硕士 · 计算机技术 · 上海第二工业大学",
   educationEn: "Master · Computer Technology · SSPU",
-  age: 26,
+  age: Number(`${new Date().getFullYear() - 1999}`),
   english: "CET-6",
   github: "https://github.com/leibaio", // 如果没有可以删除这行
 };
