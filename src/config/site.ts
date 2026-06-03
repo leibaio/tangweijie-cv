@@ -8,7 +8,7 @@ export const siteConfig = {
   year: new Date().getFullYear(),
   url: "https://tangweijie-cv.vercel.app",
   resumePdfUrl:
-    "https://drive.google.com/file/d/1f8CjDYo3zQZjXUeT6GKZvAEmh7Jk4DXw/view?usp=drive_link",
+    "https://drive.google.com/file/d/1rnXcudL7ljBkPchOTU7urRxo4mG7ZlfO/view?usp=drive_link",
   email: "leibaio@foxmail.com",
   github: "https://github.com/leibaio",
   keywords: [
