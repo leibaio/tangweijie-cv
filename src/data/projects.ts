@@ -9,7 +9,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         "游戏运营管理全栈系统（前端 + 后端 + AI BFF），支撑渠道配置、活动运营、比赛管理、客服系统、财务对账、AI 数据分析等核心业务，服务日活 40 万+ 用户",
       bulletPoints: [
         "前端（Vue3 + TS + TDesign）：封装 useTable/usePagination Hooks 和 CommonTable 配置化组件，大幅减少重复代码；RBAC 动态路由权限，路由懒加载和代码分割优化首屏；弹窗配置系统支持多场景触发规则和优先级控制",
-        "后端（Spring Boot + MyBatis Plus + Redis）：责任链模式 + Redis 发布订阅实现多渠道配置热更新；Shiro + Redis 分布式会话支持水平扩展；EasyExcel 配置表导入解析、AOP 切面统一版本管理",
+        "后端（Spring Boot + MyBatis Plus + Redis）：责任链模式 + Redis 发布订阅实现多渠道配置热更新；Shiro + Redis 分布式会话支持水平扩展；EasyExcel 配置表导入解析、AOP 切面统一版本管理；CompletableFuture 并发处理多渠道 OSS 上传，发布耗时降低 60%+；",
         "AI BFF（Node.js + Hono + TS）：代理多模型 API（Kimi/NVIDIA/OpenAI）流式调用，环境变量零代码切换；聚合后端数据组装 prompt，SSE 流式响应实现实时分析、对话追问、智能报告生成",
         "AI 驱动开发：Claude Code + Spec 驱动开发，自定义 Skills 和 MCP 集成建立开发规范，开发效率显著提升",
         "MongoDB 配置对比工具（861行 Service）：多环境可视化对比，百万级牌库表采用 ObjectId 时间戳插值取中间样本（$gte O(log N) 替代 skip 的 O(N)），按 _id 排序确保主从副本一致；前端自研递归 diff 引擎，红绿橙三色高亮 + 变动优先排序，替代人工逐条检查",
