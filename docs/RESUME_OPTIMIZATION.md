@@ -1,5 +1,13 @@
 # 简历工作经历与项目经历优化建议
 
+> ⚠️ **2026-09-23 修订说明**
+>
+> 本文档早期版本的示例中夹带了一批**无法验证的效果数字**（如「开发效率提升 3 倍+」「减少 70% 重复代码」「收入转化提升 40%」「PageSpeed 90+」「5000+ QPS」「缓存命中率 95%+」「渠道发布从 10 分钟降至 30 秒」等）。
+>
+> 这些数字**不得再被复制进简历**：面试官一旦追问测算口径就会露馅。其中「渠道发布从 10 分钟降至 30 秒」已确认与 `docs/performance/` 的真实口径（单条 30~60s → 1~3s）矛盾。
+>
+> AI 相关表述已按 `D:\yaoji` 实际代码（`ttigd-backend-ai-bff` + `ttigd-backend-web/src/pages/aiAnalysis`）重写，可作为唯一口径参考。其余非 AI 数字请自行确认来源后再用；确认不了的，改成**机制描述**（做了什么、怎么做的）而不是**效果数字**。
+
 ## 问题诊断
 
 当前简历存在**工作经历**和**项目经历**内容高度重叠的问题，导致：
@@ -71,10 +79,10 @@
 2025.07 - 至今
 
 - 作为天天爱掼蛋运营系统核心开发，全栈主导前端架构设计、后端业务实现、AI BFF 集成，支撑日活 40 万+ 用户的游戏运营
-- 设计多渠道配置发布架构（责任链 + Redis 热更新），支撑 11 个业务模块的灵活配置，渠道发布从 10 分钟降至 30 秒
-- 搭建 RBAC 动态权限体系（菜单+按钮+API 三级控制），统一管理 5000+ QPS 场景下的访问控制
-- 主导 AI 能力集成，设计流式响应架构，对接多模型（Kimi/NVIDIA/OpenAI）并通过环境变量零代码切换，提升运营决策效率 50%+
-- 建立 AI 辅助开发规范（Claude Code + MCP），团队开发效率提升 3 倍+
+- 设计多渠道配置发布架构（责任链 + Redis 热更新），支撑 11 个业务模块的灵活配置，单条配置发布耗时 30~60s → 1~3s（OSS 建连 100 次 → 2 次、消除 20 次冗余读取、渠道级并发限流 10，各阶段耗时日志可验证）
+- 搭建 RBAC 动态权限体系（菜单+按钮+API 三级控制），统一管理后台访问控制
+- 主导 AI 能力集成，设计流式响应架构，对接多模型（Kimi/NVIDIA NIM/DeepSeek）并通过环境变量零代码切换，落地自动归因分析、多轮追问、划选批注三类场景
+- 沉淀 AI 代码生成规范（约定新模块的后端文件清单与 SQL 变更清单）与文档先行流程，由 AI 生成模块骨架、人工负责校验与取舍
 ```
 
 #### 项目经历（修改后）
@@ -83,11 +91,11 @@
 ## 天天爱掼蛋运营中台
 2025.07-至今 | 游戏运营管理全栈系统，支撑日活 40 万+ 用户
 
-- 封装 useTable/usePagination Hooks 和 CommonTable 配置化组件，减少 70% 重复代码，团队开发效率提升 30%+
-- 实现 Redis 发布订阅 + OSS 双通道配置热更新，渠道发布从 10min 降至 30s，支持 10000+ 配置项单次发布
-- 设计分批处理策略解决大批量发布 OOM 问题，单次最大处理 5000+ 配置并行发布
-- AI BFF（Node.js + Hono + SSE）实现多模型流式对话，实时生成运营分析报告，支持对话追问和智能报告自动生成
-- 路由懒加载 + 代码分割优化首屏加载 40%，系统支持 5000+ QPS，缓存命中率 95%+
+- 封装 useTable/usePagination Hooks 和 CommonTable 配置化组件，消除各模块重复的表格/分页样板代码
+- 实现 Redis 发布订阅 + OSS 双通道配置热更新，单条配置发布耗时 30~60s → 1~3s（OSS 建连 100 次 → 2 次、消除 20 次冗余读取、渠道级并发限流 10，各阶段耗时日志可验证）
+- 设计分批处理策略解决大批量发布 OOM 问题
+- AI BFF（Node.js + Hono + TypeScript + SSE）以 OpenAI 兼容协议统一接入大模型，实现自动归因分析、多轮追问、划选批注三类场景；服务端 ReadableStream + TextEncoder 分帧并置 X-Accel-Buffering: no 绕过 Nginx 缓冲，前端 fetch + getReader 增量解析并支持 AbortController 中断；按 IP 限流 + 报表级并发互斥 + 数仓查询熔断（连续 5 次失败熔断 30s）
+- 路由懒加载 + 代码分割优化首屏加载
 ```
 
 **对比说明：**
@@ -95,8 +103,8 @@
 | 方面 | 工作经历 | 项目经历 |
 |------|---------|---------|
 | 权限系统 | 搭建 RBAC 体系统一管理（三级控制） | Hooks + 动态路由 + 懒加载实现 |
-| 配置发布 | 设计多渠道热更新架构（10min→30s） | Redis pub/sub + 责任链模式 |
-| AI 集成 | 对接多模型、零代码切换 | SSE 流式响应、prompt 组装 |
+| 配置发布 | 设计多渠道热更新架构（30~60s → 1~3s） | Redis pub/sub + 责任链模式 |
+| AI 集成 | 对接多模型、零代码切换、规范与流程沉淀 | SSE 流式链路、Prompt 分层组装、action 协议、限流与熔断 |
 
 ---
 
@@ -108,23 +116,23 @@
 ## 上海触宝信息技术有限公司 | 前端开发工程师
 2024.05 - 2025.06
 
-- 负责多个海外业务项目（Cyanbird、Hugo Admin、Joylit 官网、ReadictNovel）从需求评估到上线的全流程，服务 10000+ 作者和 50000+ 月活用户
-- 主导 Cyanbird 作者平台前端架构设计，涵盖封面生成、PDF 解析、电子签名、富文本编辑等核心功能，收入转化提升 40%
-- 主导 Joylit 官网 Nuxt3 SSR 架构选型，协同 SEO 策略制定，有机流量增长 40%，Google PageSpeed 90+
-- 搭建 Hugo Admin 内部平台前端架构，多部门协作（产品/编辑/法务/财务），支撑财务对账、税务审核等核心业务流程
-- 封装 html2canvas、批量上传队列（p-queue）等公共业务组件，提升团队开发效率 30%+；协助游戏团队 Cocos Creator 开发
+- 负责多个海外业务项目（Cyanbird、Hugo Admin、Joylit 官网、ReadictNovel）从需求评估到上线的全流程；业务为多站点单仓架构，一套代码通过构建参数产出 6 个站点
+- 主导 Cyanbird 作者平台前端架构设计，涵盖封面生成、税表 PDF 解析、电子签名、富文本编辑等核心功能
+- 主导 Joylit 官网 Nuxt3 SSR 架构选型（SSR + 预渲染 + JSON-LD 结构化数据 + 动态 sitemap），解决 SPA 索引问题
+- 搭建 Hugo Admin 内部平台前端架构，主导构建体系从 vue-cli/Webpack 迁移到 Vite；多部门协作（产品/编辑/法务/财务），支撑财务对账、税务审核等核心业务流程
+- 封装 html2canvas、批量上传队列（p-queue，并发 10）等公共业务组件；协助游戏团队 Cocos Creator 开发
 ```
 
 #### 项目经历（修改后）
 
 ```markdown
 ## CyanbirdMedia 海外作者平台
-2024.05-2025.06 | 服务 10000+ 作者，覆盖 150+ 国家
+2024.05-2025.06 | 面向多国作者的 B 端创作与结算系统
 
-- html2canvas + cropperjs 实现封面生成和图片裁剪，优化渲染从 3000ms 降至 500ms，用户生成封面转化率提升 40%
-- pdf-lib 解析海外税表 PDF，signature_pad 电子签名对接 IRS 税务系统，多国税表自动识别，审核效率提升 40%
-- ECharts 数据可视化看板实时展示作者收入趋势、阅读量分析，Lottie-web 等级升级动画提升用户参与度
-- 封装 Quill 富文本编辑器、批量上传队列（p-queue）等业务组件，队列成功率提升 30%，团队开发效率提升 30%+
+- html2canvas + cropperjs 实现封面生成与图片裁剪：先用 performance.now() 分段埋点定位渲染瓶颈，再通过收窄渲染区域 + 复用渲染上下文 + 拆分长任务优化，单次生成 3000ms → 500ms，埋点可复现
+- pdf-lib 加载税表模板 + 动态字段填充（drawText），signature_pad 手写签名 toDataURL → embedPng → drawImage 叠加到指定坐标，全流程浏览器端完成（敏感税务数据不出端）
+- ECharts 数据可视化看板展示作者收入趋势、阅读量分析
+- 封装 Quill 富文本编辑器、批量上传队列（p-queue，并发限制 10 避免打爆后端上传接口）等业务组件
 ```
 
 ---
@@ -153,7 +161,7 @@
 
 3. **数据是否具体？**
    - 「性能提升」❌ → 「3000ms→500ms」✅
-   - 「转化率提升」❌ → 「转化率提升 15%」✅
+   - 「转化率提升」❌ → 拿不到真实统计口径就不要编数字，改成机制描述（「收窄渲染区域 + 拆分长任务」）✅
 
 4. **是否避免了技术堆砌？**
    - 工作经历不写具体技术栈名称
@@ -168,7 +176,7 @@
 现有 4 条评价的定位：
 | 序号 | 内容 | 问题 |
 |------|------|------|
-| 1 | AI 工具使用（Kiro/Cursor/Windsurf） | 工具偏小众，应突出 Claude Code、MCP 等更专业的 |
+| 1 | AI 工具使用（Kiro/Cursor/Windsurf） | 工具偏小众，应突出 Claude Code 及其 Skills 工作流等更专业的 |
 | 2 | 技术社区 + 学习能力 | 比较泛，没特色 |
 | 3 | 全栈开发能力 | 太泛，每个工程师都能这么写 |
 | 4 | 代码质量 + 组件封装 | 偏技能堆砌，没有数据支撑 |
@@ -186,7 +194,7 @@
 
 ```javascript
 zh: [
-  "AI 驱动开发：熟练使用 Claude Code + Spec 驱动开发流程，擅长 AI 辅助编程（代码生成/重构/评审）、自定义 Skills 和 MCP 集成，开发效率提升 3 倍+；持续关注 LLM 应用、RAG、Agent 等前沿技术，并在项目中落地",
+  "AI 应用开发：具备从 0 到 1 落地 LLM 应用的能力（BFF 编排 + 流式链路 + Prompt 工程 + 稳定性治理），已在生产系统落地 AI 数据分析助手；日常以 Claude Code 为主要开发方式，熟悉 Skills 工作流与 AI 代码生成规范的建设",
   "全栈工程化：具备从前端到后端的全链路开发能力，注重代码质量和工程化实践，熟悉性能优化（懒加载/缓存/分批处理）和架构设计（前后端分离/BFF/微服务），追求高可维护性和可扩展性",
   "快速学习与落地：对新技术保持敏锐度，善于从技术社区（Hacker News/Stack Overflow）和实践中学习，具备独立调研、选型、落地新技术的能力，曾主导 Nuxt3 SSR、AI BFF 等新技术的快速应用",
   "团队协作与沟通：具备良好的技术文档和沟通能力，能够清晰表达技术方案和决策理由，有跨部门协作（产品/运营/财务）经验，善于在技术与业务之间找到平衡点",
@@ -197,7 +205,7 @@ zh: [
 
 ```javascript
 en: [
-  "AI-Driven Development: Proficient in Claude Code + Spec-driven workflow, skilled in AI-assisted coding (generation/refactoring/review), custom Skills and MCP integration, 3x+ efficiency boost; staying current on LLM apps, RAG, and Agent technologies with practical project implementation",
+  "AI Application Development: Capable of taking LLM applications from 0 to 1 (BFF orchestration, streaming pipelines, prompt engineering, resilience controls), with a production AI data-analysis assistant shipped; uses Claude Code as the primary development workflow, with hands-on experience building Skills workflows and AI code-generation conventions",
   "Full-Stack Engineering: End-to-end development from frontend to backend, emphasizing code quality and engineering practices; experienced in performance optimization (lazy loading/caching/batch processing) and architecture design (FE-BE separation/BFF/microservices), pursuing high maintainability and scalability",
   "Fast Learner & Implementer: Strong technology sensitivity from tech communities (HN/Stack Overflow) and hands-on practice; capable of independently researching, selecting, and implementing new tech — e.g., led rapid adoption of Nuxt3 SSR and AI BFF",
   "Team Collaboration & Communication: Strong technical documentation and communication skills to articulate designs and decisions; experienced in cross-functional collaboration (Product/Ops/Finance), balancing technical solutions with business needs",
@@ -208,8 +216,8 @@ en: [
 
 | 维度 | 原来 | 优化后 |
 |------|------|--------|
-| AI 工具 | Kiro/Cursor/Windsurf | Claude Code + MCP（更专业） |
-| AI 认知 | 只提工具使用 | 增加 LLM/RAG/Agent 前沿技术 |
+| AI 定位 | Kiro/Cursor/Windsurf（只提工具） | 从 0 到 1 落地 LLM 应用 + Claude Code 工作流（更专业、可深挖） |
+| AI 认知 | 只提工具使用 | 增加 LLM 接入协议、Prompt 分层、流式链路与稳定性治理 |
 | 工程化 | 「注重质量」泛泛而谈 | 具体说性能优化/架构设计 |
 | 学习能力 | 「快速学习」太泛 | 举具体例子（Nuxt3 SSR/AI BFF） |
 | 团队协作 | 没体现 | 增加跨部门协作经验 |
@@ -247,9 +255,12 @@ en: [
 #### 优化后的技能结构
 
 ```
-一、AI 驱动开发（核心差异化能力）
-   - Claude Code + Spec 驱动开发，Prompt Engineering，MCP 集成
-   - 大模型接入（Kimi/OpenAI），SSE 流式对话，Agent 工作流
+一、AI 应用开发（核心差异化能力）
+   - LLM 接入：OpenAI 兼容协议、多供应商零代码切换（baseURL / model 环境变量）
+   - 流式链路：SSE（服务端 ReadableStream 分帧 + 前端 getReader 增量解析 + 中断）
+   - Prompt 工程：分层组装、action 协议驱动前端交互
+   - 稳定性：限流、并发互斥、熔断、请求串行化
+   - AI 辅助研发：Claude Code + Skills 工作流、AI 代码生成规范
 
 二、前端工程化
    - 框架：Vue 2/3 全家桶、React Hooks
@@ -279,10 +290,11 @@ en: [
 
 ```javascript
 zh: [
-  "AI 驱动开发：深度使用 Claude Code、Cursor 等 AI 工具，掌握 Prompt Engineering 和 MCP 集成，开发效率提升 3 倍+；熟悉大模型接入（Kimi/OpenAI）、SSE 流式对话、Agent 工作流，能构建 AI 数据分析和智能对话系统",
+  "⭐ AI 应用开发：独立设计并落地 AI 数据分析助手（Vue3 + Node.js/Hono BFF + Java + 大模型 + ThinkingData 数仓），覆盖自动归因分析、多轮追问、划选批注三类场景；BFF 不直连数据库，作为纯中间层编排 Java 接口、数仓 SQL 与大模型调用",
+  "大模型与流式工程：以 OpenAI 兼容协议接入，环境变量零代码切换供应商（DeepSeek / Kimi / NVIDIA NIM）；双调用编排（chatOnce 摘要 + streamChat 流式报告）；Prompt 分层组装；[ACTION:{...}] 文本协议驱动前端表格显隐与按需查询；手写 SSE 全链路（服务端 ReadableStream + TextEncoder 分帧、X-Accel-Buffering: no 绕过 Nginx 缓冲，前端 getReader + TextDecoder 增量解析 + AbortController 中断）；按 IP 限流、报表级并发互斥、数仓查询熔断 + 请求串行化",
   "前端工程化：熟练掌握 Vue 2/3 全家桶、React（Hooks），TypeScript/ES6+；熟悉 Vite/Webpack 构建优化（Tree Shaking、代码分割、懒加载），ESLint + Prettier + Husky 工程化规范",
   "全栈开发：熟悉 Node.js BFF（Express/Hono）和 Spring Boot 后端开发，MySQL/MongoDB 数据库设计，Redis 缓存与分布式会话；能独立完成中小型全栈项目",
-  "SSR 与 SEO：熟悉 Nuxt3/Next.js 服务端渲染，SEO 优化（JSON-LD、结构化数据），Core Web Vitals 首屏性能优化，PageSpeed 90+",
+  "SSR 与 SEO：熟悉 Nuxt3/Next.js 服务端渲染与预渲染，SEO 优化（JSON-LD、结构化数据、动态 sitemap），Core Web Vitals 首屏性能优化",
   "性能调优：深入理解浏览器渲染原理、事件循环、异步编程；掌握前端性能优化（懒加载/缓存/CDN）和后端性能优化（Redis/分批处理/OOM 防护）",
   "UI 框架：熟练使用 Element UI、TDesign、Ant Design、Tailwind CSS，能进行二次封装和主题定制，建立组件库",
 ]
@@ -292,10 +304,11 @@ zh: [
 
 ```javascript
 en: [
-  "AI-Driven Development: Deep use of Claude Code, Cursor for AI-assisted coding (generation/refactoring/review), Prompt Engineering and MCP integration, 3x+ efficiency boost; familiar with LLM integration (Kimi/OpenAI), SSE streaming, Agent workflow, building AI analytics and intelligent chat systems",
+  "⭐ AI Application Development: Independently designed and shipped an AI data-analysis assistant (Vue3 + Node.js/Hono BFF + Java + LLM + ThinkingData warehouse), covering automated root-cause analysis, multi-turn Q&A, and text-selection annotations; the BFF holds no database and acts purely as a middle layer orchestrating Java APIs, warehouse SQL, and LLM calls",
+  "LLM & Streaming Engineering: OpenAI-compatible integration with zero-code provider switching (DeepSeek / Kimi / NVIDIA NIM) via env vars; dual-call orchestration (chatOnce summary + streamChat streamed report); layered prompt assembly; a [ACTION:{...}] text protocol driving frontend table visibility and on-demand queries; hand-written SSE on both ends (server-side ReadableStream + TextEncoder framing with X-Accel-Buffering: no to bypass Nginx buffering, client-side getReader + TextDecoder incremental parsing with AbortController cancellation); per-IP rate limiting, per-report concurrency locking, and circuit breaking with request serialization around warehouse queries",
   "Frontend Engineering: Proficient in Vue 2/3 ecosystem, React Hooks, TypeScript/ES6+; experienced with Vite/Webpack optimization (Tree Shaking, code splitting, lazy loading), ESLint + Prettier + Husky CI pipeline",
   "Full-Stack Development: Familiar with Node.js BFF (Express/Hono) and Spring Boot backend, MySQL/MongoDB design, Redis caching and distributed sessions; capable of independent full-stack project delivery",
-  "SSR & SEO: Familiar with Nuxt3/Next.js SSR, SEO optimization (JSON-LD, structured data), Core Web Vitals optimization, PageSpeed 90+",
+  "SSR & SEO: Familiar with Nuxt3/Next.js SSR and prerendering, SEO optimization (JSON-LD, structured data, dynamic sitemap), Core Web Vitals optimization",
   "Performance Tuning: Deep understanding of browser rendering, event loop, async programming; skilled in frontend optimization (lazy loading/caching/CDN) and backend optimization (Redis/batch processing/OOM prevention)",
   "UI Frameworks: Proficient in Element UI, TDesign, Ant Design, Tailwind CSS with secondary封装 and theming, component library development",
 ]
@@ -310,7 +323,7 @@ en: [
 | 结构 | 按技术点平铺罗列 | 按能力维度分层组织 |
 | AI 权重 | 分散在各处 | 单独作为第一项，核心差异化能力 |
 | 层次感 | 「熟悉」「熟练」混用 | 明确分层：掌握 → 熟悉 |
-| 量化 | 没有数据 | 加入 PageSpeed 90+、3x+ 等具体指标 |
+| 量化 | 没有数据 | 加入可复现的指标（封面 3000ms→500ms、发布 30~60s→1~3s），或机制描述 |
 | 措辞 | 「了解」类偏弱 | 用「熟练」「熟悉」「掌握」区分层级 |
 
 ---
@@ -324,7 +337,7 @@ en: [
     ↓ 具体证明
 工作经历：主导天天爱掼蛋前端架构设计，Vue3 + TS + Vite
     ↓ 技术实现
-项目经历：Vue3 + TS + Vite 实现路由懒加载，首屏加载优化 40%
+项目经历：Vue3 + TS + Vite 实现路由懒加载 + 代码分割优化首屏
 ```
 
 ---

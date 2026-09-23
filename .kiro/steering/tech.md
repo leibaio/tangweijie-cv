@@ -12,8 +12,17 @@
 - **Radix UI** components (dropdown-menu, slot)
 - **shadcn/ui** component patterns
 - **Lucide React** for icons
-- **next-themes** for theme management
+- **next-themes** for dark/light mode (`attribute="class"`)
 - Utility libraries: `clsx`, `tailwind-merge`, `class-variance-authority`, `tailwindcss-animate`
+
+## Feature Systems
+
+| System | Where | How it works |
+|---|---|---|
+| Home styles (13) | `config/home-style.ts` + `components/home/*` | One independent component per style; `VALID_STYLES` whitelist guards the value read back from `localStorage` |
+| Accent colors (6) | `config/theme.ts` + `components/theme-color-toggle.tsx` | oklch palettes override `--primary` / `--primary-foreground`; persisted in `localStorage: theme-color` |
+| i18n (zh/en) | `config/i18n.ts` + `contexts/locale-context.tsx` | Client: React Context; Server: `cookies()`. The setter writes `localStorage` + `document.cookie`, then calls `router.refresh()` |
+| Resume reskin | `components/resume-style-wrapper.tsx` | Maps the active `HomeStyle` to wrapper classes / CSS variables so the resume matches the home page |
 
 ## Content & Markdown
 
