@@ -6,6 +6,8 @@
 >
 > 这些数字**不得再被复制进简历**：面试官一旦追问测算口径就会露馅。其中「渠道发布从 10 分钟降至 30 秒」已确认与 `docs/performance/` 的真实口径（单条 30~60s → 1~3s）矛盾。
 >
+> **另有一类已删除的表述**：「一套代码通过构建参数产出 6 个站点」「多站点单仓」「`build.sh <project_name>` 构建期注入站点标识」「S3 / CloudFront 发布链路」。**这些没做过，全部删掉了**——Cyanbird 仓库 `src/` 919 个文件里没有任何站点标识判断，`vue.config.js` 是单个 `outputDir: 'dist'`，构建命令 `vue-cli-service build` 不吃参数，`build.sh` 里也没有构建命令（那两个脚本只是仓库里的存量文件，没有实际使用）。**不要再从任何旧稿里把它们捡回来。**
+>
 > AI 相关表述已按 `D:\yaoji` 实际代码（`ttigd-backend-ai-bff` + `ttigd-backend-web/src/pages/aiAnalysis`）重写，可作为唯一口径参考。其余非 AI 数字请自行确认来源后再用；确认不了的，改成**机制描述**（做了什么、怎么做的）而不是**效果数字**。
 
 ## 问题诊断
@@ -116,7 +118,7 @@
 ## 上海触宝信息技术有限公司 | 前端开发工程师
 2024.05 - 2025.06
 
-- 负责多个海外业务项目（Cyanbird、Hugo Admin、Joylit 官网、ReadictNovel）从需求评估到上线的全流程；业务为多站点单仓架构，一套代码通过构建参数产出 6 个站点
+- 负责多个海外业务项目（Cyanbird、Hugo Admin、Joylit 官网、ReadictNovel）从需求评估到上线的全流程，C 端（官网 / 作者平台）与 B 端（运营后台）均覆盖
 - 主导 Cyanbird 作者平台前端架构设计，涵盖封面生成、税表 PDF 解析、电子签名、富文本编辑等核心功能
 - 主导 Joylit 官网 Nuxt3 SSR 架构选型（SSR + 预渲染 + JSON-LD 结构化数据 + 动态 sitemap），解决 SPA 索引问题
 - 搭建 Hugo Admin 内部平台前端架构，主导构建体系从 vue-cli/Webpack 迁移到 Vite；多部门协作（产品/编辑/法务/财务），支撑财务对账、税务审核等核心业务流程

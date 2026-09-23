@@ -23,11 +23,11 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
       position: "商业与技术中台-前端开发工程师",
       duration: "2024.05 - 2025.06",
       responsibilities: [
-        "负责多个海外业务项目（cyanbird、hugo_admin、joylit_official、readictnovel）前端从需求评估到上线的全流程；业务为多站点单仓架构，一套代码通过构建参数产出 6 个站点（readictnovel / globalnovel / aoyuonline / hanxiang / urnovelonline / stepyounger）",
+        "负责多个海外业务项目（cyanbird、hugo_admin、joylit_official、readictnovel）前端从需求评估到上线的全流程，C 端（官网 / 作者平台）与 B 端（运营后台）均覆盖",
         "Cyanbird 作者平台：html2canvas 封面生成性能优化（performance.now() 分段埋点定位渲染瓶颈，3000ms→500ms）、税表 PDF 处理与电子签名（pdf-lib + signature_pad，全流程浏览器端完成）、Quill 富文本编辑器、ECharts 数据看板",
         "Joylit 官网：Nuxt3 SSR + 预渲染 + Tailwind CSS，首屏直出 HTML 解决 SPA 索引问题；JSON-LD 结构化数据（WebSite / Book + aggregateRating）+ 动态 sitemap 优化 Google 索引质量",
         "Hugo Admin 内部平台：主导构建体系从 vue-cli/Webpack 迁移到 Vite（@vitejs/plugin-vue2 + vite-plugin-commonjs + rollup-plugin-require-context + vite-plugin-svg-icons）；Quill 富文本、批量上传队列（p-queue 并发 10）、ECharts 数据看板；多部门协作（产品/编辑/法务/财务）",
-        "封装 html2canvas 封面生成、批量上传队列等公共业务组件；多站点构建脚本（build.sh 站点参数注入）+ S3/CloudFront 发布链路（缓存头 + 精准失效）；协助游戏团队 Cocos Creator 开发",
+        "封装 html2canvas 封面生成、批量上传队列等公共业务组件供各业务模块复用；协助游戏团队以 Cocos Creator + TypeScript 开发休闲游戏",
       ],
     },
     {
@@ -61,11 +61,11 @@ export const workExperienceData: Record<"zh" | "en", WorkExperience[]> = {
       position: "Frontend Developer",
       duration: "2024.05 - 2025.06",
       responsibilities: [
-        "Owned multiple overseas projects (cyanbird, hugo_admin, joylit_official, readictnovel) end to end, from requirement assessment to launch; the business is a single-repo multi-site architecture producing 6 sites from one codebase via build parameters (readictnovel / globalnovel / aoyuonline / hanxiang / urnovelonline / stepyounger)",
+        "Owned multiple overseas projects (cyanbird, hugo_admin, joylit_official, readictnovel) end to end, from requirement assessment to launch, covering both consumer-facing and internal apps",
         "Cyanbird Author Platform: html2canvas cover generation optimized via performance.now() instrumentation to locate the rendering bottleneck (3000ms → 500ms); tax form PDF handling and e-signature (pdf-lib + signature_pad, entirely client-side); Quill rich-text editor; ECharts dashboards",
         "Joylit Official Website: Nuxt3 SSR + prerendering + Tailwind CSS, shipping real HTML on the first screen to fix SPA indexing; JSON-LD structured data (WebSite / Book + aggregateRating) and a dynamic sitemap to improve Google indexing quality",
         "Hugo Admin Internal Platform: led the build-system migration from vue-cli/Webpack to Vite (@vitejs/plugin-vue2 + vite-plugin-commonjs + rollup-plugin-require-context + vite-plugin-svg-icons); Quill rich-text, batch upload queue (p-queue, concurrency 10), ECharts dashboards; cross-department collaboration (Product/Editorial/Legal/Finance)",
-        "Encapsulated reusable components (html2canvas cover generation, batch upload queue); built the multi-site build script (build.sh with site parameter injection) and the S3/CloudFront release pipeline (cache headers + targeted invalidation); assisted the game team with Cocos Creator",
+        "Encapsulated reusable components (html2canvas cover generation, batch upload queue) shared across business modules; assisted the game team with casual game development in Cocos Creator + TypeScript",
       ],
     },
     {
