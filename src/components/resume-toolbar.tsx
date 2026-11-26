@@ -3,7 +3,6 @@
 import { LocaleToggle } from "@/components/locale-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { PrintButton } from "@/components/resume";
-import { ThemeColorToggle } from "@/components/theme-color-toggle";
 import { i18n } from "@/config";
 import { HomeStyle } from "@/config/home-style";
 import { useLocale } from "@/contexts/locale-context";
@@ -112,7 +111,6 @@ export function ResumeToolbar() {
         <div className="flex items-center gap-2">
           <PrintButton locale={locale} />
           <LocaleToggle />
-          <ThemeColorToggle locale={locale} />
           {!styleConfig.hideDarkMode && <ModeToggle />}
         </div>
       </div>

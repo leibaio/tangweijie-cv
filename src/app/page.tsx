@@ -4,7 +4,6 @@ import { BauhausStyle, BrutalistStyle, ChineseStyle, F1Style, GlassStyle, Japane
 import { HomeStyleToggle } from "@/components/home-style-toggle";
 import { LocaleToggle } from "@/components/locale-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
-import { ThemeColorToggle } from "@/components/theme-color-toggle";
 import { i18n } from "@/config";
 import { defaultHomeStyle, HomeStyle } from "@/config/home-style";
 import { useLocale } from "@/contexts/locale-context";
@@ -166,7 +165,6 @@ export default function Home() {
         >
           <HomeStyleToggle locale={locale} onStyleChange={handleStyleChange} />
           <LocaleToggle />
-          <ThemeColorToggle locale={locale} />
           {!isChinese && !isRetro && !isGlass && !isF1 && !isBrutalist && !isSynthwave && !isJapanese && !isNewspaper && <ModeToggle />}
         </div>
       </div>
