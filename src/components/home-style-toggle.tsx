@@ -1,40 +1,23 @@
 "use client";
 
+import { homeStyleThemes } from "@/components/home/theme";
 import { Button } from "@/components/ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { homeStyleThemes } from "@/components/home/theme";
-import { defaultHomeStyle, HomeStyle, homeStyles } from "@/config/home-style";
+import { HomeStyle, homeStyles } from "@/config/home-style";
 import { Locale } from "@/config/i18n";
-import { useEffect, useState } from "react";
+import { useHomeStyle } from "@/contexts/home-style-context";
 
 interface HomeStyleToggleProps {
   locale: Locale;
-  onStyleChange?: (style: HomeStyle) => void;
 }
 
-export function HomeStyleToggle({ locale, onStyleChange }: HomeStyleToggleProps) {
-  const [style, setStyle] = useState<HomeStyle>(defaultHomeStyle);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("home-style") as HomeStyle | null;
-    if (saved && Object.keys(homeStyles).includes(saved)) {
-      setStyle(saved);
-      onStyleChange?.(saved);
-    }
-  }, [onStyleChange]);
-
-  const handleStyleChange = (newStyle: HomeStyle) => {
-    setStyle(newStyle);
-    localStorage.setItem("home-style", newStyle);
-    window.dispatchEvent(new CustomEvent("home-style-change", { detail: newStyle }));
-    onStyleChange?.(newStyle);
-  };
-
+export function HomeStyleToggle({ locale }: HomeStyleToggleProps) {
+  const { style, setStyle } = useHomeStyle();
   const CurrentIcon = homeStyleThemes[style].icon;
 
   return (
@@ -52,7 +35,7 @@ export function HomeStyleToggle({ locale, onStyleChange }: HomeStyleToggleProps)
           return (
             <DropdownMenuItem
               key={key}
-              onClick={() => handleStyleChange(key)}
+              onClick={() => setStyle(key)}
               className={style === key ? "bg-accent" : ""}
             >
               <Icon className="mr-2 h-4 w-4" />

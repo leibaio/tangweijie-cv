@@ -11,10 +11,9 @@ import { homeStyleThemes } from "./theme";
 interface HomeHeaderProps {
   locale: Locale;
   style: HomeStyle;
-  onStyleChange: (style: HomeStyle) => void;
 }
 
-export function HomeHeader({ locale, style, onStyleChange }: HomeHeaderProps) {
+export function HomeHeader({ locale, style }: HomeHeaderProps) {
   const theme = homeStyleThemes[style];
   const t = i18n[locale];
   const SiteIcon = theme.icon;
@@ -35,7 +34,7 @@ export function HomeHeader({ locale, style, onStyleChange }: HomeHeaderProps) {
           className="flex items-center gap-2 rounded-full px-1.5 py-1 backdrop-blur-sm"
           style={theme.controlsStyle}
         >
-          <HomeStyleToggle locale={locale} onStyleChange={onStyleChange} />
+          <HomeStyleToggle locale={locale} />
           <LocaleToggle />
           {theme.supportsDarkMode && <ModeToggle />}
         </div>

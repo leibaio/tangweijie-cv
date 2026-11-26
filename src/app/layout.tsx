@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { HomeStyleProvider } from "@/contexts/home-style-context";
 import { LocaleProvider } from "@/contexts/locale-context";
 import { siteConfig } from "@/config";
 import type { Metadata } from "next";
@@ -80,7 +81,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <LocaleProvider>
-            {children}
+            <HomeStyleProvider>
+              {children}
+            </HomeStyleProvider>
           </LocaleProvider>
         </ThemeProvider>
       </body>

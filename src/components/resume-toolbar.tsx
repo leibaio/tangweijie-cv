@@ -4,11 +4,10 @@ import { LocaleToggle } from "@/components/locale-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { PrintButton } from "@/components/resume";
 import { i18n } from "@/config";
-import { HomeStyle } from "@/config/home-style";
+import { useHomeStyle } from "@/contexts/home-style-context";
 import { useLocale } from "@/contexts/locale-context";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 const toolbarStyles: Record<string, {
   bg: string;
@@ -63,20 +62,8 @@ const toolbarStyles: Record<string, {
 
 export function ResumeToolbar() {
   const { locale, mounted } = useLocale();
-  const [homeStyle, setHomeStyle] = useState<string>("tech");
+  const { style: homeStyle } = useHomeStyle();
   const t = i18n[locale];
-
-  useEffect(() => {
-    const saved = localStorage.getItem("home-style");
-    if (saved) setHomeStyle(saved);
-
-    const handleChange = (e: Event) => {
-      const detail = (e as CustomEvent<string>).detail;
-      if (detail) setHomeStyle(detail);
-    };
-    window.addEventListener("home-style-change", handleChange);
-    return () => window.removeEventListener("home-style-change", handleChange);
-  }, []);
 
   const styleConfig = toolbarStyles[homeStyle] || {};
 

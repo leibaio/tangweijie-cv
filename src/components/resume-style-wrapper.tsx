@@ -1,7 +1,7 @@
 "use client";
 
 import { HomeStyle } from "@/config/home-style";
-import { useEffect, useState } from "react";
+import { useHomeStyle } from "@/contexts/home-style-context";
 
 interface ResumeStyleWrapperProps {
   children: React.ReactNode;
@@ -299,26 +299,7 @@ const styleConfigs: Record<HomeStyle, {
 };
 
 export function ResumeStyleWrapper({ children, toolbar }: ResumeStyleWrapperProps) {
-  const [style, setStyle] = useState<HomeStyle>("tech");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("home-style") as HomeStyle | null;
-    if (saved && Object.keys(styleConfigs).includes(saved)) {
-      setStyle(saved);
-    }
-    setMounted(true);
-
-    const handleChange = (e: Event) => {
-      const detail = (e as CustomEvent<string>).detail;
-      if (detail && Object.keys(styleConfigs).includes(detail)) {
-        setStyle(detail as HomeStyle);
-      }
-    };
-    window.addEventListener("home-style-change", handleChange);
-    return () => window.removeEventListener("home-style-change", handleChange);
-  }, []);
-
+  const { style, mounted } = useHomeStyle();
   const config = styleConfigs[style];
 
   // Background decorations per style
