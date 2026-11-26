@@ -7,26 +7,10 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { homeStyleThemes } from "@/components/home/theme";
 import { defaultHomeStyle, HomeStyle, homeStyles } from "@/config/home-style";
 import { Locale } from "@/config/i18n";
-import { Blocks, BookOpen, Cpu, Flag, Flower2, Gamepad2, Minus, Newspaper, Scroll, Sparkles, Terminal, Triangle, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
-
-const iconMap = {
-  cpu: Cpu,
-  minus: Minus,
-  terminal: Terminal,
-  scroll: Scroll,
-  "book-open": BookOpen,
-  triangle: Triangle,
-  "gamepad-2": Gamepad2,
-  sparkles: Sparkles,
-  flag: Flag,
-  blocks: Blocks,
-  zap: Zap,
-  "flower-2": Flower2,
-  newspaper: Newspaper,
-};
 
 interface HomeStyleToggleProps {
   locale: Locale;
@@ -51,7 +35,7 @@ export function HomeStyleToggle({ locale, onStyleChange }: HomeStyleToggleProps)
     onStyleChange?.(newStyle);
   };
 
-  const CurrentIcon = iconMap[homeStyles[style].icon as keyof typeof iconMap];
+  const CurrentIcon = homeStyleThemes[style].icon;
 
   return (
     <DropdownMenu>
@@ -64,7 +48,7 @@ export function HomeStyleToggle({ locale, onStyleChange }: HomeStyleToggleProps)
       <DropdownMenuContent align="end">
         {(Object.keys(homeStyles) as HomeStyle[]).map((key) => {
           const config = homeStyles[key];
-          const Icon = iconMap[config.icon as keyof typeof iconMap];
+          const Icon = homeStyleThemes[key].icon;
           return (
             <DropdownMenuItem
               key={key}
