@@ -14,13 +14,11 @@ interface TerminalStyleProps {
 export function TerminalStyle({ locale, header }: TerminalStyleProps) {
   const t = i18n[locale];
   const [visibleLines, setVisibleLines] = useState<number>(0);
-  const [typingIndex, setTypingIndex] = useState(0);
-  const [currentTyped, setCurrentTyped] = useState("");
 
   const lines = [
     { type: "prompt", content: "whoami" },
     { type: "output", content: locale === "zh" ? "汤伟杰 - 全栈开发工程师" : "Tang Weijie - Full Stack Developer" },
-    { type: "output", content: "📍 Shanghai | 📧 leibaio@foxmail.com" },
+    { type: "output", content: `📍 Shanghai | 📧 ${siteConfig.email}` },
     { type: "empty" },
     { type: "prompt", content: "cat skills.txt" },
     { type: "output", content: "Frontend: Vue 2/3, React, TypeScript, Next.js, Nuxt.js" },
@@ -111,7 +109,7 @@ export function TerminalStyle({ locale, header }: TerminalStyleProps) {
             [github]
           </a>
           <a
-            href="mailto:leibaio@foxmail.com"
+            href={`mailto:${siteConfig.email}`}
             className="text-[#8b949e] hover:text-[#c9d1d9] transition-colors"
           >
             [email]

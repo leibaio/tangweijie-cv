@@ -151,7 +151,7 @@ export function NewspaperStyle({ locale, header }: NewspaperStyleProps) {
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                   <Link
-                    href="mailto:leibaio@foxmail.com"
+                    href={`mailto:${siteConfig.email}`}
                     className="inline-flex items-center justify-center gap-2 px-5 py-3 text-[10px] uppercase tracking-[0.2em] font-bold transition-all hover:bg-[#111] hover:text-[#F5F0E1]"
                     style={{
                       border: "2px solid #111",

@@ -7,8 +7,6 @@ interface SkillsProps {
   locale?: Locale;
 }
 
-const categoryColors = ["bg-primary"];
-
 function parseSkill(skill: string) {
   const colonIndex = skill.indexOf(":");
   if (colonIndex === -1) return { category: null, content: skill };
@@ -28,14 +26,13 @@ export default function Skills({ locale = "zh" }: SkillsProps) {
       <div className="flex flex-col gap-3 print:gap-1">
         {skills.map((skill, index) => {
           const { category, content } = parseSkill(skill);
-          const dotColor = categoryColors[index % categoryColors.length];
           return (
             <div
               key={index}
               className="group flex items-start gap-3 p-3 rounded-lg border border-transparent hover:border-primary/10 hover:bg-primary/[0.02] transition-all print:p-0 print:border-0 print:hover:bg-transparent"
             >
               {/* 分类色点 */}
-              <div className={`mt-1.5 w-2 h-2 rounded-full ${dotColor} shrink-0 print:hidden`} />
+              <div className="mt-1.5 w-2 h-2 rounded-full bg-primary shrink-0 print:hidden" />
               <div className="flex-1 min-w-0">
                 {category && (
                   <span className="text-sm font-semibold text-foreground/80 font-mono print:text-xs">

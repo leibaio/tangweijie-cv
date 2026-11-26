@@ -288,7 +288,7 @@ export function ChineseStyle({ locale, header }: ChineseStyleProps) {
               </span>
             </Link>
             <Link
-              href="mailto:leibaio@foxmail.com"
+              href={`mailto:${siteConfig.email}`}
               className="inline-flex items-center gap-2 px-8 py-3 text-sm tracking-widest transition-all duration-300 hover:tracking-[0.3em]"
               style={{
                 border: "1px solid #C5A33A",

@@ -119,7 +119,7 @@ export function BrutalistStyle({ locale, header }: BrutalistStyleProps) {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="mailto:leibaio@foxmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-2 px-8 py-4 text-sm font-black uppercase tracking-[0.15em] transition-all hover:translate-y-[-2px]"
                 style={{
                   backgroundColor: "#FFF",

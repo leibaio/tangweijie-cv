@@ -1,4 +1,5 @@
 import { BlogHeader } from "@/components/blog-header";
+import { GridBackground } from "@/components/grid-background";
 import { i18n } from "@/config";
 import { getAllPosts } from "@/lib/blog";
 import { Calendar, Clock, Tag } from "lucide-react";
@@ -14,10 +15,9 @@ export default async function BlogPage() {
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* 背景 */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-background bg-[linear-gradient(to_right,hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
+      <GridBackground>
         <div className="absolute top-0 h-[400px] w-full bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.1),transparent)]" />
-      </div>
+      </GridBackground>
 
       <BlogHeader backHref="/" backText={i18n[locale].resume.backToHome} />
 

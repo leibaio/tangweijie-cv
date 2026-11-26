@@ -2,10 +2,7 @@ import { TimelineProps, WorkExperience } from "@/types";
 
 interface TimelineItemProps extends WorkExperience {
   isLast?: boolean;
-  index: number;
 }
-
-const nodeColors = ["bg-primary"];
 
 const TimelineItem = ({
   company,
@@ -13,19 +10,16 @@ const TimelineItem = ({
   duration,
   responsibilities,
   isLast = false,
-  index,
 }: TimelineItemProps) => {
-  const nodeColor = nodeColors[index % nodeColors.length];
-
   return (
     <li className={`relative pl-10 print:pl-7 print:break-inside-avoid ${!isLast ? "pb-5 print:pb-2" : ""}`}>
       {/* 节点圆点 - 渐变 + 发光 */}
       <div
-        className={`absolute left-[-9px] print:left-[-6px] top-1 w-[18px] h-[18px] print:w-3 print:h-3 rounded-full ${nodeColor} border-[3px] border-background shadow-sm`}
+        className="absolute left-[-9px] print:left-[-6px] top-1 w-[18px] h-[18px] print:w-3 print:h-3 rounded-full bg-primary border-[3px] border-background shadow-sm"
       />
       {/* 连接线上的渐变光晕 */}
       <div
-        className={`absolute left-[-5px] print:left-[-3px] top-1 w-[10px] h-[10px] rounded-full ${nodeColor} opacity-20 blur-sm print:hidden`}
+        className="absolute left-[-5px] print:left-[-3px] top-1 w-[10px] h-[10px] rounded-full bg-primary opacity-20 blur-sm print:hidden"
       />
 
       <div className="flex flex-col gap-1.5 print:gap-0">
@@ -60,7 +54,6 @@ export default function Timeline({
         <TimelineItem
           key={index}
           {...item}
-          index={index}
           isLast={index === items.length - 1}
         />
       ))}

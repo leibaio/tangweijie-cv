@@ -147,7 +147,7 @@ export function RetroStyle({ locale, header }: RetroStyleProps) {
                 <ArrowRight className="w-3 h-3" />
               </Link>
               <Link
-                href="mailto:leibaio@foxmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-2 px-6 py-3 transition-all hover:scale-105"
                 style={{
                   fontFamily: "'Press Start 2P', monospace",

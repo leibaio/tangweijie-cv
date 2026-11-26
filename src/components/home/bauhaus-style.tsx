@@ -161,7 +161,7 @@ export function BauhausStyle({ locale, header }: BauhausStyleProps) {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="mailto:leibaio@foxmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-2 px-8 py-4 text-sm uppercase tracking-[0.2em] font-bold transition-all"
                 style={{
                   border: "3px solid #1A1A1A",

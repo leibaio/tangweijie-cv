@@ -139,7 +139,7 @@ export function GlassStyle({ locale, header }: GlassStyleProps) {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="mailto:leibaio@foxmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-2 px-7 py-3.5 font-medium transition-all duration-300"
                 style={{
                   background: "rgba(255,255,255,0.06)",

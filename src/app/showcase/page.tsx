@@ -2,6 +2,7 @@
 
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { GridBackground } from "@/components/grid-background";
 import { i18n } from "@/config";
 import { useLocale } from "@/contexts/locale-context";
 import { projectsData } from "@/data";
@@ -32,9 +33,7 @@ export default function ShowcasePage() {
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-background bg-[linear-gradient(to_right,hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
-      </div>
+      <GridBackground />
 
       <header className="border-b border-primary/10 bg-background/60 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">

@@ -1,4 +1,5 @@
 import { BlogHeader } from "@/components/blog-header";
+import { GridBackground } from "@/components/grid-background";
 import { i18n } from "@/config";
 import { getPostBySlug } from "@/lib/blog";
 import { Calendar, Clock, Tag } from "lucide-react";
@@ -23,9 +24,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-background bg-[linear-gradient(to_right,hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
-      </div>
+      <GridBackground />
 
       <BlogHeader backHref="/blog" backText={t.backToList} />
 

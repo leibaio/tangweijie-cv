@@ -157,7 +157,7 @@ export function SynthwaveStyle({ locale, header }: SynthwaveStyleProps) {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                href="mailto:leibaio@foxmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-2 px-8 py-3.5 font-medium transition-all duration-300"
                 style={{
                   fontFamily: "'Orbitron', sans-serif",

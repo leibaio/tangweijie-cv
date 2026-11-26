@@ -37,7 +37,7 @@ export function MinimalStyle({ locale, header }: MinimalStyleProps) {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <span className="text-muted-foreground/30">|</span>
-            <Link href="mailto:leibaio@foxmail.com" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href={`mailto:${siteConfig.email}`} className="text-muted-foreground hover:text-foreground transition-colors">
               {t.hero.contactMe}
             </Link>
           </div>
@@ -82,7 +82,7 @@ export function MinimalStyle({ locale, header }: MinimalStyleProps) {
             <a href={siteConfig.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground/50 hover:text-foreground transition-colors">
               <Github className="w-4 h-4" />
             </a>
-            <a href="mailto:leibaio@foxmail.com" className="text-muted-foreground/50 hover:text-foreground transition-colors">
+            <a href={`mailto:${siteConfig.email}`} className="text-muted-foreground/50 hover:text-foreground transition-colors">
               <Mail className="w-4 h-4" />
             </a>
           </div>

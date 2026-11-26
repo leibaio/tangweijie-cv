@@ -165,7 +165,7 @@ export function JapaneseStyle({ locale, header }: JapaneseStyleProps) {
                 <ArrowRight className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
               </Link>
               <Link
-                href="mailto:leibaio@foxmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="inline-flex items-center gap-2 transition-all duration-500"
                 style={{
                   fontFamily: "'Noto Serif SC', serif",
