@@ -46,13 +46,13 @@
   <a href="index.html" style="position:fixed;top:12px;right:12px;z-index:999;font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;border:1px solid rgba(45,49,66,.2);border-radius:4px;padding:6px 10px;color:#2d3142;text-decoration:none;">← 返回图集</a>
   <div class="frame">
     <p class="eyebrow">Tree · ttigd-backend-web</p>
-    <h1>前端功能地图：五个业务域撑起运营台</h1>
-    <p class="subtitle">路由模块 → 菜单分组 → 代表页面；菜单由后端 roleCode 动态下发</p>
+    <h1>前端功能地图：五个业务域 + AI 分析</h1>
+    <p class="subtitle">8 个路由模块 → 5 个展示域；AI 分析单独成域，菜单由 roleCode 动态下发</p>
 
     <div class="diagram-container">
       <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="frontend-map-title frontend-map-desc">
         <title id="frontend-map-title">ttigd-backend-web 前端功能地图</title>
-        <desc id="frontend-map-desc">运营配置台前端按运营管理、数据报表、系统管理、研发工具、客服支持五个业务域划分，每个域下列出代表页面。</desc>
+        <desc id="frontend-map-desc">运营配置台前端按运营管理、数据报表、系统与研发、AI 分析、客服支持五个业务域划分，每个域下列出代表页面。</desc>
         <defs>
           <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
           <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
@@ -71,11 +71,11 @@
         <line x1="1104" y1="220" x2="1104" y2="276" stroke="#4f5d75" stroke-width="1"/>
 
         <!-- root -->
-        <rect x="536" y="100" width="208" height="64" rx="6" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
-        <rect x="544" y="106" width="34" height="12" rx="2" fill="none" stroke="rgba(191,69,32,0.40)" stroke-width="0.8"/>
-        <text x="561" y="115" class="tag" text-anchor="middle" fill="#bf4520">ROOT</text>
+        <rect x="536" y="100" width="208" height="64" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+        <rect x="544" y="106" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+        <text x="561" y="115" class="tag" text-anchor="middle">ROOT</text>
         <text x="640" y="130" class="nn" text-anchor="middle">运营配置台前端</text>
-        <text x="640" y="146" class="sb" text-anchor="middle">Vue 3.5 · Vite 5 · TDesign</text>
+        <text x="640" y="146" class="sb" text-anchor="middle">Vue 3.5 · Vite 5 · 8 modules</text>
 
         <!-- group 1 -->
         <g>
@@ -108,25 +108,25 @@
           <rect x="536" y="276" width="208" height="156" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
           <rect x="544" y="282" width="52" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
           <text x="570" y="291" class="tag" text-anchor="middle">MODULE</text>
-          <text x="552" y="316" class="nn">系统管理</text>
-          <text x="552" y="334" class="sb">system.ts · 3 groups</text>
+          <text x="552" y="316" class="nn">系统 / 研发</text>
+          <text x="552" y="334" class="sb">system · develop · gm</text>
           <line x1="552" y1="344" x2="728" y2="344" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
           <text x="552" y="368" class="li">用户 / 角色 / 菜单</text>
-          <text x="552" y="392" class="li">操作日志 / 同步</text>
-          <text x="552" y="416" class="li">基础配置 / 工具箱</text>
+          <text x="552" y="392" class="li">appconfig / 配置对比</text>
+          <text x="552" y="416" class="li">游戏调试 / 牌库</text>
         </g>
 
         <!-- group 4 -->
         <g>
-          <rect x="768" y="276" width="208" height="156" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
-          <rect x="776" y="282" width="52" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
-          <text x="802" y="291" class="tag" text-anchor="middle">MODULE</text>
-          <text x="784" y="316" class="nn">研发工具</text>
-          <text x="784" y="334" class="sb">develop.ts · 1 group</text>
-          <line x1="784" y1="344" x2="960" y2="344" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
-          <text x="784" y="368" class="li">appconfig / 配置表</text>
-          <text x="784" y="392" class="li">错误日志 / 配置对比</text>
-          <text x="784" y="416" class="li">充值检测 / 充值对比</text>
+          <rect x="768" y="276" width="208" height="156" rx="6" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
+          <rect x="776" y="282" width="52" height="12" rx="2" fill="none" stroke="rgba(191,69,32,0.40)" stroke-width="0.8"/>
+          <text x="802" y="291" class="tag" text-anchor="middle" fill="#bf4520">MODULE</text>
+          <text x="784" y="316" class="nn">AI 分析</text>
+          <text x="784" y="334" class="sb">ai-analysis.ts · 3 pages</text>
+          <line x1="784" y1="344" x2="960" y2="344" stroke="rgba(191,69,32,0.28)" stroke-width="0.8"/>
+          <text x="784" y="368" class="li">自动分析</text>
+          <text x="784" y="392" class="li">对话分析</text>
+          <text x="784" y="416" class="li">分析报表</text>
         </g>
 
         <!-- group 5 -->
@@ -144,20 +144,20 @@
 
         <!-- annotations -->
         <line x1="72" y1="492" x2="98" y2="492" stroke="#bf4520" stroke-width="1.2"/>
-        <text x="108" y="497" class="callout">第 6 个路由模块 homepage 只承载登录与个人中心，未单独展开。</text>
+        <text x="108" y="497" class="callout">第 8 个路由模块 homepage 只承载登录与个人中心，未单独展开。</text>
         <line x1="72" y1="524" x2="98" y2="524" stroke="#bf4520" stroke-width="1.2"/>
-        <text x="108" y="529" class="callout">permission.ts 在登录后拉取用户信息，按 roleCode 构建异步路由再挂载。</text>
+        <text x="108" y="529" class="callout">AI 分析页通过 /bff-api 直连 BFF，使用 fetch + ReadableStream 消费 SSE。</text>
 
         <!-- legend -->
         <line x1="40" y1="636" x2="1240" y2="636" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
         <text x="40" y="656" class="ey">LEGEND</text>
-        <rect x="118" y="646" width="14" height="10" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
-        <text x="140" y="655" class="al">ROOT</text>
-        <rect x="226" y="646" width="14" height="10" rx="2" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="0.8"/>
-        <text x="248" y="655" class="al">ROUTER MODULE</text>
-        <line x1="430" y1="651" x2="466" y2="651" stroke="#4f5d75" stroke-width="1"/>
-        <text x="474" y="655" class="al">MENU HIERARCHY</text>
-        <text x="720" y="655" class="al">LIST = REPRESENTATIVE PAGES, NOT EXHAUSTIVE</text>
+        <rect x="118" y="646" width="14" height="10" rx="2" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="0.8"/>
+        <text x="140" y="655" class="al">ROOT / MODULE</text>
+        <rect x="260" y="646" width="14" height="10" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+        <text x="282" y="655" class="al">AI ANALYSIS</text>
+        <line x1="400" y1="651" x2="436" y2="651" stroke="#4f5d75" stroke-width="1"/>
+        <text x="444" y="655" class="al">MENU HIERARCHY</text>
+        <text x="600" y="655" class="al">LIST = REPRESENTATIVE PAGES, NOT EXHAUSTIVE</text>
       </svg>
     </div>
 
@@ -166,7 +166,8 @@
         <p class="eyebrow">ROUTING</p>
         <h3><span class="dot coral"></span>路由与权限</h3>
         <ul>
-          <li>router/modules 下 6 个模块文件</li>
+          <li>router/modules 下 8 个模块文件</li>
+          <li>AI 分析页走 /bff-api + SSE</li>
           <li>登录后按 roleCode 动态挂载异步路由</li>
           <li>白名单外未登录统一跳 /login</li>
           <li>布局支持多页签与 iframe 内嵌页</li>
@@ -196,7 +197,7 @@
 
     <footer>
       Sources: internal source tree · configuration<br>
-      Detail: balanced · 6 router modules → 5 drawn domains + root · homepage/login folded into the root · page lists show representative entries only.
+      Detail: balanced · 8 router modules → 5 drawn domains + root · homepage/login folded into the root · develop + game-master merged into 系统/研发 · AI analysis highlighted · page lists show representative entries only.
     </footer>
   </div>
 </body>

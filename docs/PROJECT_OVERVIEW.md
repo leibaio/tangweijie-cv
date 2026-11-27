@@ -173,7 +173,7 @@ frontmatter 支持 `title` / `date` / `description` / `tags` 及对应的 `*En` 
 
 `showcase/page.tsx` 直接复用 `src/data/projects.ts`（与简历页同一份数据源），因此「简历里写的项目」与「展示页展示的项目」天然一致，不会出现两处各写一遍而对不上的问题。
 
-有 `visualUrl` 的项目会排在前面，卡片封面直接链接到 `public/showcase/<slug>/index.html` 的中英双语项目介绍页；Guandan 的介绍页再链接到 `public/showcase/guandan/gallery/` 的 8 张架构图（公开版本已脱敏）。
+有 `visualUrl` 的项目会排在前面，卡片封面直接链接到 `public/showcase/<slug>/index.html` 的中英双语项目介绍页；Guandan 的介绍页再链接到 `public/showcase/guandan/gallery/` 的 9 张架构图（公开版本已脱敏）。
 
 > `content/showcase/` 目录仍为空——展示页走的是 `src/data/` 数据与 `public/showcase/` 静态页，不读该目录。
 

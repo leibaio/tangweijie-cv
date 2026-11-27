@@ -153,6 +153,7 @@
     .card.focal { border-color: rgba(191,69,32,0.45); }
     .card.focal .card-num { color: var(--accent); }
     .card.focal .card-tag { border-color: rgba(191,69,32,0.35); color: var(--accent); }
+    .card.wide { grid-column: 1 / -1; }
 
     .note {
       margin-top: 2rem;
@@ -184,9 +185,9 @@
     <p class="eyebrow">Index · ttigd architecture set</p>
     <h1>运营配置台架构与功能图集</h1>
     <p class="lede">
-      一套 8 张图，覆盖 <strong>ttigd-backend-server</strong>（Java 配置后台）与 <strong>ttigd-backend-web</strong>（Vue 运营台）的总体架构、工程分层、前后端功能地图、配置发布链路、部署视图、登录权限时序与配置数据模型。
+      一套 9 张图，覆盖 <strong>ttigd-backend-server</strong>（Java 配置后台）、<strong>ttigd-backend-web</strong>（Vue 运营台）与 <strong>ttigd-backend-ai-bff</strong>（AI 分析 BFF）的总体架构、工程分层、前后端功能地图、配置发布链路、部署视图、登录权限时序、配置数据模型与 AI 流式链路。
     </p>
-    <p class="meta"><span>8 diagrams</span> · 2 repositories · 1 runtime · self-contained HTML</p>
+    <p class="meta"><span>9 diagrams</span> · 3 repositories · 2 runtimes · self-contained HTML</p>
 
     <div class="reading">
       <div class="step">
@@ -200,9 +201,9 @@
         <p>后端业务域 → 发布链路 → 部署视图，回答“改哪里、怎么生效、跑在哪”。</p>
       </div>
       <div class="step">
-        <p class="num">07 — 08</p>
-        <h3>最后看两条纵向细节</h3>
-        <p>登录权限时序 + 配置数据模型，补上登录态与表关系的细节。</p>
+        <p class="num">07 — 09</p>
+        <h3>最后看三条纵向细节</h3>
+        <p>登录权限时序 + 配置数据模型 + AI BFF 流式链路，补上登录态、表关系与 AI 旁路。</p>
       </div>
     </div>
 
@@ -286,12 +287,20 @@
         <p>fun_ab_config 聚合根，加上功能类型、渠道、版本号、发布记录、客户端配置与同步注册。</p>
         <span class="open">打开图 →</span>
       </a>
+
+      <a class="card wide" href="./09-ai-bff-architecture.html">
+        <div class="card-top">
+          <span class="card-num">09</span>
+          <span class="card-tag">Architecture</span>
+        </div>
+        <h2>AI BFF 架构与流式链路</h2>
+        <p>Vue AI 分析页 → Nginx <code>/bff-api</code> → Node/Hono BFF → Java <code>/v1/aiAnalysis</code> + LLM + ThinkingData，SSE 把分析结果流式推回浏览器。包含两次 LLM 调用、无状态设计与生产注意事项。</p>
+        <span class="open">打开图 →</span>
+      </a>
     </div>
 
     <p class="note">
-      <strong>说明：</strong>本页只是索引，不把 8 张图合并到一张画布。每张图都是独立、自包含的 HTML，便于单独分享、嵌入 wiki 或导出 PNG/SVG。<br>
-      <strong>校验：</strong>8 张图均通过 diagram-design 的 self_check 与 verify_geometry；当前环境缺少 Playwright，未做 PNG 可视化预览。<br>
-      <strong>维护：</strong>新增图后，在本页追加一张卡片，并同步 README 的图清单。
+      <strong>说明：</strong>本页只是索引，不把 9 张图合并到一张画布。每张图都是独立、自包含的 HTML，便于单独分享或嵌入 wiki。
     </p>
   </div>
   <p style="max-width:1200px;margin:2rem auto 0;padding:0 1rem;font:11px/1.6 'Geist Mono',ui-monospace,monospace;color:#5a6580;">公开版本已脱敏：内部域名、端口与库名已替换为通用标签。</p>

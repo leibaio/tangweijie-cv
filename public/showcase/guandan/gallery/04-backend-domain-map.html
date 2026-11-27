@@ -47,12 +47,12 @@
   <div class="frame">
     <p class="eyebrow">Tree · ttigd-manage-web</p>
     <h1>后端业务域地图：39 个 Controller 包的五个归属</h1>
-    <p class="subtitle">按业务域归并 Controller 包；每个域对应 ttigd-service 下的同名领域包</p>
+    <p class="subtitle">按业务域归并 Controller 包；AI 分析归入系统域，每个域对应 ttigd-service 下的同名领域包</p>
 
     <div class="diagram-container">
       <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="backend-domain-map-title backend-domain-map-desc">
         <title id="backend-domain-map-title">ttigd-manage 后端业务域地图</title>
-        <desc id="backend-domain-map-desc">配置后台的 39 个 Controller 包归并为运营配置、活动与礼包、比赛与玩家、充值与财务、系统与工具五个业务域。</desc>
+        <desc id="backend-domain-map-desc">配置后台的 39 个 Controller 包归并为运营配置、活动与礼包、比赛与玩家、充值与财务、系统与工具五个业务域，AI 分析归入系统域。</desc>
         <defs>
           <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
           <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
@@ -134,11 +134,11 @@
           <rect x="1000" y="276" width="208" height="156" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
           <rect x="1008" y="282" width="44" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
           <text x="1030" y="291" class="tag" text-anchor="middle">DOMAIN</text>
-          <text x="1016" y="316" class="nn">系统与工具</text>
-          <text x="1016" y="334" class="sb">auth · system · clientlog</text>
+          <text x="1016" y="316" class="nn">系统 · AI · 工具</text>
+          <text x="1016" y="334" class="sb">auth · system · ai · log</text>
           <line x1="1016" y1="344" x2="1192" y2="344" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
           <text x="1016" y="368" class="li">用户 / 角色 / 菜单</text>
-          <text x="1016" y="392" class="li">同步 / 日志 / 错误</text>
+          <text x="1016" y="392" class="li">AI 分析 / 同步 / 日志</text>
           <text x="1016" y="416" class="li">牌库工具 / 配置对比</text>
         </g>
 
@@ -167,6 +167,7 @@
         <h3><span class="dot ink"></span>接口入口</h3>
         <ul>
           <li>39 个 controller 包，路径多为 /v1/{module}</li>
+          <li>AI 分析：/v1/aiAnalysis/**</li>
           <li>/mgt/v1 前缀用于用户、角色、权限</li>
           <li>Shiro 统一拦截，登录态存 Redis</li>
           <li>Swagger 入口 /swagger-ui/index.html</li>
@@ -189,6 +190,7 @@
           <li>TtigdGameServerClientApi：40+ HTTP 接口</li>
           <li>baseUrl 指向 server/game-backend</li>
           <li>mongo-compare 直连游戏 MongoDB</li>
+          <li>AI 分析：AiAnalysisController + 4 张 ai_analysis_* 表</li>
           <li>Redis pub/sub 广播配置热更</li>
         </ul>
       </div>
@@ -196,7 +198,7 @@
 
     <footer>
       Sources: internal source tree · configuration<br>
-      Detail: balanced · 39 controller packages → 5 domains · representative features only; the full package list stays in the source tree.
+      Detail: balanced · 39 controller packages → 5 domains · AI analysis folded into the system domain · representative features only; the full package list stays in the source tree.
     </footer>
   </div>
 </body>
