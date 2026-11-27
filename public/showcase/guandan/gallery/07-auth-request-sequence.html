@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ttigd 前端请求与权限时序</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5; --paper-2: #ececec; --ink: #2d3142; --muted: #4f5d75;
+      --soft: #5a6580; --rule: rgba(45,49,66,0.12); --accent: #bf4520;
+      --accent-tint: rgba(191,69,32,0.08); --link: #2e5aa8;
+      --sans: 'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      --serif: 'Instrument Serif', 'Noto Serif', serif;
+      --mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); min-height: 100vh; display: flex; justify-content: center; padding: 3rem 2rem 4rem; }
+    .frame { max-width: 1360px; width: 100%; }
+    .eyebrow { font-family: var(--mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); font-size: 0.86rem; margin-bottom: 1.5rem; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    .actor { font-family: var(--sans); font-size: 12px; font-weight: 600; fill: var(--ink); }
+    .asub { font-family: var(--mono); font-size: 9px; fill: var(--muted); }
+    .msg { font-family: var(--sans); font-size: 12px; font-weight: 600; fill: var(--muted); }
+    .msg-accent { font-family: var(--sans); font-size: 12px; font-weight: 600; fill: var(--accent); }
+    .ey { font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.14em; fill: var(--soft); }
+    .al { font-family: var(--mono); font-size: 8px; fill: var(--soft); letter-spacing: 0.06em; }
+    .tag { font-family: var(--mono); font-size: 7px; font-weight: 500; letter-spacing: 0.08em; fill: var(--soft); }
+    .cards { display: grid; grid-template-columns: 1.05fr 1.1fr 0.95fr; gap: 16px; margin-top: 2rem; }
+    .card { background: #ffffff; border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; }
+    .card .eyebrow { margin-bottom: 0.6rem; font-size: 0.6rem; }
+    .card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot.coral { background: var(--accent); } .dot.ink { background: var(--ink); } .dot.link { background: var(--link); }
+    .card ul { list-style: none; font-size: 0.76rem; line-height: 1.7; color: var(--muted); }
+    .card li::before { content: "— "; color: var(--soft); }
+    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.65rem; color: var(--soft); line-height: 1.7; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <a href="index.html" style="position:fixed;top:12px;right:12px;z-index:999;font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;border:1px solid rgba(45,49,66,.2);border-radius:4px;padding:6px 10px;color:#2d3142;text-decoration:none;">← 返回图集</a>
+  <div class="frame">
+    <p class="eyebrow">Sequence · Auth &amp; Permission</p>
+    <h1>前端请求与权限时序：登录、取权限、动态挂路由</h1>
+    <p class="subtitle">登录走 Shiro Session（Redis），/login-info 返回 privileges，前端按 roleCode 过滤本地路由树</p>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="auth-sequence-title auth-sequence-desc">
+        <title id="auth-sequence-title">ttigd 前端请求与权限时序</title>
+        <desc id="auth-sequence-desc">运营用户登录后，Vue 前端通过 /login-info 获取权限，按 roleCode 过滤本地路由并挂载，随后业务请求携带会话与 Authorization 头。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- lifelines -->
+        <line x1="180" y1="138" x2="180" y2="590" stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="460" y1="138" x2="460" y2="590" stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="760" y1="138" x2="760" y2="590" stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="1040" y1="138" x2="1040" y2="590" stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="3,3"/>
+
+        <!-- activation bars -->
+        <rect x="456" y="224" width="8" height="236" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="456" y="474" width="8" height="20" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="756" y="226" width="8" height="86" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="756" y="322" width="8" height="86" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="756" y="474" width="8" height="86" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="1036" y="258" width="8" height="20" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="1036" y="354" width="8" height="20" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="1036" y="506" width="8" height="20" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+
+        <!-- messages -->
+        <line x1="180" y1="200" x2="452" y2="200" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="240" y="180" width="152" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="316" y="191" class="msg" text-anchor="middle">输入账号 / 密码 / 验证码</text>
+
+        <line x1="464" y1="232" x2="752" y2="232" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="560" y="212" width="96" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="608" y="223" class="msg" text-anchor="middle">POST /login</text>
+
+        <line x1="764" y1="264" x2="1032" y2="264" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="830" y="244" width="136" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="898" y="255" class="msg" text-anchor="middle">写入 Shiro session</text>
+
+        <line x1="752" y1="296" x2="468" y2="296" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <rect x="490" y="276" width="240" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="610" y="287" class="msg" text-anchor="middle">code=0 · Set-Cookie gd_sessionId</text>
+
+        <line x1="464" y1="328" x2="752" y2="328" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="546" y="308" width="124" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="608" y="319" class="msg" text-anchor="middle">POST /login-info</text>
+
+        <line x1="764" y1="360" x2="1032" y2="360" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="806" y="340" width="184" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="898" y="351" class="msg" text-anchor="middle">读取 session / principal</text>
+
+        <line x1="752" y1="392" x2="468" y2="392" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <rect x="526" y="372" width="168" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="610" y="383" class="msg-accent" text-anchor="middle">userInfo + privileges</text>
+
+        <path d="M 468,424 H 500 Q 508,424 508,432 V 444 Q 508,452 500,452 H 476" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="516" y="432" width="200" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="520" y="443" class="msg">FILTER roleCode · addRoute</text>
+
+        <line x1="464" y1="480" x2="752" y2="480" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="500" y="460" width="216" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="608" y="471" class="msg" text-anchor="middle">业务请求 · cookie + Authorization</text>
+
+        <line x1="764" y1="512" x2="1032" y2="512" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="840" y="492" width="116" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="898" y="503" class="msg" text-anchor="middle">校验 session</text>
+
+        <line x1="752" y1="544" x2="468" y2="544" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <rect x="550" y="524" width="120" height="14" rx="2" fill="#f5f5f5"/>
+        <text x="610" y="535" class="msg" text-anchor="middle">code=0 / 8001</text>
+
+        <!-- actors -->
+        <g>
+          <rect x="100" y="90" width="160" height="48" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <text x="180" y="112" class="actor" text-anchor="middle">运营用户</text>
+          <text x="180" y="128" class="asub" text-anchor="middle">browser</text>
+        </g>
+        <g>
+          <rect x="380" y="90" width="160" height="48" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <text x="460" y="112" class="actor" text-anchor="middle">Vue 前端</text>
+          <text x="460" y="128" class="asub" text-anchor="middle">Pinia · Router · Axios</text>
+        </g>
+        <g>
+          <rect x="680" y="90" width="160" height="48" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <text x="760" y="112" class="actor" text-anchor="middle">Spring Boot</text>
+          <text x="760" y="128" class="asub" text-anchor="middle">Shiro · Spring MVC</text>
+        </g>
+        <g>
+          <rect x="960" y="90" width="160" height="48" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <text x="1040" y="112" class="actor" text-anchor="middle">Redis</text>
+          <text x="1040" y="128" class="asub" text-anchor="middle">session store</text>
+        </g>
+
+        <!-- legend -->
+        <line x1="40" y1="620" x2="1240" y2="620" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="644" class="ey">LEGEND</text>
+        <line x1="118" y1="639" x2="154" y2="639" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="162" y="643" class="al">SYNC CALL</text>
+        <line x1="290" y1="639" x2="326" y2="639" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <text x="334" y="643" class="al">RETURN</text>
+        <line x1="460" y1="639" x2="496" y2="639" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <text x="504" y="643" class="al">HEADLINE SUCCESS</text>
+        <line x1="700" y1="632" x2="700" y2="648" stroke="rgba(45,49,66,0.20)" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="712" y="643" class="al">LIFELINE</text>
+        <text x="840" y="643" class="al">ACTIVATION BAR = ACTOR HOLDS CONTROL</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">LOGIN</p>
+        <h3><span class="dot ink"></span>登录与会话</h3>
+        <ul>
+          <li>POST /login，multipart 表单</li>
+          <li>短信验证码由 SmsService 校验</li>
+          <li>Shiro 把会话写入 Redis</li>
+          <li>浏览器持有 gd_sessionId Cookie</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">ROUTING</p>
+        <h3><span class="dot coral"></span>权限与动态路由</h3>
+        <ul>
+          <li>/login-info 返回用户与 privileges</li>
+          <li>路由树是前端本地定义，不发请求</li>
+          <li>按 meta.roleCode 过滤后 addRoute</li>
+          <li>无权限路由不会注册到 router</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">REQUEST</p>
+        <h3><span class="dot link"></span>业务请求</h3>
+        <ul>
+          <li>携带 Cookie 与 Authorization 头</li>
+          <li>后端以 Shiro Session 为准</li>
+          <li>code=0 返回 data</li>
+          <li>code=8001 清状态并跳 /login</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      Sources: internal source tree · configuration<br>
+      Detail: balanced · Nginx omitted from lifelines (it only proxies /ttigd-manage) · MySQL AuthUser lookup omitted · 11 messages drawn.
+    </footer>
+  </div>
+</body>
+</html>

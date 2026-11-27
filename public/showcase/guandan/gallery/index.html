@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ttigd 运营配置台 · 架构与功能图集</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5;
+      --paper-2: #ececec;
+      --ink: #2d3142;
+      --muted: #4f5d75;
+      --soft: #5a6580;
+      --rule: rgba(45,49,66,0.12);
+      --accent: #bf4520;
+      --link: #2e5aa8;
+      --sans: 'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      --serif: 'Instrument Serif', 'Noto Serif', serif;
+      --mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 3rem 2rem 4rem;
+    }
+    .frame { max-width: 1200px; margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw + 0.5rem, 3.2rem);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+    }
+    .lede {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 760px;
+      margin-bottom: 0.6rem;
+    }
+    .meta {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--soft);
+      text-transform: uppercase;
+      margin-bottom: 2.4rem;
+    }
+    .meta span { color: var(--ink); }
+
+    .reading {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2.4rem;
+    }
+    .step {
+      padding: 1rem 1.25rem 1.1rem;
+      border-right: 1px solid var(--rule);
+    }
+    .step:last-child { border-right: 0; }
+    .step .num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+    .step h3 { font-size: 0.86rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .step p { font-size: 0.74rem; line-height: 1.6; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 1.4rem 1.5rem 1.3rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 140ms ease, transform 140ms ease;
+    }
+    .card:hover { border-color: rgba(45,49,66,0.38); transform: translateY(-1px); }
+    .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .card-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 0.9rem;
+    }
+    .card-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+    }
+    .card-tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--soft);
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 0.22rem 0.45rem;
+      white-space: nowrap;
+    }
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 0.45rem;
+    }
+    .card p {
+      font-size: 0.78rem;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .card .open {
+      margin-top: auto;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      color: var(--link);
+      text-transform: uppercase;
+    }
+    .card.focal { border-color: rgba(191,69,32,0.45); }
+    .card.focal .card-num { color: var(--accent); }
+    .card.focal .card-tag { border-color: rgba(191,69,32,0.35); color: var(--accent); }
+
+    .note {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      line-height: 1.8;
+      color: var(--soft);
+    }
+    .note strong { color: var(--muted); font-weight: 500; }
+
+    @media (max-width: 860px) {
+      body { padding: 2rem 1.25rem 3rem; }
+      .reading { grid-template-columns: 1fr; }
+      .step { border-right: 0; border-bottom: 1px solid var(--rule); }
+      .step:last-child { border-bottom: 0; }
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { padding: 0; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" style="position:fixed;top:12px;right:12px;z-index:999;font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;border:1px solid rgba(45,49,66,.2);border-radius:4px;padding:6px 10px;color:#2d3142;text-decoration:none;">← 返回项目介绍</a>
+  <div class="frame">
+    <p class="eyebrow">Index · ttigd architecture set</p>
+    <h1>运营配置台架构与功能图集</h1>
+    <p class="lede">
+      一套 8 张图，覆盖 <strong>ttigd-backend-server</strong>（Java 配置后台）与 <strong>ttigd-backend-web</strong>（Vue 运营台）的总体架构、工程分层、前后端功能地图、配置发布链路、部署视图、登录权限时序与配置数据模型。
+    </p>
+    <p class="meta"><span>8 diagrams</span> · 2 repositories · 1 runtime · self-contained HTML</p>
+
+    <div class="reading">
+      <div class="step">
+        <p class="num">01 — 03</p>
+        <h3>先建立全局地图</h3>
+        <p>总览架构 → 后端分层 → 前端功能，先知道“有什么、在哪一层”。</p>
+      </div>
+      <div class="step">
+        <p class="num">04 — 06</p>
+        <h3>再定位模块与运行形态</h3>
+        <p>后端业务域 → 发布链路 → 部署视图，回答“改哪里、怎么生效、跑在哪”。</p>
+      </div>
+      <div class="step">
+        <p class="num">07 — 08</p>
+        <h3>最后看两条纵向细节</h3>
+        <p>登录权限时序 + 配置数据模型，补上登录态与表关系的细节。</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <a class="card focal" href="./01-overall-architecture.html">
+        <div class="card-top">
+          <span class="card-num">01</span>
+          <span class="card-tag">Architecture</span>
+        </div>
+        <h2>前后端总体架构</h2>
+        <p>Vue SPA → Nginx → Spring Boot → MySQL / Redis / OSS / 游戏服与外部平台。先看这张建立边界感。</p>
+        <span class="open">打开图 →</span>
+      </a>
+
+      <a class="card" href="./02-backend-modules.html">
+        <div class="card-top">
+          <span class="card-num">02</span>
+          <span class="card-tag">Layer Stack</span>
+        </div>
+        <h2>后端工程分层</h2>
+        <p>6 个 Gradle 模块收成 5 层：manage-web → service → dal → model/util/poker-common。</p>
+        <span class="open">打开图 →</span>
+      </a>
+
+      <a class="card" href="./03-frontend-function-map.html">
+        <div class="card-top">
+          <span class="card-num">03</span>
+          <span class="card-tag">Tree</span>
+        </div>
+        <h2>前端功能地图</h2>
+        <p>运营管理 / 数据报表 / 系统管理 / 研发工具 / 客服支持，按菜单快速定位页面。</p>
+        <span class="open">打开图 →</span>
+      </a>
+
+      <a class="card" href="./04-backend-domain-map.html">
+        <div class="card-top">
+          <span class="card-num">04</span>
+          <span class="card-tag">Tree</span>
+        </div>
+        <h2>后端业务域地图</h2>
+        <p>39 个 Controller 包归并为 5 个业务域，按包定位接口与 service。</p>
+        <span class="open">打开图 →</span>
+      </a>
+
+      <a class="card" href="./05-publish-flow.html">
+        <div class="card-top">
+          <span class="card-num">05</span>
+          <span class="card-tag">Data Flow</span>
+        </div>
+        <h2>一键发布链路</h2>
+        <p>一次发布写入 MySQL 状态、Redis 热更、OSS 版本文件、game-backend 版本行，再被游戏服与客户端消费。</p>
+        <span class="open">打开图 →</span>
+      </a>
+
+      <a class="card" href="./06-deployment.html">
+        <div class="card-top">
+          <span class="card-num">06</span>
+          <span class="card-tag">Deployment</span>
+        </div>
+        <h2>部署视图</h2>
+        <p>Nginx、JDK 11 JVM、双 MySQL、Redis、OSS、MongoDB，以及各中间件的部署关系。</p>
+        <span class="open">打开图 →</span>
+      </a>
+
+      <a class="card" href="./07-auth-request-sequence.html">
+        <div class="card-top">
+          <span class="card-num">07</span>
+          <span class="card-tag">Sequence</span>
+        </div>
+        <h2>请求与权限时序</h2>
+        <p>登录 → Shiro Session → /login-info → roleCode 过滤 → addRoute → 业务请求。</p>
+        <span class="open">打开图 →</span>
+      </a>
+
+      <a class="card" href="./08-config-data-model.html">
+        <div class="card-top">
+          <span class="card-num">08</span>
+          <span class="card-tag">ER</span>
+        </div>
+        <h2>配置数据模型</h2>
+        <p>fun_ab_config 聚合根，加上功能类型、渠道、版本号、发布记录、客户端配置与同步注册。</p>
+        <span class="open">打开图 →</span>
+      </a>
+    </div>
+
+    <p class="note">
+      <strong>说明：</strong>本页只是索引，不把 8 张图合并到一张画布。每张图都是独立、自包含的 HTML，便于单独分享、嵌入 wiki 或导出 PNG/SVG。<br>
+      <strong>校验：</strong>8 张图均通过 diagram-design 的 self_check 与 verify_geometry；当前环境缺少 Playwright，未做 PNG 可视化预览。<br>
+      <strong>维护：</strong>新增图后，在本页追加一张卡片，并同步 README 的图清单。
+    </p>
+  </div>
+  <p style="max-width:1200px;margin:2rem auto 0;padding:0 1rem;font:11px/1.6 'Geist Mono',ui-monospace,monospace;color:#5a6580;">公开版本已脱敏：内部域名、端口与库名已替换为通用标签。</p>
+</body>
+</html>

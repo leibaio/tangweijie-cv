@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>天天爱掼蛋运营中台 · 项目介绍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/showcase/brief.css">
+</head>
+<body data-lang="zh">
+  <header class="topbar">
+    <a class="back" href="/showcase"><span class="zh">← 返回 showcase</span><span class="en">← Back to showcase</span></a>
+    <div class="right">
+      <span class="eyebrow" style="margin:0">PROJECT BRIEF · 01</span>
+      <button class="lang-btn" id="lang-toggle" type="button">EN</button>
+    </div>
+  </header>
+
+  <main class="frame">
+    <p class="eyebrow">Full-Stack · Game Operations</p>
+    <h1>
+      <span class="zh">天天爱掼蛋运营中台</span>
+      <span class="en">Guandan Game Operation Platform</span>
+    </h1>
+    <p class="lede">
+      <span class="zh">游戏运营配置中台：前端运营台、Java 配置服务、AI BFF 与多条下发链路，支撑渠道、活动、比赛、充值、财务结算和 AI 数据分析，服务日活 40 万+ 的游戏运营。</span>
+      <span class="en">A full-stack game operations platform: Vue console, Java config service, AI BFF and multi-channel delivery pipelines for channels, events, tournaments, recharge, finance and AI analytics — serving 400K+ DAU.</span>
+    </p>
+
+    <div class="meta">
+      <span>ROLE <b><span class="zh">全栈开发工程师</span><span class="en">Full-Stack Developer</span></b></span>
+      <span>PERIOD <b><span class="zh">2025.07 — 至今</span><span class="en">2025.07 — Present</span></b></span>
+      <span>STACK <b>Vue3 · Spring Boot · Redis · Node.js · SSE</b></span>
+    </div>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="n"><span class="zh">40万+</span><span class="en">400K+</span></div>
+        <div class="k">DAU</div>
+      </div>
+      <div class="stat">
+        <div class="n">163</div>
+        <div class="k"><span class="zh">Controller 类 · 39 包</span><span class="en">Controller classes · 39 packages</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">239</div>
+        <div class="k"><span class="zh">前端 .vue 页面</span><span class="en">Frontend .vue pages</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">1–3s</div>
+        <div class="k"><span class="zh">单条发布 · 原 30–60s</span><span class="en">Publish · from 30–60s</span></div>
+      </div>
+    </section>
+
+    <section class="diagram" aria-label="配置发布链路">
+      <svg viewBox="0 0 960 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="guandan-flow-title guandan-flow-desc">
+        <title id="guandan-flow-title">配置发布链路</title>
+        <desc id="guandan-flow-desc">运营台提交配置，Java 配置服务写入 MySQL，并通过 Redis、OSS 与游戏服版本行下发给游戏服和客户端。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#555555"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+        <line x1="170" y1="110" x2="220" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="360" y1="110" x2="410" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="550" y1="110" x2="600" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="740" y1="110" x2="790" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+        <rect x="180" y="88" width="32" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="196" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">HTTP</text>
+        <rect x="369" y="88" width="32" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="385" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">PUB</text>
+        <rect x="559" y="88" width="32" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="575" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">SYNC</text>
+        <rect x="749" y="88" width="32" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="765" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">VER</text>
+
+        <rect x="30" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="100" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Console</text>
+        <text x="100" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Vue3 · TDesign</text>
+
+        <rect x="220" y="78" width="140" height="64" rx="6" fill="rgba(196,69,54,0.08)" stroke="#C44536" stroke-width="1"/>
+        <text x="290" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Config service</text>
+        <text x="290" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Spring Boot</text>
+
+        <rect x="410" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="480" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Publish</text>
+        <text x="480" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">MySQL · Redis · OSS</text>
+
+        <rect x="600" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="670" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Game server</text>
+        <text x="670" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Game server</text>
+
+        <rect x="790" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="860" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Client</text>
+        <text x="860" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Web / App</text>
+      </svg>
+      <p class="caption"><span class="zh">一次发布，四条落点：MySQL 状态 · Redis 广播 · OSS 版本 · 游戏服版本行</span><span class="en">One publish, four targets: MySQL state · Redis broadcast · OSS version · game-server version row</span></p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2><span class="zh">项目背景</span><span class="en">Context</span></h2>
+        <p>
+          <span class="zh">天天爱掼蛋的运营配置中台，覆盖渠道、活动、比赛、充值、弹窗、白名单、财务结算与 AI 数据分析。前端运营台、Java 配置服务、AI BFF 与多条下发链路共同支撑日活 40 万+ 的游戏运营。</span>
+          <span class="en">The operations platform behind Guandan: channels, events, tournaments, recharge, popups, allowlists, finance and AI analytics. A Vue console, Java config service, AI BFF and multi-channel delivery pipelines support a 400K+ DAU game.</span>
+        </p>
+      </article>
+
+      <article class="card">
+        <h2><span class="zh">关键设计</span><span class="en">Key decisions</span></h2>
+        <ul>
+          <li><span class="zh">一次发布写四个落点：MySQL 状态、Redis pub/sub、OSS 版本文件、游戏服版本行，分别被游戏服和客户端消费。</span><span class="en">One publish writes four targets: MySQL state, Redis pub/sub, OSS version file and game-server version row, consumed by game servers and clients.</span></li>
+          <li><span class="zh">写路径按渠道并发 + 限流；读路径走 Redis 热更新，避免重启和全量刷新。</span><span class="en">Writes fan out per channel with concurrency limits; reads hot-reload through Redis, avoiding restarts and full refreshes.</span></li>
+          <li><span class="zh">AI BFF 不直连数据库，只编排 Java 接口、数仓 SQL 与大模型调用，保持前后端解耦。</span><span class="en">The AI BFF holds no database; it orchestrates Java APIs, warehouse SQL and LLM calls to keep the frontend and backend decoupled.</span></li>
+        </ul>
+      </article>
+
+      <article class="card full">
+        <h2><span class="zh">我做了什么</span><span class="en">What I built</span></h2>
+        <ul>
+          <li><span class="zh">多渠道配置发布：责任链 + Redis Pub/Sub 热更新，OSS 版本文件与 game-backend 版本行；单条发布 30~60s → 1~3s（OSS 建连 100 次 → 2 次、消除 20 次冗余读取、渠道级并发限流 10）。</span><span class="en">Multi-channel config publishing: chain of responsibility + Redis pub/sub hot updates, OSS version files and game-backend version rows; single publish 30–60s → 1–3s (OSS connections 100 → 2, 20 redundant reads removed, per-channel concurrency capped at 10).</span></li>
+          <li><span class="zh">RBAC 动态权限：菜单 / 按钮 / API 三级控制，Shiro + Redis 分布式会话支持水平扩展。</span><span class="en">RBAC with menu, button and API-level control; Shiro + Redis distributed sessions for horizontal scaling.</span></li>
+          <li><span class="zh">AI BFF：Node.js + Hono + SSE，按 OpenAI 兼容协议接入 Kimi / NVIDIA NIM / DeepSeek，环境变量零代码切换；分层 Prompt 支撑自动归因、多轮追问和划选批注。</span><span class="en">AI BFF: Node.js + Hono + SSE, OpenAI-compatible access to Kimi / NVIDIA NIM / DeepSeek with zero-code provider switching; layered prompts power automated analysis, multi-turn Q&amp;A and text-selection annotations.</span></li>
+          <li><span class="zh">财务结算与审计：CPS 多渠道分成（安卓 / iOS 分开统计）、自定义 @Log AOP 记录 9 类财务操作、EasyExcel 批量导入导出。</span><span class="en">Finance settlement and audit: CPS multi-channel revenue splits (Android / iOS separated), a custom @Log AOP recording 9 financial operations, EasyExcel batch import/export.</span></li>
+          <li><span class="zh">MongoDB 配置对比：多环境可视化 diff，百万级牌库用 ObjectId 时间戳插值取中间样本（$gte 走 O(log N) 替代 skip 的 O(N)）。</span><span class="en">MongoDB config compare: multi-environment visual diff; million-row poker tables sampled by ObjectId timestamp interpolation ($gte O(log N) instead of skip O(N)).</span></li>
+          <li><span class="zh">工程化：CompletableFuture 并发处理多渠道 OSS 上传、分批处理解决大批量发布 OOM、AOP 统一版本管理。</span><span class="en">Engineering: CompletableFuture-based concurrent OSS uploads, batch processing to prevent OOM on large publishes, AOP-based version management.</span></li>
+        </ul>
+        <div class="chips">
+          <span class="chip">Vue3</span><span class="chip">TypeScript</span><span class="chip">Spring Boot</span><span class="chip">MyBatis-Plus</span><span class="chip">Redis</span><span class="chip">MongoDB</span><span class="chip">Node.js</span><span class="chip">Hono</span><span class="chip">SSE</span><span class="chip">EasyExcel</span>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <a class="cta" href="gallery/index.html"><span class="zh">查看 8 张架构图集 →</span><span class="en">View the 8-diagram gallery →</span></a>
+      <span class="caption" style="margin:0"><span class="zh">公开版本已脱敏 · 内部域名 / 端口 / 库名已替换</span><span class="en">Public edition · internal domains / ports / database names removed</span></span>
+    </footer>
+  </main>
+
+  <script src="/showcase/brief.js"></script>
+</body>
+</html>

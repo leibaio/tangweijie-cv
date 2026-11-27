@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Hugo Admin 内容运营后台 · 项目介绍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/showcase/brief.css">
+</head>
+<body data-lang="zh">
+  <header class="topbar">
+    <a class="back" href="/showcase"><span class="zh">← 返回 showcase</span><span class="en">← Back to showcase</span></a>
+    <div class="right">
+      <span class="eyebrow" style="margin:0">PROJECT BRIEF · 04</span>
+      <button class="lang-btn" id="lang-toggle" type="button">EN</button>
+    </div>
+  </header>
+
+  <main class="frame">
+    <p class="eyebrow">Internal Tools · Content Operations</p>
+    <h1>
+      <span class="zh">Hugo Admin 内容运营后台</span>
+      <span class="en">Hugo Admin Content Operations Platform</span>
+    </h1>
+    <p class="lede">
+      <span class="zh">网络文学内容运营后台：作者招募与管理、作品与大纲、章节审核、合同 / 税表 / 结算、广告投放、线索管理与工具集，服务编辑、BD、法务、财务、运营等多角色。</span>
+      <span class="en">A content operations platform for web fiction: author recruitment and management, books and outlines, chapter review, contracts / tax / settlement, ad campaigns, lead management and internal tools for editors, BD, legal, finance and operations.</span>
+    </p>
+
+    <div class="meta">
+      <span>ROLE <b><span class="zh">前端开发工程师</span><span class="en">Frontend Developer</span></b></span>
+      <span>PERIOD <b>2024.05 — 2025.06</b></span>
+      <span>STACK <b>Vue2 · Vite · Element UI · ECharts</b></span>
+    </div>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="n">248</div>
+        <div class="k"><span class="zh">前端文件 · 149 Vue + 99 JSX</span><span class="en">Frontend files · 149 Vue + 99 JSX</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">22</div>
+        <div class="k"><span class="zh">API 模块</span><span class="en">API modules</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">10+</div>
+        <div class="k"><span class="zh">业务域</span><span class="en">Business domains</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">RBAC</div>
+        <div class="k"><span class="zh">多角色动态路由</span><span class="en">Role-based routing</span></div>
+      </div>
+    </section>
+
+    <section class="diagram" aria-label="内容运营链路">
+      <svg viewBox="0 0 960 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hugo-flow-title hugo-flow-desc">
+        <title id="hugo-flow-title">内容运营链路</title>
+        <desc id="hugo-flow-desc">作者与线索进入作品库，经章节审核和合同签署、税表与结算，最终上架并进入数据与投放分析。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#555555"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+        <line x1="170" y1="110" x2="220" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="360" y1="110" x2="410" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="550" y1="110" x2="600" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="740" y1="110" x2="790" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+        <rect x="180" y="88" width="44" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="202" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">INTAKE</text>
+        <rect x="370" y="88" width="36" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="388" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">DRAFT</text>
+        <rect x="556" y="88" width="48" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="580" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">REVIEW</text>
+        <rect x="750" y="88" width="32" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="766" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">PAY</text>
+
+        <rect x="30" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="100" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Authors</text>
+        <text x="100" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">BD · UGC</text>
+
+        <rect x="220" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="290" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Books</text>
+        <text x="290" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Upload · Draft</text>
+
+        <rect x="410" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="480" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Review</text>
+        <text x="480" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Chapters · e-sign</text>
+
+        <rect x="600" y="78" width="140" height="64" rx="6" fill="rgba(196,69,54,0.08)" stroke="#C44536" stroke-width="1"/>
+        <text x="670" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Tax &amp; payment</text>
+        <text x="670" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">W-8 / W-9</text>
+
+        <rect x="790" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="860" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Publish</text>
+        <text x="860" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">In-App · Ads</text>
+      </svg>
+      <p class="caption"><span class="zh">内容运营链路 · 作者 / 作品 → 审核 / 合同 → 税表 / 结算 → 上架 / 数据</span><span class="en">Content pipeline · authors / books → review / contracts → tax / payment → publish / analytics</span></p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2><span class="zh">项目背景</span><span class="en">Context</span></h2>
+        <p>
+          <span class="zh">一个角色众多的内部运营后台，同一套页面要服务编辑、BD、法务、财务、运营等不同权限；合同、税表和结算又横跨多个业务模块，状态流转复杂。</span>
+          <span class="en">A multi-role internal back office where the same pages serve editors, BD, legal, finance and operations; contracts, tax and settlement cut across modules with complex state transitions.</span>
+        </p>
+      </article>
+
+      <article class="card">
+        <h2><span class="zh">关键设计</span><span class="en">Key decisions</span></h2>
+        <ul>
+          <li><span class="zh">权限按角色过滤路由树，菜单和页面访问同源，避免前后端两套规则。</span><span class="en">Permissions filter the route tree; menu and page access share one source, avoiding two rule sets across frontend and backend.</span></li>
+          <li><span class="zh">合同、税表、结算共用一套状态模型，减少跨模块重复。</span><span class="en">Contracts, tax and settlement share one status model, reducing duplication across modules.</span></li>
+          <li><span class="zh">Vite 迁移优先保证构建速度和 HMR，再逐步替换旧 webpack 配置。</span><span class="en">The Vite migration prioritized build speed and HMR, then replaced legacy webpack configuration incrementally.</span></li>
+        </ul>
+      </article>
+
+      <article class="card full">
+        <h2><span class="zh">我做了什么</span><span class="en">What I built</span></h2>
+        <ul>
+          <li><span class="zh">多角色动态路由：按 authority 过滤路由树，覆盖 admin / 编辑 / BD / 法务 / 财务 / 运营等角色。</span><span class="en">Role-based dynamic routing: the route tree is filtered by authority for admin, editor, BD, legal, finance and operations roles.</span></li>
+          <li><span class="zh">合同与结算：合同审核、电子签、W-8 / W-9 税表审核、书籍 / 大纲结算、付款状态流转。</span><span class="en">Contracts and settlement: contract review, e-signature, W-8 / W-9 tax review, book / outline settlement and payment status transitions.</span></li>
+          <li><span class="zh">内容生产链路：作品上传 / 分章、章节审查、大纲库、试读、机翻 / 敏感词 / 相似标题工具。</span><span class="en">Content pipeline: book upload / chapters, chapter review, outline library, trial reads, translation / sensitive-word / similar-title tools.</span></li>
+          <li><span class="zh">数据与投放：书籍测试汇总、In-App 表现、作者付款看板、广告 Campaign 管理、Excel 导出。</span><span class="en">Data and acquisition: book-testing summary, In-App performance, author payment dashboard, ad campaign management and Excel export.</span></li>
+          <li><span class="zh">工程化：参与构建体系从 vue-cli / Webpack 迁移到 Vite，路由级代码分割、SVG 雪碧图与公共组件沉淀。</span><span class="en">Engineering: contributed to the vue-cli / Webpack → Vite migration, route-level code splitting, SVG sprites and shared components.</span></li>
+        </ul>
+        <div class="chips">
+          <span class="chip">Vue2</span><span class="chip">Vite</span><span class="chip">Element UI</span><span class="chip">ECharts</span><span class="chip">Vuex</span><span class="chip">RBAC</span><span class="chip">Contract / Tax</span><span class="chip">Excel</span>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <a class="cta" href="/resume"><span class="zh">查看简历中的项目条目 →</span><span class="en">View resume entry →</span></a>
+      <a class="cta secondary" href="/showcase"><span class="zh">返回 showcase →</span><span class="en">Back to showcase →</span></a>
+    </footer>
+  </main>
+
+  <script src="/showcase/brief.js"></script>
+</body>
+</html>

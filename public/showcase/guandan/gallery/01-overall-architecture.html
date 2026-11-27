@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ttigd 运营配置台 · 前后端总体架构</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5;
+      --paper-2: #ececec;
+      --ink: #2d3142;
+      --muted: #4f5d75;
+      --soft: #5a6580;
+      --rule: rgba(45,49,66,0.12);
+      --accent: #bf4520;
+      --accent-tint: rgba(191,69,32,0.08);
+      --link: #2e5aa8;
+      --sans: 'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      --serif: 'Instrument Serif', 'Noto Serif', serif;
+      --mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 2rem 4rem;
+    }
+    .frame { max-width: 1360px; width: 100%; }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle { color: var(--muted); font-size: 0.86rem; margin-bottom: 1.5rem; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    .nn { font-family: var(--sans); font-size: 12px; font-weight: 600; fill: var(--ink); }
+    .sb { font-family: var(--mono); font-size: 9px; fill: var(--muted); }
+    .ey { font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.14em; fill: var(--soft); }
+    .al { font-family: var(--mono); font-size: 8px; fill: var(--soft); letter-spacing: 0.06em; }
+    .tag { font-family: var(--mono); font-size: 7px; font-weight: 500; letter-spacing: 0.08em; fill: var(--soft); }
+    .cards { display: grid; grid-template-columns: 1.1fr 0.95fr 1fr; gap: 16px; margin-top: 2rem; }
+    .card { background: #ffffff; border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; }
+    .card .eyebrow { margin-bottom: 0.6rem; font-size: 0.6rem; }
+    .card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot.coral { background: var(--accent); }
+    .dot.ink { background: var(--ink); }
+    .dot.link { background: var(--link); }
+    .card ul { list-style: none; font-size: 0.76rem; line-height: 1.7; color: var(--muted); }
+    .card li::before { content: "— "; color: var(--soft); }
+    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.65rem; color: var(--soft); line-height: 1.7; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" style="position:fixed;top:12px;right:12px;z-index:999;font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;border:1px solid rgba(45,49,66,.2);border-radius:4px;padding:6px 10px;color:#2d3142;text-decoration:none;">← 返回图集</a>
+  <div class="frame">
+    <p class="eyebrow">Architecture · ttigd 运营配置台</p>
+    <h1>前后端总体架构：配置后台如何驱动游戏服与客户端</h1>
+    <p class="subtitle">Vue 3 运营台 → Nginx → Spring Boot 配置后台 → MySQL / Redis / OSS / 游戏服与外部平台</p>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="overall-architecture-title overall-architecture-desc">
+        <title id="overall-architecture-title">ttigd 运营配置台前后端总体架构</title>
+        <desc id="overall-architecture-desc">运营人员通过 Vue 3 管理后台经 Nginx 访问 Spring Boot 配置服务，服务层读写 MySQL、Redis 与 OSS，并通过 HTTP 调用游戏服和外部平台。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- zones -->
+        <rect x="40" y="96" width="240" height="520" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <rect x="52" y="100" width="128" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="116" y="109" class="ey" text-anchor="middle">EDGE · ACCESS</text>
+
+        <rect x="320" y="96" width="560" height="520" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <rect x="332" y="100" width="212" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="438" y="109" class="ey" text-anchor="middle">APPLICATION · SPRING BOOT</text>
+
+        <rect x="920" y="96" width="320" height="520" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <rect x="932" y="100" width="156" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="1010" y="109" class="ey" text-anchor="middle">DATA &amp; INTEGRATION</text>
+
+        <!-- arrows first -->
+        <line x1="160" y1="248" x2="160" y2="322" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="168" y="282" width="52" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="172" y="291" class="al">HTTPS</text>
+
+        <path d="M 256,376 H 296 Q 304,376 304,368 V 200 Q 304,192 312,192 H 346" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="312" y="274" width="48" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="316" y="283" class="al">PROXY</text>
+
+        <line x1="600" y1="232" x2="600" y2="290" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="608" y="256" width="40" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="612" y="265" class="al">CALL</text>
+
+        <line x1="600" y1="376" x2="600" y2="434" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="608" y="400" width="56" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="612" y="409" class="al">MAPPER</text>
+
+        <line x1="848" y1="480" x2="946" y2="480" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="890" y="462" width="32" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="895" y="471" class="al">SQL</text>
+
+        <line x1="848" y1="336" x2="946" y2="336" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <rect x="878" y="318" width="56" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="882" y="327" class="al">PUBLISH</text>
+
+        <path d="M 848,316 H 892 Q 900,316 900,308 V 200 Q 900,192 908,192 H 946" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <rect x="908" y="250" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="912" y="259" class="al">HTTP</text>
+
+        <!-- nodes -->
+        <g>
+          <rect x="64" y="152" width="192" height="96" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="72" y="158" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="89" y="167" class="tag" text-anchor="middle">SPA</text>
+          <text x="160" y="204" class="nn" text-anchor="middle">运营管理后台</text>
+          <text x="160" y="220" class="sb" text-anchor="middle">Vue 3 · TDesign · Pinia</text>
+        </g>
+
+        <g>
+          <rect x="64" y="328" width="192" height="96" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="72" y="334" width="38" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="91" y="343" class="tag" text-anchor="middle">EDGE</text>
+          <text x="160" y="380" class="nn" text-anchor="middle">Nginx 接入层</text>
+          <text x="160" y="396" class="sb" text-anchor="middle">/html8 · reverse proxy</text>
+        </g>
+
+        <g>
+          <rect x="352" y="152" width="496" height="80" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="360" y="158" width="38" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="379" y="167" class="tag" text-anchor="middle">WEB</text>
+          <text x="600" y="196" class="nn" text-anchor="middle">配置后台 Web 层</text>
+          <text x="600" y="212" class="sb" text-anchor="middle">Controller · Shiro · Swagger</text>
+        </g>
+
+        <g>
+          <rect x="352" y="296" width="496" height="80" rx="6" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
+          <rect x="360" y="302" width="38" height="12" rx="2" fill="none" stroke="rgba(191,69,32,0.40)" stroke-width="0.8"/>
+          <text x="379" y="311" class="tag" text-anchor="middle" fill="#bf4520">SVC</text>
+          <text x="600" y="340" class="nn" text-anchor="middle">业务与发布服务</text>
+          <text x="600" y="356" class="sb" text-anchor="middle">service · publish · job</text>
+        </g>
+
+        <g>
+          <rect x="352" y="440" width="496" height="80" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="360" y="446" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="377" y="455" class="tag" text-anchor="middle">DAL</text>
+          <text x="600" y="484" class="nn" text-anchor="middle">数据访问层</text>
+          <text x="600" y="500" class="sb" text-anchor="middle">MyBatis-Plus · Mapper</text>
+        </g>
+
+        <g>
+          <rect x="952" y="430" width="256" height="100" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="960" y="436" width="30" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="975" y="445" class="tag" text-anchor="middle">DB</text>
+          <text x="1080" y="484" class="nn" text-anchor="middle">MySQL 配置库</text>
+          <text x="1080" y="500" class="sb" text-anchor="middle">config DB · 2 datasources</text>
+        </g>
+
+        <g>
+          <rect x="952" y="286" width="256" height="100" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="960" y="292" width="46" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="983" y="301" class="tag" text-anchor="middle">STORE</text>
+          <text x="1080" y="340" class="nn" text-anchor="middle">配置下发</text>
+          <text x="1080" y="356" class="sb" text-anchor="middle">Redis pub/sub · OSS version.json</text>
+          <text x="1080" y="370" class="sb" text-anchor="middle">all channels · A/B groups</text>
+        </g>
+
+        <g>
+          <rect x="952" y="142" width="256" height="100" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="960" y="148" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="977" y="157" class="tag" text-anchor="middle">EXT</text>
+          <text x="1080" y="196" class="nn" text-anchor="middle">游戏服与外部平台</text>
+          <text x="1080" y="212" class="sb" text-anchor="middle">game-backend · WeChat · Douyin</text>
+          <text x="1080" y="226" class="sb" text-anchor="middle">AliBI · email · SMS</text>
+        </g>
+
+        <!-- legend -->
+        <line x1="40" y1="648" x2="1240" y2="648" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="668" class="ey">LEGEND</text>
+        <rect x="118" y="658" width="14" height="10" rx="2" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="0.8"/>
+        <text x="140" y="667" class="al">COMPONENT</text>
+        <rect x="258" y="658" width="14" height="10" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+        <text x="280" y="667" class="al">FOCAL: PUBLISH CORE</text>
+        <line x1="466" y1="663" x2="502" y2="663" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="510" y="667" class="al">SYNC CALL</text>
+        <line x1="628" y1="663" x2="664" y2="663" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <text x="672" y="667" class="al">HTTP / API</text>
+        <line x1="790" y1="663" x2="826" y2="663" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <text x="834" y="667" class="al">PUBLISH PATH</text>
+        <line x1="960" y1="663" x2="996" y2="663" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <text x="1004" y="667" class="al">ASYNC / HOT RELOAD</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">FRONTEND</p>
+        <h3><span class="dot ink"></span>Vue 3 运营台</h3>
+        <ul>
+          <li>Vue 3.5 + Vite 5 + TypeScript + TDesign</li>
+          <li>Pinia 状态、动态路由、roleCode 权限</li>
+          <li>6 个路由模块、230+ 页面组件</li>
+          <li>Axios 统一封装：code=0 成功、8001 登录过期</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">BACKEND</p>
+        <h3><span class="dot coral"></span>Spring Boot 配置后台</h3>
+        <ul>
+          <li>Spring Boot 2.7.3 / JDK 11 / Gradle 多模块</li>
+          <li>Shiro + shiro-redis 负责登录与会话</li>
+          <li>MyBatis-Plus 双 MySQL 数据源</li>
+          <li>39 个 Controller 包 / 163 个 Controller 类</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">INTEGRATION</p>
+        <h3><span class="dot link"></span>三类下游</h3>
+        <ul>
+          <li>Redis pub/sub：配置热更广播</li>
+          <li>OSS：version.json / module.md5 下发给客户端</li>
+          <li>game-backend：40+ Retrofit HTTP 接口</li>
+          <li>微信 / 抖音 / AliBI / 邮件 / 短信</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      Sources: internal source tree · configuration<br>
+      Detail: balanced · 8 components drawn · external platforms collapsed into one integration node · Redis and OSS collapsed into the publish-store node (see 05-publish-flow.html for the fan-out).
+    </footer>
+  </div>
+</body>
+</html>

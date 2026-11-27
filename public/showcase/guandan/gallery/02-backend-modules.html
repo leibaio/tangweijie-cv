@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ttigd-manage 后端工程分层</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5; --paper-2: #ececec; --ink: #2d3142; --muted: #4f5d75;
+      --soft: #5a6580; --rule: rgba(45,49,66,0.12); --accent: #bf4520;
+      --accent-tint: rgba(191,69,32,0.08); --link: #2e5aa8;
+      --sans: 'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      --serif: 'Instrument Serif', 'Noto Serif', serif;
+      --mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); min-height: 100vh; display: flex; justify-content: center; padding: 3rem 2rem 4rem; }
+    .frame { max-width: 1360px; width: 100%; }
+    .eyebrow { font-family: var(--mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); font-size: 0.86rem; margin-bottom: 1.5rem; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    .nn { font-family: var(--sans); font-size: 16px; font-weight: 600; fill: var(--ink); }
+    .sb { font-family: var(--mono); font-size: 9px; fill: var(--muted); }
+    .ey { font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.14em; fill: var(--soft); }
+    .al { font-family: var(--mono); font-size: 8px; fill: var(--soft); letter-spacing: 0.06em; }
+    .tag { font-family: var(--mono); font-size: 7px; font-weight: 500; letter-spacing: 0.08em; fill: var(--soft); }
+    .callout { font-family: var(--serif); font-style: italic; font-size: 14px; fill: var(--muted); }
+    .cards { display: grid; grid-template-columns: 1fr 1.15fr 0.9fr; gap: 16px; margin-top: 2rem; }
+    .card { background: #ffffff; border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; }
+    .card .eyebrow { margin-bottom: 0.6rem; font-size: 0.6rem; }
+    .card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot.coral { background: var(--accent); } .dot.ink { background: var(--ink); } .dot.link { background: var(--link); }
+    .card ul { list-style: none; font-size: 0.76rem; line-height: 1.7; color: var(--muted); }
+    .card li::before { content: "— "; color: var(--soft); }
+    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.65rem; color: var(--soft); line-height: 1.7; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <a href="index.html" style="position:fixed;top:12px;right:12px;z-index:999;font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;border:1px solid rgba(45,49,66,.2);border-radius:4px;padding:6px 10px;color:#2d3142;text-decoration:none;">← 返回图集</a>
+  <div class="frame">
+    <p class="eyebrow">Layer Stack · ttigd-manage</p>
+    <h1>后端工程分层：一个可启动入口，五层依赖</h1>
+    <p class="subtitle">Gradle 多模块项目，上层依赖下层；只有 ttigd-manage-web 打包为可执行 Spring Boot Jar</p>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="backend-layers-title backend-layers-desc">
+        <title id="backend-layers-title">ttigd-manage 后端工程分层</title>
+        <desc id="backend-layers-desc">从 ttigd-manage-web 到 ttigd-service、ttigd-dal、ttigd-model 与 base 工具模块的五层依赖栈，业务与发布服务层被标记为焦点。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- direction indicator -->
+        <text x="130" y="138" class="ey" text-anchor="middle">DEPENDENCY</text>
+        <line x1="130" y1="150" x2="130" y2="502" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+        <!-- stack silhouette -->
+        <rect x="180" y="150" width="920" height="360" rx="2" fill="none" stroke="#4f5d75" stroke-width="1"/>
+
+        <!-- L5 -->
+        <rect x="180" y="150" width="920" height="72" fill="#f5f5f5"/>
+        <rect x="196" y="178" width="44" height="14" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+        <text x="218" y="188" class="tag" text-anchor="middle">WEB</text>
+        <text x="260" y="184" class="nn">ttigd-manage-web</text>
+        <text x="1076" y="184" class="sb" text-anchor="end">Spring Boot · Controller · Shiro · Swagger</text>
+
+        <!-- L4 focal -->
+        <rect x="180" y="222" width="920" height="72" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
+        <rect x="196" y="250" width="44" height="14" rx="2" fill="none" stroke="rgba(191,69,32,0.40)" stroke-width="0.8"/>
+        <text x="218" y="260" class="tag" text-anchor="middle" fill="#bf4520">SVC</text>
+        <text x="260" y="256" class="nn">ttigd-service</text>
+        <text x="1076" y="256" class="sb" text-anchor="end">service · QuickPublish · job · Retrofit</text>
+
+        <!-- L3 -->
+        <rect x="180" y="294" width="920" height="72" fill="#f5f5f5"/>
+        <rect x="196" y="322" width="44" height="14" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+        <text x="218" y="332" class="tag" text-anchor="middle">DAL</text>
+        <text x="260" y="328" class="nn">ttigd-dal</text>
+        <text x="1076" y="328" class="sb" text-anchor="end">MyBatis-Plus · Mapper · MySQL / read-only replica</text>
+
+        <!-- L2 -->
+        <rect x="180" y="366" width="920" height="72" fill="#f5f5f5"/>
+        <rect x="196" y="394" width="44" height="14" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+        <text x="218" y="404" class="tag" text-anchor="middle">MODEL</text>
+        <text x="260" y="400" class="nn">ttigd-model</text>
+        <text x="1076" y="400" class="sb" text-anchor="end">Entity · DTO · VO</text>
+
+        <!-- L1 -->
+        <rect x="180" y="438" width="920" height="72" fill="#f5f5f5"/>
+        <rect x="196" y="466" width="44" height="14" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+        <text x="218" y="476" class="tag" text-anchor="middle">BASE</text>
+        <text x="260" y="472" class="nn">ttigd-util + poker-common</text>
+        <text x="1076" y="472" class="sb" text-anchor="end">enums · exception · utils · poker</text>
+
+        <!-- dividers -->
+        <line x1="180" y1="222" x2="1100" y2="222" stroke="rgba(45,49,66,0.12)" stroke-width="1"/>
+        <line x1="180" y1="294" x2="1100" y2="294" stroke="rgba(45,49,66,0.12)" stroke-width="1"/>
+        <line x1="180" y1="366" x2="1100" y2="366" stroke="rgba(45,49,66,0.12)" stroke-width="1"/>
+        <line x1="180" y1="438" x2="1100" y2="438" stroke="rgba(45,49,66,0.12)" stroke-width="1"/>
+
+        <!-- annotations -->
+        <line x1="180" y1="548" x2="206" y2="548" stroke="#bf4520" stroke-width="1.2"/>
+        <text x="216" y="553" class="callout">上层依赖下层；ttigd-dal 同时连接配置库与生产只读库。</text>
+        <line x1="180" y1="580" x2="206" y2="580" stroke="#bf4520" stroke-width="1.2"/>
+        <text x="216" y="585" class="callout">poker-common 是独立牌库算法模块，由 service 引用，不反向依赖 Web。</text>
+
+        <!-- legend -->
+        <line x1="40" y1="636" x2="1240" y2="636" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="656" class="ey">LEGEND</text>
+        <line x1="120" y1="651" x2="156" y2="651" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="164" y="655" class="al">DEPENDENCY (UPPER → LOWER)</text>
+        <rect x="380" y="646" width="14" height="10" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+        <text x="402" y="655" class="al">FOCAL: BUSINESS &amp; PUBLISH LAYER</text>
+        <text x="700" y="655" class="al">6 GRADLE MODULES · 5 DRAWN LAYERS</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">BUILD</p>
+        <h3><span class="dot ink"></span>Gradle 多模块</h3>
+        <ul>
+          <li>settings.gradle 声明 6 个子模块</li>
+          <li>统一 Java 11 与 Spring Boot 2.7.3 BOM</li>
+          <li>仅 ttigd-manage-web 启用 bootJar</li>
+          <li>部署需 --add-opens java.base/java.lang.invoke</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">RESPONSIBILITY</p>
+        <h3><span class="dot coral"></span>各层职责</h3>
+        <ul>
+          <li>web：REST 入口、Shiro、Swagger、全局异常</li>
+          <li>service：业务编排、QuickPublish、定时任务、Retrofit</li>
+          <li>dal：MyBatis-Plus Mapper 与两套 MySQL</li>
+          <li>model / util / poker-common：契约、枚举工具、牌库算法</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">BOUNDARY</p>
+        <h3><span class="dot link"></span>依赖边界</h3>
+        <ul>
+          <li>web → service → dal → model</li>
+          <li>service 可引用 poker-common</li>
+          <li>dal 不感知 Controller</li>
+          <li>新增模块需在 settings.gradle 注册</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      Sources: internal source tree · configuration<br>
+      Detail: balanced · 6 source modules → 5 drawn layers · ttigd-model, ttigd-util and poker-common share the BASE row; ttigd-model is called out in the row label.
+    </footer>
+  </div>
+</body>
+</html>

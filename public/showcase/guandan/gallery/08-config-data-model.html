@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ttigd 配置数据模型</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5; --paper-2: #ececec; --ink: #2d3142; --muted: #4f5d75;
+      --soft: #5a6580; --rule: rgba(45,49,66,0.12); --accent: #bf4520;
+      --accent-tint: rgba(191,69,32,0.08); --link: #2e5aa8;
+      --sans: 'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      --serif: 'Instrument Serif', 'Noto Serif', serif;
+      --mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); min-height: 100vh; display: flex; justify-content: center; padding: 3rem 2rem 4rem; }
+    .frame { max-width: 1360px; width: 100%; }
+    .eyebrow { font-family: var(--mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); font-size: 0.86rem; margin-bottom: 1.5rem; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    .ent { font-family: var(--sans); font-size: 12px; font-weight: 600; fill: var(--ink); }
+    .fld { font-family: var(--mono); font-size: 9px; fill: var(--muted); }
+    .fld-accent { font-family: var(--mono); font-size: 9px; fill: var(--accent); }
+    .ey { font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.14em; fill: var(--soft); }
+    .al { font-family: var(--mono); font-size: 8px; fill: var(--soft); letter-spacing: 0.06em; }
+    .card { font-family: var(--mono); font-size: 8px; fill: var(--soft); }
+    .tag { font-family: var(--mono); font-size: 7px; font-weight: 500; letter-spacing: 0.08em; fill: var(--soft); }
+    .cards { display: grid; grid-template-columns: 1.1fr 0.95fr 1fr; gap: 16px; margin-top: 2rem; }
+    .card-box { background: #ffffff; border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; }
+    .card-box .eyebrow { margin-bottom: 0.6rem; font-size: 0.6rem; }
+    .card-box h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot.coral { background: var(--accent); } .dot.ink { background: var(--ink); } .dot.link { background: var(--link); }
+    .card-box ul { list-style: none; font-size: 0.76rem; line-height: 1.7; color: var(--muted); }
+    .card-box li::before { content: "— "; color: var(--soft); }
+    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.65rem; color: var(--soft); line-height: 1.7; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <a href="index.html" style="position:fixed;top:12px;right:12px;z-index:999;font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;border:1px solid rgba(45,49,66,.2);border-radius:4px;padding:6px 10px;color:#2d3142;text-decoration:none;">← 返回图集</a>
+  <div class="frame">
+    <p class="eyebrow">ER · Config Domain</p>
+    <h1>配置数据模型：发布域的核心表与逻辑引用</h1>
+    <p class="subtitle">fun_ab_config 是聚合根；功能类型、渠道、版本号、发布账本与同步注册围绕它展开</p>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="config-er-title config-er-desc">
+        <title id="config-er-title">ttigd 配置数据模型</title>
+        <desc id="config-er-desc">功能开关配置表与功能类型、渠道类型、系统版本、发布记录、客户端配置和同步注册表之间的逻辑关系。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- relationships first -->
+        <path d="M 280,272 H 396 Q 404,272 404,280 V 302 Q 404,310 412,310 H 514" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="416" y="292" width="96" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="420" y="301" class="al">NAME → TYPE</text>
+        <text x="290" y="262" class="card" text-anchor="middle">1</text>
+        <text x="498" y="324" class="card" text-anchor="middle">N</text>
+
+        <path d="M 280,440 H 396 Q 404,440 404,432 V 428 Q 404,420 412,420 H 514" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="416" y="402" width="96" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="420" y="411" class="al">CHANNEL IDS</text>
+        <text x="290" y="430" class="card" text-anchor="middle">N</text>
+        <text x="498" y="434" class="card" text-anchor="middle">N</text>
+
+        <line x1="640" y1="196" x2="640" y2="242" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <rect x="648" y="208" width="88" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="652" y="217" class="al">LATEST VERSION</text>
+        <text x="628" y="206" class="card" text-anchor="middle">1</text>
+        <text x="648" y="240" class="card" text-anchor="middle">N</text>
+
+        <path d="M 760,300 H 836 Q 844,300 844,292 V 230 Q 844,222 852,222 H 914" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <rect x="764" y="254" width="72" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="768" y="263" class="al">PUBLISH LOG</text>
+        <text x="770" y="290" class="card" text-anchor="middle">1</text>
+        <text x="900" y="212" class="card" text-anchor="middle">N</text>
+
+        <line x1="760" y1="420" x2="914" y2="420" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <rect x="800" y="402" width="88" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="804" y="411" class="al">SAME MODULE</text>
+        <text x="770" y="410" class="card" text-anchor="middle">1</text>
+        <text x="900" y="410" class="card" text-anchor="middle">N</text>
+
+        <line x1="680" y1="456" x2="680" y2="506" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <rect x="688" y="468" width="80" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="692" y="477" class="al">SYNC TARGET</text>
+        <text x="668" y="466" class="card" text-anchor="middle">1</text>
+        <text x="688" y="506" class="card" text-anchor="middle">N</text>
+
+        <!-- entity: base_fun_type_info -->
+        <g>
+          <rect x="80" y="210" width="200" height="124" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <line x1="80" y1="246" x2="280" y2="246" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+          <rect x="88" y="216" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="105" y="225" class="tag" text-anchor="middle">TABLE</text>
+          <text x="92" y="238" class="ent">base_fun_type_info</text>
+          <text x="92" y="262" class="fld"># id</text>
+          <text x="92" y="276" class="fld">  code</text>
+          <text x="92" y="290" class="fld">  name</text>
+          <text x="92" y="304" class="fld">  type</text>
+          <text x="92" y="318" class="fld">  default_status</text>
+        </g>
+
+        <!-- entity: base_channel_type_info -->
+        <g>
+          <rect x="80" y="386" width="200" height="108" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <line x1="80" y1="422" x2="280" y2="422" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+          <rect x="88" y="392" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="105" y="401" class="tag" text-anchor="middle">TABLE</text>
+          <text x="92" y="414" class="ent">base_channel_type_info</text>
+          <text x="92" y="438" class="fld"># id</text>
+          <text x="92" y="452" class="fld">  code</text>
+          <text x="92" y="466" class="fld">  name</text>
+          <text x="92" y="480" class="fld">  type</text>
+        </g>
+
+        <!-- entity: base_system_config_info -->
+        <g>
+          <rect x="520" y="88" width="240" height="108" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <line x1="520" y1="124" x2="760" y2="124" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+          <rect x="528" y="94" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="545" y="103" class="tag" text-anchor="middle">TABLE</text>
+          <text x="532" y="116" class="ent">base_system_config_info</text>
+          <text x="532" y="140" class="fld"># key  (PK)</text>
+          <text x="532" y="154" class="fld">  value</text>
+          <text x="532" y="168" class="fld">  description</text>
+          <text x="532" y="182" class="fld">  priority</text>
+        </g>
+
+        <!-- entity: quick_publish_info -->
+        <g>
+          <rect x="920" y="160" width="240" height="124" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <line x1="920" y1="196" x2="1160" y2="196" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+          <rect x="928" y="166" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="945" y="175" class="tag" text-anchor="middle">TABLE</text>
+          <text x="932" y="188" class="ent">quick_publish_info</text>
+          <text x="932" y="212" class="fld"># id</text>
+          <text x="932" y="226" class="fld">  module</text>
+          <text x="932" y="240" class="fld">  version_code</text>
+          <text x="932" y="254" class="fld">  operator</text>
+          <text x="932" y="268" class="fld">  update_time</text>
+        </g>
+
+        <!-- entity: app_config_info -->
+        <g>
+          <rect x="920" y="340" width="240" height="152" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <line x1="920" y1="376" x2="1160" y2="376" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+          <rect x="928" y="346" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="945" y="355" class="tag" text-anchor="middle">TABLE</text>
+          <text x="932" y="368" class="ent">app_config_info</text>
+          <text x="932" y="392" class="fld"># id</text>
+          <text x="932" y="406" class="fld">  group_name</text>
+          <text x="932" y="420" class="fld">  channel</text>
+          <text x="932" y="434" class="fld">  type_code</text>
+          <text x="932" y="448" class="fld">  type_value</text>
+          <text x="932" y="462" class="fld">  publish_status</text>
+          <text x="932" y="476" class="fld">  del_flag</text>
+        </g>
+
+        <!-- entity: syn_table_info -->
+        <g>
+          <rect x="520" y="512" width="240" height="124" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <line x1="520" y1="548" x2="760" y2="548" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+          <rect x="528" y="518" width="34" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="545" y="527" class="tag" text-anchor="middle">TABLE</text>
+          <text x="532" y="540" class="ent">syn_table_info</text>
+          <text x="532" y="564" class="fld"># id</text>
+          <text x="532" y="578" class="fld">  menu_name</text>
+          <text x="532" y="592" class="fld">  module_name</text>
+          <text x="532" y="606" class="fld">  table_name</text>
+          <text x="532" y="620" class="fld">  syn_status</text>
+        </g>
+
+        <!-- entity: fun_ab_config (focal) -->
+        <g>
+          <rect x="520" y="248" width="240" height="208" rx="6" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
+          <line x1="520" y1="284" x2="760" y2="284" stroke="rgba(191,69,32,0.28)" stroke-width="0.8"/>
+          <rect x="528" y="254" width="34" height="12" rx="2" fill="none" stroke="rgba(191,69,32,0.40)" stroke-width="0.8"/>
+          <text x="545" y="263" class="tag" text-anchor="middle" fill="#bf4520">TABLE</text>
+          <text x="532" y="276" class="ent">fun_ab_config</text>
+          <text x="532" y="300" class="fld-accent"># id</text>
+          <text x="532" y="314" class="fld-accent">  code</text>
+          <text x="532" y="328" class="fld-accent">  name</text>
+          <text x="532" y="342" class="fld-accent">  fun_name</text>
+          <text x="532" y="356" class="fld-accent">  group_name</text>
+          <text x="532" y="370" class="fld-accent">  version_code</text>
+          <text x="532" y="384" class="fld-accent">  status</text>
+          <text x="532" y="398" class="fld-accent">  publish_status</text>
+          <text x="532" y="412" class="fld-accent">  del_flag</text>
+          <text x="532" y="426" class="fld-accent">  open_channel_config_ids</text>
+          <text x="532" y="440" class="fld-accent">  close_channel_config_ids</text>
+        </g>
+
+        <!-- legend -->
+        <line x1="40" y1="676" x2="1240" y2="676" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="699" class="ey">LEGEND</text>
+        <rect x="118" y="689" width="14" height="10" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+        <text x="140" y="698" class="al">AGGREGATE ROOT</text>
+        <text x="300" y="698" class="al"># PK</text>
+        <text x="380" y="698" class="al">1 / N CARDINALITY</text>
+        <line x1="520" y1="694" x2="556" y2="694" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="564" y="698" class="al">LOGICAL REFERENCE, NO PHYSICAL FK</text>
+        <text x="900" y="698" class="al">FIELDS = REPRESENTATIVE SUBSET</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card-box">
+        <p class="eyebrow">AGGREGATE</p>
+        <h3><span class="dot coral"></span>功能开关配置</h3>
+        <ul>
+          <li>fun_ab_config：名称、分组、版本、状态</li>
+          <li>open/close_channel_config_ids 存 CSV</li>
+          <li>publish_status：0 未发 / 1 成功 / 9 失败</li>
+          <li>del_flag 逻辑删除，发布时过滤</li>
+        </ul>
+      </div>
+      <div class="card-box">
+        <p class="eyebrow">LOOKUP</p>
+        <h3><span class="dot ink"></span>三张映射表</h3>
+        <ul>
+          <li>base_fun_type_info：name → type 编码</li>
+          <li>base_channel_type_info：渠道 code / type</li>
+          <li>base_system_config_info：game_version</li>
+          <li>版本号是字符串，不在配置表建外键</li>
+        </ul>
+      </div>
+      <div class="card-box">
+        <p class="eyebrow">LEDGER</p>
+        <h3><span class="dot link"></span>发布与同步</h3>
+        <ul>
+          <li>quick_publish_info：模块 → 版本列表</li>
+          <li>app_config_info：客户端配置 + 发布状态</li>
+          <li>syn_table_info：体验服 → 正式服同步注册</li>
+          <li>均按 module/name 逻辑关联，无物理外键</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      Sources: internal source tree · configuration<br>
+      Detail: balanced · 7 tables drawn · fields are a representative subset, not full DDL · no physical foreign keys exist; every relationship is by name / CSV ids / key-value.
+    </footer>
+  </div>
+</body>
+</html>

@@ -16,6 +16,8 @@ export interface Project {
   time?: string;
   bulletPoints?: string[];
   tags: TagItem[];
+  /** 项目介绍页路径，例如 /showcase/guandan/index.html */
+  visualUrl?: string;
 }
 
 // 工作经历

@@ -28,6 +28,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "AI", color: "purple" },
         { text: "Claude Code", color: "purple" },
       ],
+      visualUrl: "/showcase/guandan/index.html",
     },
     {
       title: "CyanbirdMedia 海外小说作者平台",
@@ -48,6 +49,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "html2canvas", color: "blue" },
         { text: "Lottie", color: "purple" },
       ],
+      visualUrl: "/showcase/cyanbird/index.html",
     },
     {
       title: "Joylit Novel 海外小说官网",
@@ -66,6 +68,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "SSR", color: "green" },
         { text: "SEO", color: "green" },
       ],
+      visualUrl: "/showcase/joylit/index.html",
     },
     {
       title: "Hey Beauty 三消换装游戏试玩",
@@ -80,6 +83,28 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "TypeScript", color: "blue" },
         { text: "游戏开发", color: "purple" },
       ],
+    },
+    {
+      title: "Hugo Admin 内容运营后台",
+      time: "2024.05-2025.06",
+      description:
+        "网络文学内容运营后台，覆盖作者招募与管理、作品与大纲、章节审核、合同/税表/结算、广告投放与线索管理，服务编辑、BD、法务、财务、运营等多角色。",
+      bulletPoints: [
+        "多角色动态路由：按 authority 过滤路由树，覆盖 admin / 编辑 / BD / 法务 / 财务 / 运营等角色，菜单与页面访问同源。",
+        "合同与结算：合同审核、电子签、W-8/W-9 税表审核、书籍/大纲结算、付款状态流转。",
+        "内容生产链路：作品上传/分章、章节审查、大纲库、试读、机翻/敏感词/相似标题工具。",
+        "数据与投放：书籍测试汇总、In-App 表现、作者付款看板、广告 Campaign 管理、Excel 导出。",
+        "工程化：参与构建体系从 vue-cli/Webpack 迁移到 Vite，路由级代码分割、SVG 雪碧图与公共组件沉淀。",
+      ],
+      tags: [
+        { text: "Vue2", color: "blue" },
+        { text: "Vite", color: "blue" },
+        { text: "Element UI", color: "blue" },
+        { text: "ECharts", color: "blue" },
+        { text: "RBAC", color: "green" },
+        { text: "Contract / Tax", color: "green" },
+      ],
+      visualUrl: "/showcase/hugo-admin/index.html",
     },
     {
       title: "其他项目经验",
@@ -127,6 +152,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "AI", color: "purple" },
         { text: "Claude Code", color: "purple" },
       ],
+      visualUrl: "/showcase/guandan/index.html",
     },
     {
       title: "CyanbirdMedia Overseas Author Platform",
@@ -147,6 +173,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "html2canvas", color: "blue" },
         { text: "Lottie", color: "purple" },
       ],
+      visualUrl: "/showcase/cyanbird/index.html",
     },
     {
       title: "Joylit Novel Overseas Reading Platform",
@@ -165,6 +192,7 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "SSR", color: "green" },
         { text: "SEO", color: "green" },
       ],
+      visualUrl: "/showcase/joylit/index.html",
     },
     {
       title: "Hey Beauty Match-3 Game Playable",
@@ -179,6 +207,28 @@ export const projectsData: Record<"zh" | "en", Project[]> = {
         { text: "TypeScript", color: "blue" },
         { text: "Game Dev", color: "purple" },
       ],
+    },
+    {
+      title: "Hugo Admin Content Operations Platform",
+      time: "2024.05-2025.06",
+      description:
+        "Internal content operations platform for web fiction: author recruitment and management, books and outlines, chapter review, contracts/tax/settlement, ad campaigns and lead management for editors, BD, legal, finance and operations.",
+      bulletPoints: [
+        "Role-based dynamic routing: the route tree is filtered by authority for admin, editor, BD, legal, finance and operations; menu and page access share one source.",
+        "Contracts and settlement: contract review, e-signature, W-8/W-9 tax review, book/outline settlement and payment status transitions.",
+        "Content pipeline: book upload/chapters, chapter review, outline library, trial reads, translation/sensitive-word/similar-title tools.",
+        "Data and acquisition: book-testing summary, In-App performance, author payment dashboard, ad campaign management and Excel export.",
+        "Engineering: contributed to the vue-cli/Webpack → Vite migration, route-level code splitting, SVG sprites and shared components.",
+      ],
+      tags: [
+        { text: "Vue2", color: "blue" },
+        { text: "Vite", color: "blue" },
+        { text: "Element UI", color: "blue" },
+        { text: "ECharts", color: "blue" },
+        { text: "RBAC", color: "green" },
+        { text: "Contract / Tax", color: "green" },
+      ],
+      visualUrl: "/showcase/hugo-admin/index.html",
     },
     {
       title: "Other Project Experience",

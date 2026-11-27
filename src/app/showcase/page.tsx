@@ -10,7 +10,9 @@ import { projectsData } from "@/data";
 export default function ShowcasePage() {
   const { locale, mounted } = useLocale();
   const t = i18n[locale];
-  const projects = projectsData[locale];
+  const projects = [...projectsData[locale]].sort(
+    (a, b) => Number(Boolean(b.visualUrl)) - Number(Boolean(a.visualUrl))
+  );
 
   if (!mounted) {
     return (
@@ -63,23 +65,55 @@ export default function ShowcasePage() {
               key={index}
               className="group rounded-xl border border-primary/10 bg-card/30 backdrop-blur-sm overflow-hidden hover:border-primary/30 transition-all"
             >
-              {/* 截图占位区域 */}
-              <div className="relative h-48 md:h-64 bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center border-b border-primary/10">
-                <div className="text-center text-muted-foreground">
-                  <p className="text-sm font-mono">
-                    {locale === "zh" ? "项目截图（待添加）" : "Project Screenshot (TBD)"}
-                  </p>
-                  <p className="text-xs mt-1 opacity-50">{project.title}</p>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <div>
-                    <h2 className="text-xl font-semibold mb-1">{project.title}</h2>
-                    <span className="text-sm text-muted-foreground font-mono">{project.time}</span>
+              {project.visualUrl ? (
+                <a
+                  href={project.visualUrl}
+                  className="group/cover relative block h-48 md:h-64 overflow-hidden border-b border-primary/10"
+                >
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.04)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.04)_1px,transparent_1px)] bg-[size:2rem_2rem]" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.07] via-transparent to-primary/[0.03]" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/50 to-primary/10 opacity-0 group-hover/cover:opacity-100 transition-opacity" />
+                  <span className="pointer-events-none absolute right-4 bottom-0 font-serif text-[7rem] leading-none text-primary/[0.06] select-none">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="relative h-full flex flex-col justify-between p-6 md:p-8">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-mono text-xs tracking-[0.2em] text-primary/50">
+                        CASE {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover/cover:text-primary transition-colors">
+                        {locale === "zh" ? "查看项目介绍" : "View project brief"}
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <p className="font-mono text-xs text-muted-foreground mb-2">{project.time}</p>
+                      <h2 className="text-xl md:text-2xl font-semibold tracking-tight group-hover/cover:text-primary transition-colors">
+                        {project.title}
+                      </h2>
+                    </div>
+                  </div>
+                </a>
+              ) : (
+                <div className="relative h-48 md:h-64 bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center border-b border-primary/10">
+                  <div className="text-center text-muted-foreground">
+                    <p className="text-sm font-mono">
+                      {locale === "zh" ? "项目截图（待添加）" : "Project Screenshot (TBD)"}
+                    </p>
+                    <p className="text-xs mt-1 opacity-50">{project.title}</p>
                   </div>
                 </div>
+              )}
+
+              <div className="p-6">
+                {!project.visualUrl && (
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div>
+                      <h2 className="text-xl font-semibold mb-1">{project.title}</h2>
+                      <span className="text-sm text-muted-foreground font-mono">{project.time}</span>
+                    </div>
+                  </div>
+                )}
 
                 <p className="text-muted-foreground mb-4">{project.description}</p>
 

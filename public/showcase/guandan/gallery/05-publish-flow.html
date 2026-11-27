@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ttigd 一键发布链路</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5; --paper-2: #ececec; --ink: #2d3142; --muted: #4f5d75;
+      --soft: #5a6580; --rule: rgba(45,49,66,0.12); --accent: #bf4520;
+      --accent-tint: rgba(191,69,32,0.08); --link: #2e5aa8;
+      --sans: 'Geist', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      --serif: 'Instrument Serif', 'Noto Serif', serif;
+      --mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); min-height: 100vh; display: flex; justify-content: center; padding: 3rem 2rem 4rem; }
+    .frame { max-width: 1360px; width: 100%; }
+    .eyebrow { font-family: var(--mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--serif); font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); font-size: 0.86rem; margin-bottom: 1.5rem; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    .nn { font-family: var(--sans); font-size: 12px; font-weight: 600; fill: var(--ink); }
+    .sb { font-family: var(--mono); font-size: 9px; fill: var(--muted); }
+    .ey { font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.14em; fill: var(--soft); }
+    .al { font-family: var(--mono); font-size: 8px; fill: var(--soft); letter-spacing: 0.06em; }
+    .tag { font-family: var(--mono); font-size: 7px; font-weight: 500; letter-spacing: 0.08em; fill: var(--soft); }
+    .cards { display: grid; grid-template-columns: 1.05fr 1.1fr 0.9fr; gap: 16px; margin-top: 2rem; }
+    .card { background: #ffffff; border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; }
+    .card .eyebrow { margin-bottom: 0.6rem; font-size: 0.6rem; }
+    .card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot.coral { background: var(--accent); } .dot.ink { background: var(--ink); } .dot.link { background: var(--link); }
+    .card ul { list-style: none; font-size: 0.76rem; line-height: 1.7; color: var(--muted); }
+    .card li::before { content: "— "; color: var(--soft); }
+    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 0.65rem; color: var(--soft); line-height: 1.7; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <a href="index.html" style="position:fixed;top:12px;right:12px;z-index:999;font:12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;border:1px solid rgba(45,49,66,.2);border-radius:4px;padding:6px 10px;color:#2d3142;text-decoration:none;">← 返回图集</a>
+  <div class="frame">
+    <p class="eyebrow">Data Flow · QuickPublish</p>
+    <h1>一键发布链路：一次提交，四路落点</h1>
+    <p class="subtitle">配置状态落 MySQL；Redis 广播游戏服；OSS 版本文件给客户端；game-backend 写服务端版本行</p>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="publish-flow-title publish-flow-desc">
+        <title id="publish-flow-title">ttigd 配置一键发布链路</title>
+        <desc id="publish-flow-desc">运营在后台选择模块与版本提交发布，发布服务写 MySQL 状态，并向 Redis、OSS 和 game-backend 三路分发，最终游戏服与客户端生效。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- zone -->
+        <rect x="776" y="60" width="248" height="476" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <rect x="792" y="64" width="124" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="854" y="73" class="ey" text-anchor="middle">PUBLISH TARGETS</text>
+
+        <!-- arrows first -->
+        <line x1="224" y1="324" x2="266" y2="324" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="230" y="306" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="234" y="315" class="al">SUBMIT</text>
+
+        <line x1="432" y1="324" x2="494" y2="324" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="438" y="306" width="40" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="442" y="315" class="al">PUBLISH</text>
+
+        <path d="M 560,280 V 144 Q 560,136 568,136 H 794" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="504" y="198" width="50" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="508" y="207" class="al">SQL</text>
+
+        <path d="M 700,304 H 736 Q 744,304 744,296 V 232 Q 744,224 752,224 H 794" fill="none" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <rect x="752" y="254" width="44" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="756" y="263" class="al">PUB/SUB</text>
+
+        <line x1="700" y1="368" x2="794" y2="368" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <rect x="734" y="350" width="28" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="738" y="359" class="al">OSS</text>
+
+        <path d="M 640,400 V 464 Q 640,472 648,472 H 794" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <rect x="648" y="426" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="652" y="435" class="al">HTTP</text>
+
+        <line x1="1000" y1="228" x2="1034" y2="228" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+
+        <line x1="1000" y1="372" x2="1034" y2="372" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <rect x="1004" y="354" width="30" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="1008" y="363" class="al">PULL</text>
+
+        <path d="M 1000,472 H 1208 Q 1216,472 1216,464 V 236 Q 1216,228 1208,228 H 1204" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <rect x="1088" y="454" width="40" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="1092" y="463" class="al">UPSERT</text>
+
+        <!-- nodes -->
+        <g>
+          <rect x="64" y="280" width="160" height="88" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="72" y="286" width="46" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="95" y="295" class="tag" text-anchor="middle">01 EDIT</text>
+          <text x="144" y="328" class="nn" text-anchor="middle">选择模块与版本</text>
+          <text x="144" y="344" class="sb" text-anchor="middle">moduleList · versionCode</text>
+        </g>
+
+        <g>
+          <rect x="272" y="280" width="160" height="88" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="280" y="286" width="56" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="308" y="295" class="tag" text-anchor="middle">02 SUBMIT</text>
+          <text x="352" y="328" class="nn" text-anchor="middle">前端发布弹窗</text>
+          <text x="352" y="344" class="sb" text-anchor="middle">POST /v1/quickPublish</text>
+        </g>
+
+        <g>
+          <rect x="500" y="280" width="200" height="120" rx="6" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
+          <rect x="508" y="286" width="54" height="12" rx="2" fill="none" stroke="rgba(191,69,32,0.40)" stroke-width="0.8"/>
+          <text x="535" y="295" class="tag" text-anchor="middle" fill="#bf4520">03 PUBLISH</text>
+          <text x="600" y="334" class="nn" text-anchor="middle">发布服务</text>
+          <text x="600" y="350" class="sb" text-anchor="middle">QuickPublishInfoService</text>
+          <text x="600" y="364" class="sb" text-anchor="middle">QuickPublish interface</text>
+        </g>
+
+        <g>
+          <rect x="800" y="96" width="200" height="80" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="808" y="102" width="26" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="821" y="111" class="tag" text-anchor="middle">DB</text>
+          <text x="900" y="140" class="nn" text-anchor="middle">MySQL 状态</text>
+          <text x="900" y="156" class="sb" text-anchor="middle">publish status · version</text>
+        </g>
+
+        <g>
+          <rect x="800" y="184" width="200" height="80" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="808" y="190" width="40" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="828" y="199" class="tag" text-anchor="middle">CACHE</text>
+          <text x="900" y="228" class="nn" text-anchor="middle">Redis 热更</text>
+          <text x="900" y="244" class="sb" text-anchor="middle">TTIGD_* channel</text>
+        </g>
+
+        <g>
+          <rect x="800" y="328" width="200" height="80" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="808" y="334" width="30" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="823" y="343" class="tag" text-anchor="middle">OSS</text>
+          <text x="900" y="372" class="nn" text-anchor="middle">OSS 版本文件</text>
+          <text x="900" y="388" class="sb" text-anchor="middle">version.json · module.md5</text>
+        </g>
+
+        <g>
+          <rect x="800" y="432" width="200" height="80" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="808" y="438" width="30" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="823" y="447" class="tag" text-anchor="middle">API</text>
+          <text x="900" y="476" class="nn" text-anchor="middle">game-backend</text>
+          <text x="900" y="492" class="sb" text-anchor="middle">batchUpsert · batchDelete</text>
+        </g>
+
+        <g>
+          <rect x="1040" y="184" width="160" height="88" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="1048" y="190" width="36" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="1066" y="199" class="tag" text-anchor="middle">GAME</text>
+          <text x="1120" y="232" class="nn" text-anchor="middle">游戏服</text>
+          <text x="1120" y="248" class="sb" text-anchor="middle">Redis subscribe · HTTP</text>
+        </g>
+
+        <g>
+          <rect x="1040" y="328" width="160" height="88" rx="6" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)" stroke-width="1"/>
+          <rect x="1048" y="334" width="44" height="12" rx="2" fill="none" stroke="#bfc0c0" stroke-width="0.8"/>
+          <text x="1070" y="343" class="tag" text-anchor="middle">CLIENT</text>
+          <text x="1120" y="376" class="nn" text-anchor="middle">客户端</text>
+          <text x="1120" y="392" class="sb" text-anchor="middle">pull version.json</text>
+        </g>
+
+        <!-- legend -->
+        <line x1="40" y1="648" x2="1240" y2="648" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="668" class="ey">LEGEND</text>
+        <rect x="118" y="658" width="14" height="10" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+        <text x="140" y="667" class="al">FOCAL: PUBLISH SERVICE</text>
+        <line x1="340" y1="663" x2="376" y2="663" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="384" y="667" class="al">LOCAL WRITE</text>
+        <line x1="514" y1="663" x2="550" y2="663" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <text x="558" y="667" class="al">PRIMARY HOT-UPDATE PATH</text>
+        <line x1="790" y1="663" x2="826" y2="663" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <text x="834" y="667" class="al">HTTP / API</text>
+        <line x1="960" y1="663" x2="996" y2="663" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <text x="1004" y="667" class="al">ASYNC PUB/SUB</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">TRIGGER</p>
+        <h3><span class="dot coral"></span>发布入口</h3>
+        <ul>
+          <li>POST /v1/quickPublish/publish</li>
+          <li>入参：moduleList + versionCode</li>
+          <li>QuickPublishModuleEnum 注册约 30 个模块</li>
+          <li>单条/勾选发布不传版本号，不更新版本记录</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">FAN-OUT</p>
+        <h3><span class="dot ink"></span>四路落点</h3>
+        <ul>
+          <li>MySQL：publish_status、版本号、操作人</li>
+          <li>Redis：按 group 发 TTIGD_* 频道</li>
+          <li>OSS：version.json / module.json / module_MD5.json</li>
+          <li>game-backend：batchUpsert / batchDelete 写版本行</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">GUARDRAILS</p>
+        <h3><span class="dot link"></span>失败与跳过</h3>
+        <ul>
+          <li>按 groupName + versionCode 分组发布</li>
+          <li>版本下无配置抛 QuickPublishSkipException</li>
+          <li>失败记录标 publish_status=9 且不回滚</li>
+          <li>发布后可重试，幂等 upsert</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      Sources: internal source tree · configuration<br>
+      Detail: balanced · 4 publish targets + 2 consumers drawn · module list is representative (QuickPublishModuleEnum registers ~30 modules).
+    </footer>
+  </div>
+</body>
+</html>

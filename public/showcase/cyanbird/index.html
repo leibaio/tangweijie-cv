@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>CyanbirdMedia 海外作者平台 · 项目介绍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/showcase/brief.css">
+</head>
+<body data-lang="zh">
+  <header class="topbar">
+    <a class="back" href="/showcase"><span class="zh">← 返回 showcase</span><span class="en">← Back to showcase</span></a>
+    <div class="right">
+      <span class="eyebrow" style="margin:0">PROJECT BRIEF · 02</span>
+      <button class="lang-btn" id="lang-toggle" type="button">EN</button>
+    </div>
+  </header>
+
+  <main class="frame">
+    <p class="eyebrow">B2B Platform · Author Experience</p>
+    <h1>
+      <span class="zh">CyanbirdMedia 海外作者平台</span>
+      <span class="en">CyanbirdMedia Author Platform</span>
+    </h1>
+    <p class="lede">
+      <span class="zh">面向多国作者的 B 端创作与结算平台：作品创建（CFL / WFH / Ongoing）、合同与电子签、税表、收入结算、数据分析与封面图库。</span>
+      <span class="en">A B2B creation and settlement platform for authors across countries: book creation (CFL / WFH / ongoing), contracts and e-signature, tax forms, income, analytics and cover assets.</span>
+    </p>
+
+    <div class="meta">
+      <span>ROLE <b><span class="zh">前端开发工程师</span><span class="en">Frontend Developer</span></b></span>
+      <span>PERIOD <b>2024.05 — 2025.06</b></span>
+      <span>STACK <b>Vue2 · TypeScript · Element UI · pdf-lib</b></span>
+    </div>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="n">139</div>
+        <div class="k"><span class="zh">前端文件 · 96 Vue + 43 JSX</span><span class="en">Frontend files · 96 Vue + 43 JSX</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">13</div>
+        <div class="k"><span class="zh">API 模块</span><span class="en">API modules</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">3000 → 500ms</div>
+        <div class="k"><span class="zh">单次封面生成</span><span class="en">Cover generation</span></div>
+      </div>
+      <div class="stat">
+        <div class="n">W-8 / W-9</div>
+        <div class="k"><span class="zh">多国税表模板</span><span class="en">Multi-country tax forms</span></div>
+      </div>
+    </section>
+
+    <section class="diagram" aria-label="作者旅程">
+      <svg viewBox="0 0 960 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cyanbird-flow-title cyanbird-flow-desc">
+        <title id="cyanbird-flow-title">作者旅程</title>
+        <desc id="cyanbird-flow-desc">作者入驻后选择投稿项目，经过审核签约、税表与收款配置，最终发布作品并查看收益。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#555555"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+        <line x1="170" y1="110" x2="220" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="360" y1="110" x2="410" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="550" y1="110" x2="600" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="740" y1="110" x2="790" y2="110" stroke="#555555" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+        <rect x="178" y="88" width="44" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="200" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">JOIN</text>
+        <rect x="366" y="88" width="48" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="390" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">SUBMIT</text>
+        <rect x="556" y="88" width="48" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="580" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">REVIEW</text>
+        <rect x="748" y="88" width="32" height="12" rx="2" fill="#FFFFFF"/>
+        <text x="764" y="97" fill="#555555" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">PAY</text>
+
+        <rect x="30" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="100" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Onboarding</text>
+        <text x="100" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Onboarding</text>
+
+        <rect x="220" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="290" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Create book</text>
+        <text x="290" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CFL · WFH</text>
+
+        <rect x="410" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="480" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Review</text>
+        <text x="480" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Contract · e-sign</text>
+
+        <rect x="600" y="78" width="140" height="64" rx="6" fill="rgba(196,69,54,0.08)" stroke="#C44536" stroke-width="1"/>
+        <text x="670" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Tax &amp; payment</text>
+        <text x="670" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">pdf-lib · Payoneer</text>
+
+        <rect x="790" y="78" width="140" height="64" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1"/>
+        <text x="860" y="108" fill="#1A1A1A" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans SC', sans-serif" text-anchor="middle">Publish</text>
+        <text x="860" y="124" fill="#555555" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">ECharts · Analytics</text>
+      </svg>
+      <p class="caption"><span class="zh">作者旅程 · 从投稿到签约、税表、收款与收益</span><span class="en">Author journey · submission, contract, tax, payment and earnings</span></p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2><span class="zh">项目背景</span><span class="en">Context</span></h2>
+        <p>
+          <span class="zh">平台服务多国作者，既有 C 端官网与阅读器，也有 B 端创作、合同、税务和结算后台。前端需要同时处理复杂的表单流程、金额数据、PDF 生成和跨设备体验。</span>
+          <span class="en">The platform serves authors across countries with both a public site and a B2B backend for creation, contracts, tax and settlement. The frontend handles complex forms, financial data, PDF generation and cross-device experience.</span>
+        </p>
+      </article>
+
+      <article class="card">
+        <h2><span class="zh">关键设计</span><span class="en">Key decisions</span></h2>
+        <ul>
+          <li><span class="zh">敏感税务数据在浏览器端完成 PDF 生成与签名，不经过服务端。</span><span class="en">Sensitive tax data is rendered and signed entirely in the browser, never sent through the server.</span></li>
+          <li><span class="zh">先用 performance.now() 分段埋点定位渲染瓶颈，再做收窄渲染区域、复用上下文、拆分长任务。</span><span class="en">Located the rendering bottleneck with performance.now() instrumentation first, then narrowed the render area, reused the context and split long tasks.</span></li>
+          <li><span class="zh">多国税表用模板 + 字段配置驱动，避免为每个国家复制一套页面。</span><span class="en">Multi-country tax forms are driven by templates and field config, avoiding a separate page per country.</span></li>
+        </ul>
+      </article>
+
+      <article class="card full">
+        <h2><span class="zh">我做了什么</span><span class="en">What I built</span></h2>
+        <ul>
+          <li><span class="zh">三种投稿路径：CFL / WFH / Ongoing，分步表单、预览与状态流转，覆盖从创建到提交审核的完整链路。</span><span class="en">Three submission paths — CFL, WFH and ongoing — with step forms, previews and status transitions from creation to review.</span></li>
+          <li><span class="zh">封面生成与裁剪：html2canvas + cropperjs；分段埋点定位瓶颈后，单次生成 3000ms → 500ms。</span><span class="en">Cover generation and cropping with html2canvas + cropperjs; after instrumentation, generation dropped from 3000ms to 500ms.</span></li>
+          <li><span class="zh">税表 PDF 与电子签：pdf-lib 加载模板 + drawText 填充；signature_pad 手写签名经 toDataURL → embedPng → drawImage 叠加到指定坐标，支持多国模板。</span><span class="en">Tax-form PDFs and e-signature: pdf-lib templates + drawText; signature_pad handwriting goes toDataURL → embedPng → drawImage at precise coordinates, with multi-country templates.</span></li>
+          <li><span class="zh">收入与合同中心：ECharts 收入趋势、结算明细、合同 / 税表状态、Payoneer / PayPal / 银行账户配置。</span><span class="en">Income and contract center: ECharts revenue trends, settlement details, contract / tax status and Payoneer / PayPal / bank account setup.</span></li>
+          <li><span class="zh">性能与体验：p-queue 批量上传并发限制 10、图片懒加载、Lottie 升级动画、PC / 移动响应式。</span><span class="en">Performance and UX: p-queue batch uploads capped at 10, image lazy loading, Lottie level-up animations and responsive PC / mobile layouts.</span></li>
+        </ul>
+        <div class="chips">
+          <span class="chip">Vue2</span><span class="chip">TypeScript</span><span class="chip">Element UI</span><span class="chip">ECharts</span><span class="chip">html2canvas</span><span class="chip">cropperjs</span><span class="chip">pdf-lib</span><span class="chip">signature_pad</span><span class="chip">Quill</span><span class="chip">p-queue</span>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <a class="cta" href="/resume"><span class="zh">查看简历中的项目条目 →</span><span class="en">View resume entry →</span></a>
+      <a class="cta secondary" href="/showcase"><span class="zh">返回 showcase →</span><span class="en">Back to showcase →</span></a>
+    </footer>
+  </main>
+
+  <script src="/showcase/brief.js"></script>
+</body>
+</html>
