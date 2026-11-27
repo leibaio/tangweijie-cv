@@ -33,14 +33,14 @@ export default function RootLayout({ children }) {
 - 合理设置图片尺寸和质量
 
 ### 1.3 代码分割优化
-**问题**：三种首页风格都在 `page.tsx` 中导入，即使只使用一种。
+**问题**：13 种首页风格都在 `components/home/registry.ts` 中静态导入，即使一次只使用一种。
 
-**建议**：
+**建议**：把注册表改为按风格动态加载。由于风格从 `localStorage` 恢复，首次加载非默认风格时需要准备骨架屏。
+
 ```typescript
-// 使用动态导入
-const MinimalStyle = dynamic(() => import('@/components/home/minimal-style'))
-const TechStyle = dynamic(() => import('@/components/home/tech-style'))
-const TerminalStyle = dynamic(() => import('@/components/home/terminal-style'))
+// registry.ts
+const TechStyle = dynamic(() => import('./tech-style').then((m) => m.TechStyle))
+// ...其余 12 种同理
 ```
 
 ### 1.4 移除未使用的依赖
@@ -142,33 +142,9 @@ npm install -D prettier prettier-plugin-tailwindcss
 ```
 
 ### 3.4 统一状态管理
-**问题**：多处使用 localStorage 和 useState 管理全局状态（locale、homeStyle、theme）。
+**现状**：`locale` 与 `homeStyle` 已分别由 `LocaleProvider` / `HomeStyleProvider` 统一管理，明暗模式交给 next-themes；组件内不再直接读写 `localStorage` 或派发自定义事件。
 
-**建议**：考虑使用：
-- Context API 统一管理
-- 或使用轻量级状态管理库如 zustand
-- 创建自定义 Hook 封装 localStorage 逻辑
-
-```typescript
-// hooks/useLocalStorage.ts
-export function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(initialValue)
-
-  useEffect(() => {
-    const item = window.localStorage.getItem(key)
-    if (item) {
-      setStoredValue(JSON.parse(item))
-    }
-  }, [key])
-
-  const setValue = (value: T) => {
-    setStoredValue(value)
-    window.localStorage.setItem(key, JSON.stringify(value))
-  }
-
-  return [storedValue, setValue] as const
-}
-```
+**建议**：后续新增全局偏好时沿用 `contexts/` 下的 Provider 模式，不要重新引入 `localStorage + CustomEvent` 的手工同步；只有局部 UI 状态才使用 `useState`。
 
 ## 4. 功能完善
 

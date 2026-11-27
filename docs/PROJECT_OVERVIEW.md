@@ -4,7 +4,7 @@
 
 基于 Next.js 15 构建的个人站点，集成在线简历、技术博客和项目展示。纯静态数据驱动，无后端、无数据库，所有内容在编译期确定。已部署到 Vercel：<https://tangweijie-cv.vercel.app>
 
-**代码规模**：`src/` 66 个文件 / 约 8,000 行。
+**代码规模**：`src/` 约 70 个 TS/TSX 文件 / 约 7,000 行。
 
 ## 技术栈
 
@@ -13,7 +13,7 @@
 | 框架 | Next.js 15.3.6 (App Router) + React 19 |
 | 语言 | TypeScript 5（strict） |
 | 样式 | Tailwind CSS v4 + shadcn/ui (new-york) + Radix UI |
-| 主题 | next-themes (dark/light) + 6 套 oklch 主题色 + 13 种首页风格 |
+| 主题 | next-themes (dark/light) + 13 种首页风格（固定配色风格不参与明暗切换） |
 | Markdown | react-markdown + remark-gfm + rehype-highlight + @tailwindcss/typography |
 | 内容解析 | gray-matter（frontmatter）+ reading-time（阅读时长） |
 | 图标 / 字体 | lucide-react；Geist Sans / Geist Mono + 各风格自定义 Web 字体 |
@@ -54,22 +54,26 @@ src/
 │   │   ├── synthwave-style.tsx # 合成波
 │   │   ├── japanese-style.tsx  # 日式侘寂
 │   │   ├── newspaper-style.tsx # 报纸风
+│   │   ├── registry.ts         # HomeStyle → 组件穷举映射
+│   │   ├── theme.ts            # 各风格头部主题、图标、暗色能力
+│   │   ├── home-header.tsx     # 首页公共头部
 │   │   └── index.ts
 │   ├── resume/                 # 简历组件
 │   │   ├── header.tsx, education.tsx, skills.tsx
 │   │   ├── work-experience.tsx, projects.tsx
 │   │   ├── self-comment.tsx, project-card.tsx
 │   │   ├── section-header.tsx, tag.tsx, timeline.tsx
+│   │   ├── resume-backgrounds.tsx # 按风格渲染简历背景装饰
 │   │   ├── print-button.tsx
 │   │   └── index.ts
 │   ├── ui/                     # shadcn/ui 基础组件
 │   │   └── button.tsx, card.tsx, dropdown-menu.tsx
-│   ├── resume-style-wrapper.tsx # 简历页按首页风格套壳（注入 CSS 变量）
+│   ├── resume-style-wrapper.tsx # 简历页套壳（读 config/resume-style.ts）
 │   ├── resume-toolbar.tsx      # 简历工具栏 (Client Component)
+│   ├── grid-background.tsx     # 博客 / 展示页共用网格背景
 │   ├── theme-provider.tsx      # next-themes 封装
 │   ├── locale-toggle.tsx       # 中/英切换
 │   ├── mode-toggle.tsx         # dark/light 切换
-│   ├── theme-color-toggle.tsx  # 6 套主题色切换
 │   ├── home-style-toggle.tsx   # 13 种首页风格切换
 │   └── blog-header.tsx         # 博客页头
 │
@@ -77,8 +81,8 @@ src/
 │   ├── site.ts                 # 站点元信息 / SEO / 简历 PDF 外链
 │   ├── personal.ts             # 个人信息
 │   ├── i18n.ts                 # 国际化文案 (zh/en)
-│   ├── theme.ts                # 6 套 oklch 主题色
-│   ├── home-style.ts           # 13 种首页风格定义与默认值
+│   ├── home-style.ts           # 13 种首页风格类型、名称与默认值
+│   ├── resume-style.ts         # 13 套简历风格（CSS 变量 / 纸张 / 工具栏 / 背景）
 │   └── index.ts
 │
 ├── data/                       # 简历数据层 (纯常量，zh/en 双版本)
@@ -90,7 +94,8 @@ src/
 │   └── index.ts
 │
 ├── contexts/
-│   └── locale-context.tsx      # 语言 Context（localStorage + cookie 双写）
+│   ├── locale-context.tsx      # 语言 Context（localStorage + cookie 双写）
+│   └── home-style-context.tsx  # 首页风格 Context（单一读写入口）
 │
 ├── lib/
 │   ├── blog.ts                 # 博客文件系统读取（gray-matter + reading-time）
@@ -127,19 +132,29 @@ localStorage + document.cookie 双写    直接读 cookie
 
 `setLocale()` 同时写 `localStorage`（客户端持久化）和 `document.cookie`（`max-age=31536000`），再调 `router.refresh()` 让 Server Component 重新渲染——这是「客户端切语言，服务端页面跟着变」的关键一环。
 
-### 主题系统（三层叠加，互不干扰）
+### 主题系统（两层，互不干扰）
 
 | 层 | 实现 | 持久化 |
 |---|---|---|
-| 明暗模式 | next-themes，`attribute="class"`，切换 `<html>` 的 class | next-themes 自带 |
-| 主题色 | `config/theme.ts` 6 套 oklch 调色板（黑/蓝/绿/红/紫/琥珀），覆盖 `--primary` 等 CSS 变量 | `localStorage: theme-color` |
-| 首页风格 | 13 个完全不同的组件，独立于主题 | `localStorage: home-style` |
+| 明暗模式 | next-themes，`attribute="class"`，切换 `<html>` 的 class；仅 tech / minimal 响应 | next-themes 自带 |
+| 首页风格 | 13 个完全不同的组件，各自固定配色 | `localStorage: home-style` |
+
+> 固定配色的 11 种风格（terminal、chinese、retro、glass、f1、brutalist、synthwave、japanese、newspaper、magazine、bauhaus）不响应明暗切换，因此 `supportsDarkMode` 为 `false`，首页头部与简历工具栏都会隐藏明暗按钮。
 
 ### 首页风格系统
 
-13 个风格组件共享 `data/home-shared.ts` 的 `getFeatures()` 与 `techStack`，但各自的 JSX、配色、动效完全不同——本质是 **Strategy 模式**：`config/home-style.ts` 定义 `HomeStyle` 联合类型 + `homeStyles` 元数据（名称/图标）+ `defaultHomeStyle`。
+13 个风格组件共享 `data/home-shared.ts` 的 `getFeatures()` 与 `techStack`，但各自的 JSX、配色、动效完全不同——本质是 **Strategy 模式**，由四处穷举注册表驱动：
 
-首页从 `localStorage` 读回风格时用 `VALID_STYLES` 白名单校验，避免历史脏数据导致渲染崩掉；简历页则由 `ResumeStyleWrapper` 按同一份 `HomeStyle` 注入对应的 CSS 变量与纸张样式，让简历跟随首页风格换皮并保持打印可用。
+| 文件 | 职责 |
+|---|---|
+| `config/home-style.ts` | `HomeStyle` 联合类型、名称元数据、默认值 |
+| `components/home/theme.ts` | 头部主题、图标、明暗开关能力位 |
+| `components/home/registry.ts` | `HomeStyle → 组件` 映射 |
+| `config/resume-style.ts` | 简历页 CSS 变量、纸张、工具栏、背景装饰 |
+
+四处都是 `Record<HomeStyle, ...>`：新增风格时漏写任意一处都会在编译期报错，不会静默降级。
+
+风格状态由 `contexts/home-style-context.tsx` 的 `HomeStyleProvider` 统一读写 `localStorage`；首页、简历套壳、简历工具栏、切换器共用 `useHomeStyle()`，不再使用自定义事件同步。`ResumeStyleWrapper` 读取 `resumeStyleThemes` 注入 CSS 变量，让简历跟随首页风格换皮并保持打印可用。
 
 字体也是风格的一部分：根布局统一 `preconnect` 并加载 Orbitron / Playfair Display / Press Start 2P / Noto Serif SC / Source Serif 4 等风格专用字体。
 
@@ -191,8 +206,8 @@ src/data/*.ts (纯 TypeScript 常量，zh/en 双版本)
 | `config/site.ts` | 站点 URL、名称、描述、关键词、简历 PDF 外链 |
 | `config/personal.ts` | 个人基本信息（姓名/职位/联系方式/教育/GitHub） |
 | `config/i18n.ts` | 所有 UI 文案 (zh/en 完整双语) |
-| `config/theme.ts` | 6 套 oklch 主题色定义 |
-| `config/home-style.ts` | 13 种首页风格类型、元数据与默认值 |
+| `config/home-style.ts` | 13 种首页风格类型、名称与默认值 |
+| `config/resume-style.ts` | 13 套简历风格主题（CSS 变量 / 纸张 / 工具栏 / 背景） |
 
 ## 修改内容指南
 
@@ -202,8 +217,8 @@ src/data/*.ts (纯 TypeScript 常量，zh/en 双版本)
 | 个人信息 | `src/config/personal.ts` |
 | 网站标题/描述/SEO | `src/config/site.ts` |
 | UI 文案/翻译 | `src/config/i18n.ts` |
-| 主题颜色 | `src/config/theme.ts` |
-| 首页风格（新增/改默认值） | `src/config/home-style.ts` + `src/components/home/` |
+| 明暗模式 | next-themes（仅 tech / minimal 响应，无独立配置） |
+| 首页风格（新增/改默认值） | `config/home-style.ts` + `home/theme.ts` + `home/registry.ts` + `config/resume-style.ts` |
 | 博客文章 | `content/blog/*.md` |
 
 ## 开发命令
