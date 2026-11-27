@@ -13,6 +13,18 @@
 - 自定义配置方法
 - 开发和部署指南
 
+### 🗺️ [架构图](./ARCHITECTURE.md)
+使用 Mermaid 绘制的当前架构：
+- 分层总览与 Server/Client 边界
+- 首页风格注册表与能力位
+- 风格状态、i18n 与内容数据流
+- 新增首页风格的完整步骤
+
+视觉版（HTML，浏览器直接打开）：
+[系统分层总览](./diagrams/architecture-overview.html) ·
+[首页风格注册表](./diagrams/architecture-style-registry.html) ·
+[运行时状态与数据流](./diagrams/architecture-data-flow.html)
+
 ### 💡 [优化建议](./OPTIMIZATION_SUGGESTIONS.md)
 详细的项目优化建议，涵盖 10 大方面：
 1. 性能优化（代码分割、字体、图片）
